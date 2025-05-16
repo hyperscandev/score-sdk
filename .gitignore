@@ -1,0 +1,8 @@
+# Build Artifacts
+#*.d
+#*.map
+#*.o
+
+Makefile
+**/[Mm]akefile
+documentation/score7/
