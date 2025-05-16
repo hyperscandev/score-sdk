@@ -13,7 +13,7 @@ Inc Path = ..\..\..\..\include
 Lib Path = ..\..\..\..\libs\MP3
 Compiler = ..\S_CORE~1.1\GNU\bin\gcc
 Compiler DefFlag = -mscore7 -mel -g -Wall -O2
-Compiler AddFlag = -Dhyperscan -Dnew_heapsize=3*(512*1024) -Dmp3drv
+Compiler AddFlag = -Dhyperscan -Dmax_heap_size=3*(512*1024) -Dmp3drv
 Assembler = ..\S_CORE~1.1\GNU\bin\as
 Assembler DefFlag = -Wa,-gdwarf-2  -x assembler-with-cpp
 Assembler AddFlag = 
@@ -65,7 +65,7 @@ Remote_Manner = Serial
 Remote_Manner = 
 Enable OSInfo = 0
 OSInfo Dll = 
-Project Path = C:\Users\ppcasm\Documents\s-core-sdk\examples\hyperscan\usb\usbloader
+Project Path = C:\Users\ppcasm\Documents\score-sdk\examples\hyperscan\usb\usbloader
 OSInfo INIT = 
 Show Cycles = 0
 Exception Debug = 0

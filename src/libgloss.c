@@ -89,8 +89,8 @@ void _exit (int extcode){
 	RAM. We just increment a pointer in what's
 	left of memory on the board.
 */
-#ifdef new_heapsize
-	#define HEAPSIZE new_heapsize
+#ifdef max_heap_size
+	#define HEAPSIZE max_heap_size
 #else
 	#define HEAPSIZE (512*1024)
 #endif
