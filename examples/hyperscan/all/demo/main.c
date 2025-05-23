@@ -26,14 +26,14 @@ int main(){
 	/************************************************************************/
 
 	/* Initalize Mattel HyperScan controller interface */
-	HS_Controller_Init();
+	hs_controller_init();
 	
 	/*
 	 Set TV output up with RGB565 color scheme and make set all framebuffers
-	 to stupid framebuffer address, TV_Init will select the first framebuffer
+	 to stupid framebuffer address, tv_init will select the first framebuffer
 	 as default.
 	*/
-	TV_Init(RESOLUTION_640_480, COLOR_RGB565, 0xA0400000, 0xA0400000, 0xA0400000);
+	tv_init(RESOLUTION_640_480, COLOR_RGB565, 0xA0400000, 0xA0400000, 0xA0400000);
 
 	// Turn on all LEDs on HyperScan
 	HS_LEDS(0xFF);
@@ -58,26 +58,26 @@ int main(){
 	while(1){
 
 		// Read controller 1 and controller 2 inputs into the controller data struct
-		HS_Controller_Read();
+		hs_controller_read();
 				
 		// Print text on TV
-		TV_Print(fb, 28, 2, msgs);
+		tv_print(fb, 28, 2, msgs);
 
-		if(controller[hs_controller_1].input.start) TV_Print(fb, ((640/8)-strlen(start_msg)-1)/2, 4, start_msg); else TV_Print(fb, ((640/8)-strlen(start_msg)-1)/2, 4, "                    ");
-		if(controller[hs_controller_1].input.select) TV_Print(fb, ((640/8)-strlen(select_msg)-1)/2, 5, select_msg); else TV_Print(fb, ((640/8)-strlen(select_msg)-1)/2, 5, "                     ");		
-		if(controller[hs_controller_1].input.rt) TV_Print(fb, ((640/8)-strlen(right_t_msg)-1)/2, 6, right_t_msg); else TV_Print(fb, ((640/8)-strlen(right_t_msg)-1)/2, 6, "                     ");
-		if(controller[hs_controller_1].input.lt) TV_Print(fb, ((640/8)-strlen(left_t_msg)-1)/2, 7, left_t_msg); else TV_Print(fb, ((640/8)-strlen(left_t_msg)-1)/2, 7, "                    ");
-		if(controller[hs_controller_1].input.rs) TV_Print(fb, ((640/8)-strlen(right_s_msg)-1)/2, 8, right_s_msg); else TV_Print(fb, ((640/8)-strlen(right_s_msg)-1)/2, 8, "                      ");
-		if(controller[hs_controller_1].input.ls) TV_Print(fb, ((640/8)-strlen(left_s_msg)-1)/2, 9, left_s_msg); else TV_Print(fb, ((640/8)-strlen(left_s_msg)-1)/2, 9, "                     ");
-		if(controller[hs_controller_1].input.g) TV_Print(fb, ((640/8)-strlen(green_msg)-1)/2, 10, green_msg); else TV_Print(fb, ((640/8)-strlen(green_msg)-1)/2, 10, "                    ");
-		if(controller[hs_controller_1].input.y) TV_Print(fb, ((640/8)-strlen(yellow_msg)-1)/2, 11, yellow_msg); else TV_Print(fb, ((640/8)-strlen(yellow_msg)-1)/2, 11, "                     ");
-		if(controller[hs_controller_1].input.r) TV_Print(fb, ((640/8)-strlen(red_msg)-1)/2, 12, red_msg); else TV_Print(fb, ((640/8)-strlen(red_msg)-1)/2, 12, "                    ");
-		if(controller[hs_controller_1].input.b) TV_Print(fb, ((640/8)-strlen(blue_msg)-1)/2, 13, blue_msg); else TV_Print(fb, ((640/8)-strlen(blue_msg)-1)/2, 13, "                    ");
+		if(controller[hs_controller_1].input.start) tv_print(fb, ((640/8)-strlen(start_msg)-1)/2, 4, start_msg); else tv_print(fb, ((640/8)-strlen(start_msg)-1)/2, 4, "                    ");
+		if(controller[hs_controller_1].input.select) tv_print(fb, ((640/8)-strlen(select_msg)-1)/2, 5, select_msg); else tv_print(fb, ((640/8)-strlen(select_msg)-1)/2, 5, "                     ");		
+		if(controller[hs_controller_1].input.rt) tv_print(fb, ((640/8)-strlen(right_t_msg)-1)/2, 6, right_t_msg); else tv_print(fb, ((640/8)-strlen(right_t_msg)-1)/2, 6, "                     ");
+		if(controller[hs_controller_1].input.lt) tv_print(fb, ((640/8)-strlen(left_t_msg)-1)/2, 7, left_t_msg); else tv_print(fb, ((640/8)-strlen(left_t_msg)-1)/2, 7, "                    ");
+		if(controller[hs_controller_1].input.rs) tv_print(fb, ((640/8)-strlen(right_s_msg)-1)/2, 8, right_s_msg); else tv_print(fb, ((640/8)-strlen(right_s_msg)-1)/2, 8, "                      ");
+		if(controller[hs_controller_1].input.ls) tv_print(fb, ((640/8)-strlen(left_s_msg)-1)/2, 9, left_s_msg); else tv_print(fb, ((640/8)-strlen(left_s_msg)-1)/2, 9, "                     ");
+		if(controller[hs_controller_1].input.g) tv_print(fb, ((640/8)-strlen(green_msg)-1)/2, 10, green_msg); else tv_print(fb, ((640/8)-strlen(green_msg)-1)/2, 10, "                    ");
+		if(controller[hs_controller_1].input.y) tv_print(fb, ((640/8)-strlen(yellow_msg)-1)/2, 11, yellow_msg); else tv_print(fb, ((640/8)-strlen(yellow_msg)-1)/2, 11, "                     ");
+		if(controller[hs_controller_1].input.r) tv_print(fb, ((640/8)-strlen(red_msg)-1)/2, 12, red_msg); else tv_print(fb, ((640/8)-strlen(red_msg)-1)/2, 12, "                    ");
+		if(controller[hs_controller_1].input.b) tv_print(fb, ((640/8)-strlen(blue_msg)-1)/2, 13, blue_msg); else tv_print(fb, ((640/8)-strlen(blue_msg)-1)/2, 13, "                    ");
 
-		if(controller[hs_controller_1].input.joystick_y <= 0x60) TV_Print(fb, ((640/8)-strlen(down_msg)-1)/2, 15, down_msg); else TV_Print(fb, ((640/8)-strlen(down_msg)-1)/2, 15, "    ");
-		if(controller[hs_controller_1].input.joystick_y >= 0xB0) TV_Print(fb, ((640/8)-strlen(up_msg)-1)/2, 14, up_msg); else TV_Print(fb, ((640/8)-strlen(up_msg)-1)/2, 14, "    ");
-		if(controller[hs_controller_1].input.joystick_x <= 0x60) TV_Print(fb, ((640/8)-strlen(right_msg)-1)/2, 17, right_msg); else TV_Print(fb, ((640/8)-strlen(right_msg)-1)/2, 17, "     ");
-		if(controller[hs_controller_1].input.joystick_x >= 0xB0) TV_Print(fb, ((640/8)-strlen(left_msg)-1)/2, 16, left_msg); else TV_Print(fb, ((640/8)-strlen(left_msg)-1)/2, 16, "    ");
+		if(controller[hs_controller_1].input.joystick_y <= 0x60) tv_print(fb, ((640/8)-strlen(down_msg)-1)/2, 15, down_msg); else tv_print(fb, ((640/8)-strlen(down_msg)-1)/2, 15, "    ");
+		if(controller[hs_controller_1].input.joystick_y >= 0xB0) tv_print(fb, ((640/8)-strlen(up_msg)-1)/2, 14, up_msg); else tv_print(fb, ((640/8)-strlen(up_msg)-1)/2, 14, "    ");
+		if(controller[hs_controller_1].input.joystick_x <= 0x60) tv_print(fb, ((640/8)-strlen(right_msg)-1)/2, 17, right_msg); else tv_print(fb, ((640/8)-strlen(right_msg)-1)/2, 17, "     ");
+		if(controller[hs_controller_1].input.joystick_x >= 0xB0) tv_print(fb, ((640/8)-strlen(left_msg)-1)/2, 16, left_msg); else tv_print(fb, ((640/8)-strlen(left_msg)-1)/2, 16, "    ");
 
 		printf("Example debug over serial\n");
 

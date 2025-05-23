@@ -129,18 +129,18 @@ int main()
 	/************************************************************************/
 
 	/* Initalize Mattel HyperScan controller interface */
-	HS_Controller_Init();
+	hs_controller_init();
 	
 	/*
 		Set TV output up with RGB565 color scheme and make set all framebuffers
-		to stupid framebuffer address, TV_Init will select the first framebuffer
+		to stupid framebuffer address, tv_init will select the first framebuffer
 		as default.
 	*/
-	TV_Init(RESOLUTION_640_480, COLOR_RGB565, 0xA0400000, 0xA0400000, 0xA0400000);
+	tv_init(RESOLUTION_640_480, COLOR_RGB565, 0xA0400000, 0xA0400000, 0xA0400000);
 
-	TV_Print(fb, 29, 2, "HyperScan PONG - ppcasm");
-	TV_Print(fb, 18, 3, "Join the Discord: https://discord.gg/rHh2nW9sue");
-	TV_Print(fb, 29, 28, "Press SELECT to restart");
+	tv_print(fb, 29, 2, "HyperScan PONG - ppcasm");
+	tv_print(fb, 18, 3, "Join the Discord: https://discord.gg/rHh2nW9sue");
+	tv_print(fb, 29, 28, "Press SELECT to restart");
 
 	// Player scores
 	char p1_score[4];
@@ -155,7 +155,7 @@ int main()
 	p2_score[2] = 0;
 	
 	while(1){
-		HS_Controller_Read();
+		hs_controller_read();
 		
 		// Make right trigger speed up ball and left trigger slow it down :p
 		if((controller[hs_controller_1].input.joystick_y != 0xFF) & (controller[hs_controller_1].input.joystick_x != 0xFF) & (controller[hs_controller_1].input.rt)){
@@ -223,9 +223,9 @@ int main()
 			goto *0xa0091000;
 		}
 		
-		//TV_PrintHex(fb, 35, 4, cur_ball_x);
-		//TV_PrintHex(fb, 35, 5, cur_ball_y);
-		//TV_PrintHex(fb, 35, 6, cur_p1_pos);
+		//tv_printHex(fb, 35, 4, cur_ball_x);
+		//tv_printHex(fb, 35, 5, cur_ball_y);
+		//tv_printHex(fb, 35, 6, cur_p1_pos);
 		
 		// Check and handle bouncing off the boundaries, scores, etc
 		if(((cur_ball_x <= 2+ball_speed) & (cur_ball_y >= cur_p1_pos-4)) & ((cur_ball_x <= 2+ball_speed) & (cur_ball_y < cur_p1_pos+49)))	ball_movement_x = ball_speed;
@@ -237,7 +237,7 @@ int main()
 				// Player2 Wins
 				ball_movement_x = 0;
 				ball_movement_y = 0;
-				TV_Print(fb, 33, 15, "PLAYER 2 WINS!");
+				tv_print(fb, 33, 15, "PLAYER 2 WINS!");
         	}
         	else{
         		p2_score[1] = p2_score[1] + 1;
@@ -249,7 +249,7 @@ int main()
 				// Player1 Wins
 				ball_movement_x = 0;
 				ball_movement_y = 0;
-				TV_Print(fb, 33, 15, "PLAYER 1 WINS!");
+				tv_print(fb, 33, 15, "PLAYER 1 WINS!");
         	}
         	else{
         		p1_score[1] = p1_score[1] + 1;
@@ -281,10 +281,10 @@ int main()
 		draw_player1(cur_p1_pos);
 		draw_player2(cur_p2_pos);
 		
-		TV_Print(fb, 0, 28, "Player1:");
-		TV_Print(fb, 9, 28, p1_score); 
-		TV_Print(fb, 69 , 28, "Player2:");
-		TV_Print(fb, 78, 28, p2_score);
+		tv_print(fb, 0, 28, "Player1:");
+		tv_print(fb, 9, 28, p1_score); 
+		tv_print(fb, 69 , 28, "Player2:");
+		tv_print(fb, 78, 28, p2_score);
 	}
 		
 	return nExitCode;

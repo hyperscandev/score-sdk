@@ -38,14 +38,14 @@ extern "C" {
 /**************************************************************************
  *               F U N C T I O N    D E C L A R A T I O N S               *
  **************************************************************************/
-void NorFlash_Init(void);
-void NorFlash_Delay(unsigned int clk);
-void NorFlash_WordWrite(unsigned int addr, unsigned data);
-unsigned int NorFlash_SetAddress(unsigned int addr);
-extern void NorFlash_ChipErase(void);
-extern void NorFlash_BlockErase(unsigned int addr);
-extern void NorFlash_SectorErase(unsigned int addr);
-extern void NorFlash_Write32(unsigned int addr, unsigned int data);
+void norflash_init(void);
+void norflash_delay(unsigned int clk);
+void norflash_wordwrite(unsigned int addr, unsigned data);
+unsigned int norflash_setaddress(unsigned int addr);
+extern void norflash_chiperase(void);
+extern void norflash_blockerase(unsigned int addr);
+extern void norflash_sectorerase(unsigned int addr);
+extern void norflash_write32(unsigned int addr, unsigned int data);
 
 #ifdef __cplusplus
 }

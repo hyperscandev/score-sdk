@@ -3,12 +3,12 @@
 #include "uart/uart.h"
 
 //=============================================================
-//	void UART_Init(int BaudRate)
+//	void uart_Init(int baudrate)
 //
 //
 //	void return
 //=============================================================
-void UART_Init(int BaudRate){
+void uart_init(int baudrate){
 /*	
 	For now I'll leave this blank, as UART is already set up
 	by the firmware on the Mattel HyperScan, but having the 
@@ -17,25 +17,25 @@ void UART_Init(int BaudRate){
 }
 
 //=============================================================
-//	void UART_SendChar(char cData)
+//	void uart_sendchar(char cdata)
 //
 //
 //	void return
 //=============================================================
-void UART_SendChar(char cData){
+void uart_sendchar(char cdata){
     while(*P_UART_TXRX_STATUS & C_UART_TXFIFO_FULL);
-    *P_UART_TXRX_DATA = cData;
+    *P_UART_TXRX_DATA = cdata;
 	while(*P_UART_TXRX_STATUS & C_UART_BUSY_FLAG);  
 }
 
 //=============================================================
-//	char UART_GetChar();
+//	char uart_getchar();
 //
 //
 //	char return (the character send to the device)
 //=============================================================
-char UART_GetChar(){
-    char cData = 0;
+char uart_getchar(){
+    char cdata = 0;
     int i=0;
     
     while(*P_UART_TXRX_STATUS & C_UART_RXFIFO_EMPTY){
@@ -43,10 +43,8 @@ char UART_GetChar(){
     	if(i==10000)break;
     }
     
-    if(i==10000) cData = 0xFF; else cData = *P_UART_TXRX_DATA;
+    if(i==10000) cdata = 0xFF; else cdata = *P_UART_TXRX_DATA;
     
-    return cData;
+    return cdata;
 }
-
-
 

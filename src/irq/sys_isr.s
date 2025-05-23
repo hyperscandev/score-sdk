@@ -258,7 +258,7 @@ int60_vec:              // IRQ60
     j save_reg          // save_reg
 .align 2
 int61_vec:              // IRQ61
-    j   save_reg        // save_reg
+    j save_reg          // save_reg
 .align 2
 int62_vec:              // IRQ62
     j save_reg          // save_reg

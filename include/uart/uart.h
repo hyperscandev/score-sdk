@@ -23,9 +23,9 @@ extern "C" {
 /**************************************************************************
  *               F U N C T I O N    D E C L A R A T I O N S               *
  **************************************************************************/
-void UART_Initial(int BaudRate);
-void UART_SendChar(char Data);
-char UART_GetChar();
+void uart_initial(int baudrate);
+void uart_sendchar(char data);
+char uart_getchar();
 
 #ifdef __cplusplus
 }

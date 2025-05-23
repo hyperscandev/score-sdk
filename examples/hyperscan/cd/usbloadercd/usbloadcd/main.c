@@ -64,14 +64,14 @@ void box(unsigned short* framebuffer, int x, int y, int width, int height, int r
     }
 }
 
-void Menu_Border(unsigned short* framebuffer, int x, int y, int width, int height, int radius, int thickness, unsigned short color) {
+void menu_border(unsigned short* framebuffer, int x, int y, int width, int height, int radius, int thickness, unsigned short color) {
 	int t = 0;
     for (t = 0; t < thickness; t++) {
         box(framebuffer, x + t, y + t, width - t * 2, height - t * 2, radius, color);
     }
 }
 
-int Get_Dir_List_Size(){
+int get_dir_list_size(){
 	
 	int dir_count = 0;
 	
@@ -117,7 +117,7 @@ int Get_Dir_List_Size(){
     return dir_count;
 }
 
-int Load_Directory_List(char **dir_buf){
+int load_directory_list(char **dir_buf){
 	
 	int dir_count = 0;
 	
@@ -165,7 +165,7 @@ int Load_Directory_List(char **dir_buf){
     return 0;
 }
 
-static int Show_Selection(char **dir_buf, int dir_count, int index, int selection){
+static int show_selection(char **dir_buf, int dir_count, int index, int selection){
 	int i = 0;
 
 	if(dir_count >= 16) dir_count = 16;
@@ -177,12 +177,12 @@ static int Show_Selection(char **dir_buf, int dir_count, int index, int selectio
 	for(i=index;i<dir_count-index;i++){
 		
 		if(i == selection){
-			TV_Print((unsigned short *)FRAMEBUFFER_ADDRESS, 34, 8+i, "-->");
-			TV_PrintColor((unsigned short *)FRAMEBUFFER_ADDRESS, 37, 8+i, dir_buf[i], 0x7E0);
+			tv_print((unsigned short *)FRAMEBUFFER_ADDRESS, 34, 8+i, "-->");
+			tv_printcolor((unsigned short *)FRAMEBUFFER_ADDRESS, 37, 8+i, dir_buf[i], 0x7E0);
 		}
 		else{
-			TV_Print((unsigned short *)FRAMEBUFFER_ADDRESS, 34, 8+i, "   ");
-			TV_Print((unsigned short *)FRAMEBUFFER_ADDRESS, 37, 8+i, dir_buf[i]);
+			tv_print((unsigned short *)FRAMEBUFFER_ADDRESS, 34, 8+i, "   ");
+			tv_print((unsigned short *)FRAMEBUFFER_ADDRESS, 37, 8+i, dir_buf[i]);
 		}
 	}
 	
@@ -228,7 +228,7 @@ void execute_binary(char *dir_buf){
 	entry_start();
 }
 
-void DAC_Init(){
+void dac_Init(){
 
 	asm("li r4, 0x0");
 	asm("mtcr r4, cr0");
@@ -255,7 +255,7 @@ void DAC_Init(){
 }
 int main(){
 
-	DAC_Init();
+	dac_Init();
 	
 	// Stupid Framebuffer
 	unsigned short *fb = (unsigned short *)FRAMEBUFFER_ADDRESS;
@@ -274,51 +274,51 @@ int main(){
 	/************************************************************************/
 
 	/* Initalize Mattel HyperScan controller interface */
-	HS_Controller_Init();
+	hs_controller_init();
 	
 	/*
 	Set TV output up with RGB565 color scheme and make set all framebuffers
-	to stupid framebuffer address, TV_Init will select the first framebuffer
+	to stupid framebuffer address, tv_init will select the first framebuffer
 	as default.
 	*/
-	TV_Init(RESOLUTION_640_480, COLOR_RGB565, FRAMEBUFFER_ADDRESS, FRAMEBUFFER_ADDRESS, FRAMEBUFFER_ADDRESS);
+	tv_init(RESOLUTION_640_480, COLOR_RGB565, FRAMEBUFFER_ADDRESS, FRAMEBUFFER_ADDRESS, FRAMEBUFFER_ADDRESS);
 
-	TV_Print(fb, (((640/8)-strlen(header1))/2), 2, header1);
-	TV_Print(fb, (((640/8)-strlen(header2))/2), 3, header2);
-	TV_Print(fb, (((640/8)-strlen(header3))/2), 4, header3);
+	tv_print(fb, (((640/8)-strlen(header1))/2), 2, header1);
+	tv_print(fb, (((640/8)-strlen(header2))/2), 3, header2);
+	tv_print(fb, (((640/8)-strlen(header3))/2), 4, header3);
 
-    Menu_Border(fb, (FRAMEBUFFER_WIDTH - 250) / 2, 20 + (FRAMEBUFFER_HEIGHT - 320) / 2, 250, 320, 1, 6, 0xFFFF); 
+    menu_border(fb, (FRAMEBUFFER_WIDTH - 250) / 2, 20 + (FRAMEBUFFER_HEIGHT - 320) / 2, 250, 320, 1, 6, 0xFFFF); 
 
-	dir_count = Get_Dir_List_Size();
+	dir_count = get_dir_list_size();
 
 	char *dir_buf[dir_count];
 	
-	Load_Directory_List(dir_buf);
+	load_directory_list(dir_buf);
 	
-	Show_Selection(dir_buf, dir_count, 0, selection);
+	show_selection(dir_buf, dir_count, 0, selection);
 
 	while(1){
 		
 		// If right trigger is pressed, move menu select down
-		HS_Controller_Read();
+		hs_controller_read();
 		if(controller[hs_controller_1].input.rt){
 			selection++;
-			selection = Show_Selection(dir_buf, dir_count, 0, selection);
+			selection = show_selection(dir_buf, dir_count, 0, selection);
 		}
 		
 		// If left trigger is pressed, move menu select up
-		HS_Controller_Read();
+		hs_controller_read();
 		if(controller[hs_controller_1].input.lt){
 			selection--;
-			selection = Show_Selection(dir_buf, dir_count, 0, selection);
+			selection = show_selection(dir_buf, dir_count, 0, selection);
 		}
 		
 		// If start is pressed, load and execute Hyper.Exe
-		HS_Controller_Read();
+		hs_controller_read();
 		if(controller[hs_controller_1].input.start){
-			TV_Print((unsigned short *)FRAMEBUFFER_ADDRESS, 20, 28, "                    ");
-			TV_Print((unsigned short *)FRAMEBUFFER_ADDRESS, 40-(strlen(loading)/2), 27, loading);
-			TV_Print((unsigned short *)FRAMEBUFFER_ADDRESS, 40-(strlen(dir_buf[selection])/2), 28, dir_buf[selection]);
+			tv_print((unsigned short *)FRAMEBUFFER_ADDRESS, 20, 28, "                    ");
+			tv_print((unsigned short *)FRAMEBUFFER_ADDRESS, 40-(strlen(loading)/2), 27, loading);
+			tv_print((unsigned short *)FRAMEBUFFER_ADDRESS, 40-(strlen(dir_buf[selection])/2), 28, dir_buf[selection]);
 			execute_binary(dir_buf[selection]);
 		}		
 	}

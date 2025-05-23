@@ -1,5 +1,5 @@
-#ifndef _SPG290_CONSTANTS_H
-#define _SPG290_CONSTANTS_H
+#ifndef _SCORE7_CONSTANTS_H
+#define _SCORE7_CONSTANTS_H
 
 //******************************************************************//
 //                            CLK-PLL                               //
@@ -1234,4 +1234,4 @@
 #define C_MPEG4_TSRAM_PAGE7       0x0000001C    // P_MPEG4_TSRAM_CTRL
 
 
-#endif  //_SPG290_CONSTANTS_H
+#endif  //_SCORE7_CONSTANTS_H

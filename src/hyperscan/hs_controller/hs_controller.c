@@ -12,26 +12,26 @@
 */
 
 //=============================================================
-// void HS_Controller_Init(void);
+// void hs_controller_init(void);
 //
 // This initializes the Mattel HyperScan controller interface
 //
 // void return
 //=============================================================
-void HS_Controller_Init(void)
+void hs_controller_init(void)
 {
-	I2C_Init();
+	i2c_init();
 	
 	*P_TFT_GPIO_OUTPUTEN = 0x000FFFFF;
 	*P_TFT_GPIO_PULLUP = 0x000FFFFF;
 	*P_TFT_GPIO_PULLDOWN = 0x00000000;
 	
 	//	Flush initial controller inputs
-	HS_Controller_Read();
+	hs_controller_read();
 }
 
 //=============================================================
-// void HS_Controller_Read(unsigned int controller_port);
+// void hs_controller_read(unsigned int controller_port);
 //
 // This reads the data from controller (controller_port) and returns
 // the value
@@ -39,7 +39,7 @@ void HS_Controller_Init(void)
 // void return, the controller data gets stored in the controller union/struct
 // for the specific controller (hs_controller_1, or hs_controller_2)
 //=============================================================
-void HS_Controller_Read(void){
+void hs_controller_read(void){
 	/*
 		The Mattel HyperScan controllers are selected by the
 		TFT_GPIO port
@@ -56,7 +56,7 @@ void HS_Controller_Read(void){
 		*P_TFT_GPIO_DATA |= (1 << controller_count);
 
 		for(read_count=0;read_count<=4;read_count++){
-			controller[controller_count].bytes[read_count] = I2C_Read8(read_count);
+			controller[controller_count].bytes[read_count] = i2c_read8(read_count);
 		}
 		
 		//	Disable controller

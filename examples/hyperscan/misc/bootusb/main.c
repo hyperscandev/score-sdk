@@ -34,10 +34,10 @@ DO NOT TRY TO RUN THIS AS A HYPER.EXE APP; IT WILL NOT WORK...
 typedef struct {
     char key[MAX_KEY_LENGTH];
     char value[MAX_VALUE_LENGTH];
-} ConfigEntry;
+} configentry;
 
 // This will parse some values from a config file in a "KEY=VALUE" format
-int parseConfigFile(const char *filename, ConfigEntry *entries, int *num_entries) {
+int parseconfigfile(const char *filename, configentry *entries, int *num_entries) {
     FIL file;
     FRESULT res;
     char line[MAX_LINE_LENGTH];
@@ -101,7 +101,7 @@ int main()
 	FIL fil;
 	FRESULT fr;
 	UINT br;
-	ConfigEntry entries[MAX_ENTRIES];
+	configentry entries[MAX_ENTRIES];
 	int num_entries = 0;
 	int file_size = 0;
 	int i = 0;
@@ -110,7 +110,7 @@ int main()
 	f_mount(&fs0, "0:", 1);
 	
 	// Read config file so that we can set parameters for loading a binary from the USB drive
-	if(parseConfigFile("usbload.ini", entries, &num_entries)){
+	if(parseconfigfile("usbload.ini", entries, &num_entries)){
 		for(i=0;i<num_entries;++i){
 			if(!strcmp(entries[i].key, "LOAD_ADDR")){
 				ldrptr = (BYTE *)strtoul(entries[i].value, NULL, 16);

@@ -18,7 +18,7 @@ Just a testing space for personal use.
 #define LOAD_ADDRESS 0xA0C001FC
 #define ENTRY_ADDRESS 0xA0C01000
 
-void Enable_Interrupts(){
+void enable_interrupts(){
 
 	asm("li r4, 0x1");
 	asm("mtcr r4, cr0");
@@ -29,7 +29,7 @@ void Enable_Interrupts(){
 	asm("nop");
 }
 
-void Disable_Interrupts(){
+void disable_interrupts(){
 	
 	asm("li r4, 0x0");
 	asm("mtcr r4, cr0");
@@ -46,7 +46,7 @@ int main(){
 	
 	int nExitCode = 0;
 	
-	Enable_Interrupts();
+	enable_interrupts();
 
     unsigned char *ldrptr = (unsigned char *)LOAD_ADDRESS;
 	void (*entry_start)(void) = (void *)ENTRY_ADDRESS;

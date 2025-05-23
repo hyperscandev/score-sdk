@@ -1,5 +1,5 @@
-#ifndef _SPG290_REGISTERS_H
-#define _SPG290_REGISTERS_H
+#ifndef _SCORE7_REGISTERS_H
+#define _SCORE7_REGISTERS_H
 
 #define HS_LEDS(value) (*P_CSI_GPIO_SETUP = (0x1FFE0000+(value<<5)))
 
@@ -639,4 +639,4 @@ typedef volatile unsigned int UV32;
 #define P_DRAM_GPIO_SETUP                   (UV32*)0x88200050
 #define P_DRAM_GPIO_INPUT                   (UV32*)0x88200070
 
-#endif  //_SPG290_REGISTERS_H
+#endif  //_SCORE7_REGISTERS_H

@@ -1,6 +1,6 @@
 // SUNPLUS  S+core IDE generated assembly include file.
-#ifndef HYPERSCAN_RESOURCE_INC__28145_5705__INCLUDED_
-#define HYPERSCAN_RESOURCE_INC__28145_5705__INCLUDED_
+#ifndef HYPERSCAN_RESOURCE_INC__8942_9040__INCLUDED_
+#define HYPERSCAN_RESOURCE_INC__8942_9040__INCLUDED_
 
 .extern _binary_C__Users_ppcasm_Documents_score_sdk_examples_hyperscan_cd_usbloadercd_cdusbldr_bin_start
 #define _RES_CDUSBLDR_BIN _binary_C__Users_ppcasm_Documents_score_sdk_examples_hyperscan_cd_usbloadercd_cdusbldr_bin_start
@@ -8,4 +8,4 @@
 #define _RES_CDUSBLDR_BIN_END _binary_C__Users_ppcasm_Documents_score_sdk_examples_hyperscan_cd_usbloadercd_cdusbldr_bin_end
 
 
-#endif //HYPERSCAN_RESOURCE_INC__28145_5705__INCLUDED_
+#endif //HYPERSCAN_RESOURCE_INC__8942_9040__INCLUDED_

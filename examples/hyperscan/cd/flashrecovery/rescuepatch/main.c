@@ -11,7 +11,7 @@ better understand what this is.
 #include "score7_constants.h"
 
 // HyperScan firmware callback functions
-#define DrvUSBH_Initial() ((int (*)(void))0xA0001460)()
+#define drvusbh_initial() ((int (*)(void))0xA0001460)()
 
 // This is the address where to go to reach the embedded USB loader code
 // if it exists in the firmware
@@ -95,7 +95,7 @@ void USB_Boot(void){
 
 	// This firmware callback *SHOULD* return 0 if a USB device is plugged
 	// in and has adequate power and properly initializes.
-	if(!DrvUSBH_Initial()){
+	if(!drvusbh_initial()){
 		HS_LEDS(0xFF);
 		print_string("USB Boot...\n");
 		void (*usb_boot)(void) = (void *)USB_LOADER_ADDRESS;

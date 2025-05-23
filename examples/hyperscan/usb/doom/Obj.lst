@@ -1,7 +1,7 @@
 /*	Created by S+core IDE	*/
 
 
-INPUT("Debug\hyperscan_startup.o")
+INPUT("Debug\doomnew_startup.o")
 INPUT("Debug\z_zone.o")
 INPUT("Debug\wi_stuff.o")
 INPUT("Debug\w_wad.o")
@@ -65,7 +65,6 @@ INPUT("Debug\i_scale.o")
 INPUT("Debug\i_joystick.o")
 INPUT("Debug\i_input.o")
 INPUT("Debug\i_endoom.o")
-INPUT("Debug\i_cdmus.o")
 INPUT("Debug\hu_stuff.o")
 INPUT("Debug\hu_lib.o")
 INPUT("Debug\gusconf.o")

@@ -2,7 +2,7 @@
 
 This is part of the Mattel HyperScan SDK by ppcasm (ppcasm@gmail.com)
 
-Just a testing space for personal use.
+usbloader
  
 */
 
@@ -67,14 +67,14 @@ void box(unsigned short* framebuffer, int x, int y, int width, int height, int r
     }
 }
 
-void Menu_Border(unsigned short* framebuffer, int x, int y, int width, int height, int radius, int thickness, unsigned short color) {
+void menu_border(unsigned short* framebuffer, int x, int y, int width, int height, int radius, int thickness, unsigned short color) {
 	int t = 0;
     for (t = 0; t < thickness; t++) {
         box(framebuffer, x + t, y + t, width - t * 2, height - t * 2, radius, color);
     }
 }
 
-void DAC_Init(){
+void dac_Init(){
 	
 	// Patch the excvec to allow fixed exc handler
 	// to use our DAC ISR while still keeping firmware
@@ -106,7 +106,7 @@ void DAC_Init(){
 	*P_DAC_MODE_CTRL1 = ~0x00000003;
 }
 
-void Load_BG_Music(const char *filename){
+void load_bg_music(const char *filename){
 	
 	FATFS fs0;
 	FIL fil;
@@ -146,7 +146,7 @@ void Load_BG_Music(const char *filename){
 	Repeat_ON_MP3();
 }
 
-int Get_Dir_List_Size(){
+int get_dir_list_size(){
 	
 	int dir_count = 0;
 	
@@ -192,7 +192,7 @@ int Get_Dir_List_Size(){
     return dir_count;
 }
 
-int Load_Directory_List(char **dir_buf){
+int load_directory_list(char **dir_buf){
 	
 	int dir_count = 0;
 	
@@ -240,7 +240,7 @@ int Load_Directory_List(char **dir_buf){
     return 0;
 }
 
-static int Show_Selection(char **dir_buf, int dir_count, int index, int selection){
+static int show_selection(char **dir_buf, int dir_count, int index, int selection){
 	int i = 0;
 
 	if(dir_count >= 16) dir_count = 16;
@@ -252,18 +252,18 @@ static int Show_Selection(char **dir_buf, int dir_count, int index, int selectio
 	for(i=index;i<dir_count-index;i++){
 		
 		if(i == selection){
-			TV_Print((unsigned short *)FRAMEBUFFER_ADDRESS, 34, 8+i, "-->");
-			TV_PrintColor((unsigned short *)FRAMEBUFFER_ADDRESS, 37, 8+i, dir_buf[i], 0x7E0);
+			tv_print((unsigned short *)FRAMEBUFFER_ADDRESS, 34, 8+i, "-->");
+			tv_printcolor((unsigned short *)FRAMEBUFFER_ADDRESS, 37, 8+i, dir_buf[i], 0x7E0);
 		}
 		else{
-			TV_Print((unsigned short *)FRAMEBUFFER_ADDRESS, 34, 8+i, "   ");
-			TV_Print((unsigned short *)FRAMEBUFFER_ADDRESS, 37, 8+i, dir_buf[i]);
+			tv_print((unsigned short *)FRAMEBUFFER_ADDRESS, 34, 8+i, "   ");
+			tv_print((unsigned short *)FRAMEBUFFER_ADDRESS, 37, 8+i, dir_buf[i]);
 		}
 	}
 	
 	return selection;
 }
-
+    
 void execute_binary(char *dir_buf){
 
 	int file_size = 0;
@@ -303,10 +303,28 @@ void execute_binary(char *dir_buf){
 	entry_start();
 }
 
+static inline unsigned int asm_j_insn(unsigned int address, unsigned int link) {
+    // low half: bits [14:0] of address, plus the p-bit at bit 15
+    unsigned int insn_l = (address & 0x7FFFU)    // mask low 15 bits
+                    | (1U << 15);            // set p-bit
+
+    // high half: bits [28:16] of (address<<1), plus bits 31 and 27
+    unsigned int insn_h = ((address << 1) & 0x1FFF0000U)  // mask bits [28:16]
+                    | (1U << 31)                   // set bit 31
+                    | (1U << 27);                  // set bit 27
+
+    // combine halves and add the link field
+    unsigned int assembled = (insn_h & 0xFFFF0000U)    // upper 16 bits
+                       | (insn_l & 0x0000FFFFU);  // lower 16 bits
+    assembled += link;
+
+    return assembled;
+}
+
 int main(){
 
 	// Initialize DAC interrupt handling
-	DAC_Init();
+	dac_Init();
 	    
 	// Stupid Framebuffer
 	unsigned short *fb = (unsigned short *)FRAMEBUFFER_ADDRESS;
@@ -325,74 +343,99 @@ int main(){
 	/************************************************************************/
 	
 	/* Initalize Mattel HyperScan controller interface */
-	HS_Controller_Init();
+	hs_controller_init();
+	
+	// If start is held at boot of usbload then continue as normal
+	hs_controller_read();
+	if(controller[hs_controller_1].input.start){
+		int i = 0;
+		
+		volatile unsigned int *src = (volatile unsigned int *)0x9F001000;
+		volatile unsigned int *dst = (volatile unsigned int *)0xA00001FC;
+		unsigned int n = (0xFF000 / 4);
+
+		for(i = 0; i < n; i++) {
+			dst[i] = src[i];
+		}
+		
+		// You could place firmware patches here that would get applied before booting HyperScanOS
+		// RESET PATCH EXAMPLE (resets when printing from coords takes place)
+		//*(volatile unsigned int *)0xa000d2b0 = 0x84D88080;
+		//*(volatile unsigned int *)0xa000d2b4 = 0x94FA9042;
+		//*(volatile unsigned int *)0xa000d2b8 = 0x267c0000;
+		//*(volatile unsigned int *)0xa000d2b0 = asm_j_insn(0xA0091000, 0);
+		//*(volatile unsigned int *)0xa000d2b4 = 0x00000000;
+		
+		void (*entry_start)(void) = (void *)0xA0001000;
+		entry_start();
+	}
 	
 	/*
 	Set TV output up with RGB565 color scheme and make set all framebuffers
-	to stupid framebuffer address, TV_Init will select the first framebuffer
+	to stupid framebuffer address, tv_init will select the first framebuffer
 	as default.
 	*/
-	TV_Init(RESOLUTION_640_480, COLOR_RGB565, FRAMEBUFFER_ADDRESS, FRAMEBUFFER_ADDRESS, FRAMEBUFFER_ADDRESS);
+	tv_init(RESOLUTION_640_480, COLOR_RGB565, FRAMEBUFFER_ADDRESS, FRAMEBUFFER_ADDRESS, FRAMEBUFFER_ADDRESS);
 
-	TV_Print(fb, (((640/8)-strlen(header1))/2), 2, header1);
-	TV_Print(fb, (((640/8)-strlen(header2))/2), 3, header2);
-	TV_Print(fb, (((640/8)-strlen(header3))/2), 4, header3);
+	tv_print(fb, (((640/8)-strlen(header1))/2), 2, header1);
+	tv_print(fb, (((640/8)-strlen(header2))/2), 3, header2);
+	tv_print(fb, (((640/8)-strlen(header3))/2), 4, header3);
 
-    Menu_Border(fb, (FRAMEBUFFER_WIDTH - 250) / 2, 20 + (FRAMEBUFFER_HEIGHT - 320) / 2, 250, 320, 1, 6, 0xFFFF); 
+    menu_border(fb, (FRAMEBUFFER_WIDTH - 250) / 2, 20 + (FRAMEBUFFER_HEIGHT - 320) / 2, 250, 320, 1, 6, 0xFFFF); 
 
-	dir_count = Get_Dir_List_Size();
+	dir_count = get_dir_list_size();
 
 	char *dir_buf[dir_count];
 	
-	Load_Directory_List(dir_buf);
+	load_directory_list(dir_buf);
 	
-	Show_Selection(dir_buf, dir_count, 0, selection);
+	show_selection(dir_buf, dir_count, 0, selection);
 
 	while(1){
 		
 		// If right trigger is pressed, move menu select down
-		HS_Controller_Read();
+		hs_controller_read();
 		if(controller[hs_controller_1].input.rt){
 			selection++;
-			selection = Show_Selection(dir_buf, dir_count, 0, selection);
+			selection = show_selection(dir_buf, dir_count, 0, selection);
 		}
 		
 		// If left trigger is pressed, move menu select up
-		HS_Controller_Read();
+		hs_controller_read();
 		if(controller[hs_controller_1].input.lt){
 			selection--;
-			selection = Show_Selection(dir_buf, dir_count, 0, selection);
+			selection = show_selection(dir_buf, dir_count, 0, selection);
 		}
 		
 		// If start is pressed, load and execute Hyper.Exe
-		HS_Controller_Read();
+		hs_controller_read();
 		if(controller[hs_controller_1].input.start){
-			TV_Print((unsigned short *)FRAMEBUFFER_ADDRESS, 20, 28, "                    ");
-			TV_Print((unsigned short *)FRAMEBUFFER_ADDRESS, 40-(strlen(loading)/2), 27, loading);
-			TV_Print((unsigned short *)FRAMEBUFFER_ADDRESS, 40-(strlen(dir_buf[selection])/2), 28, dir_buf[selection]);
+			tv_print((unsigned short *)FRAMEBUFFER_ADDRESS, 20, 28, "                    ");
+			tv_print((unsigned short *)FRAMEBUFFER_ADDRESS, 40-(strlen(loading)/2), 27, loading);
+			tv_print((unsigned short *)FRAMEBUFFER_ADDRESS, 40-(strlen(dir_buf[selection])/2), 28, dir_buf[selection]);
 			execute_binary(dir_buf[selection]);
 		}
 		
-		HS_Controller_Read();
+		hs_controller_read();
 		if(controller[hs_controller_1].input.select){
-			TV_Print((unsigned short *)FRAMEBUFFER_ADDRESS, 40-(strlen("MP3 Mode")/2), 27, "MP3 Mode");
+			tv_print((unsigned short *)FRAMEBUFFER_ADDRESS, 40-(strlen("MP3 Mode")/2), 27, "MP3 Mode");
 
 			int mp3_mode = 1;
 			int count = 0;
 			
-			Load_BG_Music("/mp3/bg.mp3");
+			load_bg_music("/mp3/bg.mp3");
 
 			while(mp3_mode){
 				// Handle MP3 stream
 				for(count=0;count<=100000;count++) MP3_Service_Loop();
 	
-				HS_Controller_Read();
+				hs_controller_read();
 				MP3_Service_Loop();
 					
 				if(controller[hs_controller_1].input.select) mp3_mode = 0;
 	
 			}
-			TV_Print((unsigned short *)FRAMEBUFFER_ADDRESS, 40-(strlen("MP3 Mode")/2), 27, "         ");
+			tv_print((unsigned short *)FRAMEBUFFER_ADDRESS, 40-(strlen("MP3 Mode")/2), 27, "         ");
 			Stop_MP3();
 			for(count=0;count<=100000;count++);
 		}

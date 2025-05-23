@@ -69,23 +69,23 @@ int main()
 	/************************************************************************/
 
 	/* Initialize NOR flash GPIO for R/W */
-	NorFlash_Init();
+	norflash_init();
 	
 	/* Initalize Mattel HyperScan controller interface */
-	HS_Controller_Init();
+	hs_controller_init();
 	
 	/*
 	   Set TV output up with RGB565 color scheme and make set all framebuffers
 	   to stupid framebuffer address, TV_Init will select the first framebuffer
 	   as default.
 	*/
-	TV_Init(RESOLUTION_640_480, COLOR_RGB565, 0xA0400000, 0xA0400000, 0xA0400000);
+	tv_init(RESOLUTION_640_480, COLOR_RGB565, 0xA0400000, 0xA0400000, 0xA0400000);
 
-	TV_Print(fb, (((640/8)-46)/2), 2, "HyperScan Firmware Recovery Installer - ppcasm");
-	TV_Print(fb, (((640/8)-47)/2), 3, "Join the Discord: https://discord.gg/rHh2nW9sue");
-	TV_Print(fb, (((640/8)-24)/2), 28, "Please use with CAUTION!");
+	tv_print(fb, (((640/8)-46)/2), 2, "HyperScan Firmware Recovery Installer - ppcasm");
+	tv_print(fb, (((640/8)-47)/2), 3, "Join the Discord: https://discord.gg/rHh2nW9sue");
+	tv_print(fb, (((640/8)-24)/2), 28, "Please use with CAUTION!");
 	
-	TV_Print(fb, (((640/8)-40)/2), 6, "Press START to install recovery firmware");
+	tv_print(fb, (((640/8)-40)/2), 6, "Press START to install recovery firmware");
 	
 	int i = 0;
 	
@@ -93,32 +93,32 @@ int main()
 
 	while(1){
 		
-		HS_Controller_Read();
+		hs_controller_read();
 		if(controller[hs_controller_1].input.start && controller[hs_controller_1].input.joystick_x != 0xFF && controller[hs_controller_1].input.joystick_y != 0xFF){
 			while(!controller[hs_controller_1].input.g && controller[hs_controller_1].input.joystick_x != 0xFF && controller[hs_controller_1].input.joystick_y != 0xFF){
-				HS_Controller_Read();
-				TV_Print(fb, (((640/8)-44)/2), 6, "Now press GREEN to install recovery firmware");
+				hs_controller_read();
+				tv_print(fb, (((640/8)-44)/2), 6, "Now press GREEN to install recovery firmware");
 				if(controller[hs_controller_1].input.g){
-					TV_Print(fb, (((640/8)-44)/2), 6, "    Installing firmware recovery patches    ");
-					TV_Print(fb, (((640/8)-6)/2), 9, "Status");
-					TV_Print(fb, (((640/8)-19)/2), 10, "Erasing boot sector");
+					tv_print(fb, (((640/8)-44)/2), 6, "    Installing firmware recovery patches    ");
+					tv_print(fb, (((640/8)-6)/2), 9, "Status");
+					tv_print(fb, (((640/8)-19)/2), 10, "Erasing boot sector");
 
 					// No this many isn't really needed :p 
-					NorFlash_SectorErase(0x9E000000);
-					NorFlash_SectorErase(0x9E000000);
-					NorFlash_SectorErase(0x9E000000);
-					NorFlash_SectorErase(0x9E000000);
+					norflash_sectorerase(0x9E000000);
+					norflash_sectorerase(0x9E000000);
+					norflash_sectorerase(0x9E000000);
+					norflash_sectorerase(0x9E000000);
 
 					for(i=0;i<=(sizeof(flash_patch)/4);i++){
-						TV_Print(fb, (((640/8)-25)/2), 10, "Writing data @ ");
-						TV_PrintHex(fb, 42, 10, 0x9E000000+(i*4));
+						tv_print(fb, (((640/8)-25)/2), 10, "Writing data @ ");
+						tv_printhex(fb, 42, 10, 0x9E000000+(i*4));
 						chk_addr_data = (volatile unsigned int *)0x9E000000+i;
 						while(*chk_addr_data != flash_patch[i]){
-							NorFlash_Write32(0x9E000000+(i*4), flash_patch[i]);
+							norflash_write32(0x9E000000+(i*4), flash_patch[i]);
 							chk_addr_data = (volatile unsigned int *)0x9E000000+i;
 						}
 					}
-					TV_Print(fb, (((640/8)-34)/2), 14, "DONE, Please reboot the HyperScan!");
+					tv_print(fb, (((640/8)-34)/2), 14, "DONE, Please reboot the HyperScan!");
 				}
 			}
 		}

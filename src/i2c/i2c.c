@@ -3,12 +3,12 @@
 #include "i2c/i2c.h"
 
 //=============================================================
-// void I2C_Init(void)
+// void i2c_init(void)
 //
 // This initializes the I2C controller
 //
 //=============================================================
-void I2C_Init(void)
+void i2c_init(void)
 {
 	*P_I2C_CLK_CONF = C_I2C_CLK_EN
 					 | C_I2C_RST_DIS;			
@@ -18,12 +18,12 @@ void I2C_Init(void)
 }
 
 //=============================================================
-// unsigned int I2C_Read8(int addr)
+// unsigned int i2c_read8(int addr)
 // 
 // This reads (8) bits of data from the selected I2C addr (addr)
 // 
 //=============================================================
-unsigned int I2C_Read8(int addr)
+unsigned int i2c_read8(int addr)
 {
 	unsigned int a = 0;
 
@@ -41,12 +41,12 @@ unsigned int I2C_Read8(int addr)
 }
 
 //=============================================================
-// void I2C_Write8(int addr, unsigned int value)
+// void i2c_write8(int addr, unsigned int value)
 // 
 // This writes an (8) bit value (value) to the I2C addr (addr)
 // 
 //=============================================================
-void I2C_Write8(int addr, unsigned int value)
+void i2c_write8(int addr, unsigned int value)
 {
 	unsigned int a;
 

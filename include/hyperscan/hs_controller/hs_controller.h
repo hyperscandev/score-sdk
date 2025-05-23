@@ -27,20 +27,20 @@ typedef struct{
 	bool g : 1;
 	unsigned char joystick_y: 8;
 	unsigned char joystick_x: 8;
-} Bitfields;
+} bitfields;
 
 typedef union{
-	Bitfields input;
+	bitfields input;
 	unsigned char bytes[5];
-} ControllerUnion;
+} controllerunion;
 
-ControllerUnion controller[1];
+controllerunion controller[1];
 
 /**************************************************************************
  *               F U N C T I O N    D E C L A R A T I O N S               *
  **************************************************************************/
-void HS_Controller_Init(void);
-void HS_Controller_Read(void);
+void hs_controller_init(void);
+void hs_controller_read(void);
 
 #ifdef __cplusplus
 }

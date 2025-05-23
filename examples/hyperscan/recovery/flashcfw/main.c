@@ -83,47 +83,47 @@ int main()
 	int i = 0;
 	
 	/* Initialize NOR flash GPIO for R/W */
-	NorFlash_Init();
+	norflash_init();
 	
 	/* Initalize Mattel HyperScan controller interface */
-	HS_Controller_Init();
+	hs_controller_init();
 	
 	/*
 	Set TV output up with RGB565 color scheme and make set all framebuffers
-	to stupid framebuffer address, TV_Init will select the first framebuffer
+	to stupid framebuffer address, tv_init will select the first framebuffer
 	as default.
 	*/
-	TV_Init(RESOLUTION_640_480, COLOR_RGB565, 0xA0400000, 0xA0400000, 0xA0400000);
+	tv_init(RESOLUTION_640_480, COLOR_RGB565, 0xA0400000, 0xA0400000, 0xA0400000);
 
-	TV_Print(fb, (((640/8)-44)/2), 2, "HyperScan Custom Firmware Installer - ppcasm");
-	TV_Print(fb, (((640/8)-47)/2), 3, "Join the Discord: https://discord.gg/rHh2nW9sue");
-	TV_Print(fb, (((640/8)-41)/2), 26, "NOTE: Screen might glitch, this is normal");
-	TV_Print(fb, (((640/8)-24)/2), 28, "Please use with CAUTION!");
+	tv_print(fb, (((640/8)-44)/2), 2, "HyperScan Custom Firmware Installer - ppcasm");
+	tv_print(fb, (((640/8)-47)/2), 3, "Join the Discord: https://discord.gg/rHh2nW9sue");
+	tv_print(fb, (((640/8)-41)/2), 26, "NOTE: Screen might glitch, this is normal");
+	tv_print(fb, (((640/8)-24)/2), 28, "Please use with CAUTION!");
 	
-	TV_Print(fb, (((640/8)-40)/2), 6, "Press START to install custom firmware");
+	tv_print(fb, (((640/8)-40)/2), 6, "Press START to install custom firmware");
 	
 	volatile unsigned int *chk_addr_data;
 		
 	while(1){
 		
-		HS_Controller_Read();
+		hs_controller_read();
 
 		if(controller[hs_controller_1].input.start && controller[hs_controller_1].input.joystick_x != 0xFF && controller[hs_controller_1].input.joystick_y != 0xFF){
 
 			while(!controller[hs_controller_1].input.g && controller[hs_controller_1].input.joystick_x != 0xFF && controller[hs_controller_1].input.joystick_y != 0xFF){
-				HS_Controller_Read();
-				TV_Print(fb, (((640/8)-44)/2), 6, "Now press GREEN to install custom firmware");
+				hs_controller_read();
+				tv_print(fb, (((640/8)-44)/2), 6, "Now press GREEN to install custom firmware");
 
 				if(controller[hs_controller_1].input.g){
-					TV_Print(fb, (((640/8)-44)/2), 6, "    Installing custom firmware patches    ");
-					TV_Print(fb, (((640/8)-6)/2), 9, "Status");
+					tv_print(fb, (((640/8)-44)/2), 6, "    Installing custom firmware patches    ");
+					tv_print(fb, (((640/8)-6)/2), 9, "Status");
 					if(*(volatile unsigned int *)0x9E000740 == 0){
 						while(1){
-						TV_Print(fb, (((640/8)-40)/2), 10, "You need to install flash recovery first");
+						tv_print(fb, (((640/8)-40)/2), 10, "You need to install flash recovery first");
 						}
 					}
 					
-					TV_Print(fb, (((640/8)-25)/2), 10, "  Send firmware over UART ");		
+					tv_print(fb, (((640/8)-25)/2), 10, "  Send firmware over UART ");		
 
 					// Enable UART
 					uart_enable_interface();
@@ -143,12 +143,12 @@ int main()
 					
 					if((size-4) > 0xFEFFC){
 						while(1){
-							TV_Print(fb, (((640/8)-27)/2), 10, "FAILED! The file is too big");
-							TV_Print(fb, (((640/8)-45)/2), 12, "HINT: Don't try to flash a full firmware file");
+							tv_print(fb, (((640/8)-27)/2), 10, "FAILED! The file is too big");
+							tv_print(fb, (((640/8)-45)/2), 12, "HINT: Don't try to flash a full firmware file");
 						}
 					}
 					
-					TV_Print(fb, (((640/8)-25)/2), 10, "        Uploading...      ");				
+					tv_print(fb, (((640/8)-25)/2), 10, "        Uploading...      ");				
 
 					// Set the destination and ending address we intend to upload to in SDRAM
 					u8 *dest = (u8 *)UPLOAD_ADDRESS;
@@ -171,7 +171,7 @@ int main()
 					
 					HS_LEDS(0);
 					
-					TV_Print(fb, (((640/8)-16)/2), 10, "Erasing Firmware");
+					tv_print(fb, (((640/8)-16)/2), 10, "Erasing Firmware");
 
 					unsigned int flash_addr_start = 0x9E000000;
 					unsigned int sector_chk = 0;
@@ -180,33 +180,33 @@ int main()
 					for(i=0;i<=0xFE;i++){
 						flash_addr_start += 0x1000;
 
-						TV_Print(fb, (((640/8)-25)/2), 10, "Clearing data @ ");
-						TV_PrintHex(fb, 43, 10, flash_addr_start);
+						tv_print(fb, (((640/8)-25)/2), 10, "Clearing data @ ");
+						tv_printhex(fb, 43, 10, flash_addr_start);
 						
 						for(sector_chk=0;sector_chk<=(SECTOR_SIZE/4);sector_chk+=4){
 							while((*(volatile unsigned int *)(flash_addr_start + sector_chk)) != 0xFFFFFFFF){
-									NorFlash_SectorErase(flash_addr_start);
+									norflash_sectorerase(flash_addr_start);
 							}
 						}
 					}
 					
-					TV_Print(fb, (((640/8)-25)/2), 10, " Writing data @ ");
+					tv_print(fb, (((640/8)-25)/2), 10, " Writing data @ ");
 					
 					for(i=0;i<=(size-4)/4;i++){
 						if((i % 0x1000) == 0){
-							TV_PrintHex(fb, 43, 10, 0x9E001000 + (i*4));
+							tv_printhex(fb, 43, 10, 0x9E001000 + (i*4));
 						}
 
 						chk_addr_data = (volatile unsigned int *)0x9E001000 + i;
 
 						while(*chk_addr_data != flash_patch[i]){
-							NorFlash_Write32(0x9E001000 + (i*4), flash_patch[i]);
+							norflash_write32(0x9E001000 + (i*4), flash_patch[i]);
 							chk_addr_data = (volatile unsigned int *)0x9E001000 + i;
 						}
 					}
 
 					while(1){
-						TV_Print(fb, (((640/8)-34)/2), 14, "DONE, Please reboot the HyperScan!");
+						tv_print(fb, (((640/8)-34)/2), 14, "DONE, Please reboot the HyperScan!");
 					}
 				}
 			}

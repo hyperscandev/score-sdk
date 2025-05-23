@@ -12,7 +12,7 @@ OutPut Dir = Debug
 Inc Path = ..\..\..\..\include
 Lib Path = ..\..\..\..\libs\MP3
 Compiler = ..\S_CORE~1.1\GNU\bin\gcc
-Compiler DefFlag = -mscore7 -mel -g -Wall -O2
+Compiler DefFlag = -mscore7 -mel -g -Wall -Os
 Compiler AddFlag = -Dhyperscan -Dmax_heap_size=3*(512*1024) -Dmp3drv
 Assembler = ..\S_CORE~1.1\GNU\bin\as
 Assembler DefFlag = -Wa,-gdwarf-2  -x assembler-with-cpp
@@ -35,7 +35,7 @@ Stack base address = a0fffff0
 Pre-Link Description = 
 Pre-Link Command = 
 Post-Build Description = makehyper
-Post-Build Command = 	cd ./Debug && move hyperscan.elf.bin Hyper.Exe	cd ./Debug && del *.o *.bin *.elf *.map *.d *.srec *.dbg *.res	cd ./Debug && copy Hyper.Exe e:\usbload.bin
+Post-Build Command = 	cd ./Debug && move hyperscan.elf.bin Hyper.Exe	cd ./Debug && copy Hyper.Exe d:\usbload.bin
 Custom Build Enable = 0
 WorkDir = 
 Custom Build = 

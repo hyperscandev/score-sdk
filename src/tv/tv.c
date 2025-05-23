@@ -4,7 +4,7 @@
 #include "tv/font_8x16.h"
 
 // =============================================================
-//	void TV_ClearScreen(unsigned short *fb)
+//	void tv_clearscreen(unsigned short *fb)
 //
 //	This clears the TV screen. This needs to be fixed at some point
 //	so as not to assume 640x480 resolution
@@ -12,7 +12,7 @@
 // 
 //	void return
 // =============================================================
-void TV_ClearScreen(unsigned short *fb){
+void tv_clearscreen(unsigned short *fb){
 	int i = 0;
 	for(i=0;i<=640*480;i++){
 		fb[i] = 0x0000;
@@ -20,17 +20,17 @@ void TV_ClearScreen(unsigned short *fb){
 }
 
 // =============================================================
-//	void TV_Init(unsigned int Mode, unsigned int ColorModeIN,
-//	unsigned int FB1_Addr, unsigned int FB2_Addr, unsigned int FB3_Addr);
+//	void tv_init(unsigned int resolution, unsigned int colormode,
+//	unsigned int fb1_addr, unsigned int fb2_addr, unsigned int fb3_addr);
 //
 //	This initializes basic TV output, then sets up some initial framebuffer
-//	addresses (3), and sets color scheme, then selects FB1_Addr as the 
+//	addresses (3), and sets color scheme, then selects fb1_addr as the 
 //	default framebuffer.
 // 
 //
 //	void return
 // =============================================================
-void TV_Init(unsigned int Resolution, unsigned int ColorMode, unsigned int FB1_Addr, unsigned int FB2_Addr, unsigned int FB3_Addr){
+void tv_init(unsigned int resolution, unsigned int colormode, unsigned int fb1_addr, unsigned int fb2_addr, unsigned int fb3_addr){
 	*P_TV_CLK_CONF = C_TV_CLK_EN | C_TV_RST_DIS; 	
 	*P_TV_VIDEODAC_CTRL = C_TV_VIDEODAC_EN; 
 	*P_TV_MODE_CTRL = C_TV_CTRL_EN 			
@@ -39,96 +39,96 @@ void TV_Init(unsigned int Resolution, unsigned int ColorMode, unsigned int FB1_A
 					| C_TV_NTSC_TYPE 		
 					| C_TV_LITTLE_ENDIAN; 	
 
-	if(Resolution == RESOLUTION_640_480){
+	if(resolution == RESOLUTION_640_480){
 		*P_TV_MODE_CTRL |= C_TV_VGA_MODE;
 	}
 	
-	if(Resolution == RESOLUTION_320_240){
+	if(resolution == RESOLUTION_320_240){
 		*P_TV_MODE_CTRL |= C_TV_QVGA_MODE;
 	}
 	
-	if(ColorMode == COLOR_RGB565){
+	if(colormode == COLOR_RGB565){
 		*P_TV_MODE_CTRL	|= 	C_TV_RGB_MODE 				
 							| C_TV_RGB565_MODE;
 	}
 
-	TV_Buffer_Set(FB1_Addr, FB2_Addr, FB3_Addr);
-	TV_ClearScreen((unsigned short *)FB1_Addr);
-	TV_Buffer_Sel(0);
+	tv_buffer_set(fb1_addr, fb2_addr, fb3_addr);
+	tv_clearscreen((unsigned short *)fb1_addr);
+	tv_buffer_sel(0);
 }
 
 // =============================================================
-// 	void TV_Buffer_Set(unsigned int FB1_Addr, unsigned int FB2_Addr,
-// 	unsigned int FB3_Addr)
+// 	void tv_buffer_set(unsigned int fb1_addr, unsigned int fb2_addr,
+// 	unsigned int fb3_addr)
 //
 //	This sets the current framebuffer pointers (3)
 //	
 //
 //	void return
 // =============================================================
-void TV_Buffer_Set(unsigned int FB1_Addr, unsigned int FB2_Addr, unsigned int FB3_Addr){
+void tv_buffer_set(unsigned int fb1_addr, unsigned int fb2_addr, unsigned int fb3_addr){
 	
-	*P_TV_BUFFER_SA1 = FB1_Addr;
-	*P_TV_BUFFER_SA2 = FB2_Addr;
-	*P_TV_BUFFER_SA3 = FB3_Addr;
+	*P_TV_BUFFER_SA1 = fb1_addr;
+	*P_TV_BUFFER_SA2 = fb2_addr;
+	*P_TV_BUFFER_SA3 = fb3_addr;
 }
 
 // =============================================================
-//	void TV_Buffer_Sel(unsigned int sel)
+//	void tv_buffer_sel(unsigned int sel)
 // 
 //	This selects the current framebuffer
 //
 //	void return
 // =============================================================
-void TV_Buffer_Sel(unsigned int sel){
+void tv_buffer_sel(unsigned int sel){
 	
 	*P_TV_BUFFER_SEL = sel;
 }
 
 // =============================================================
-//	void TV_Saturation(unsigned int satu)
+//	void tv_saturation(unsigned int satu)
 // 
 //	This sets TV saturation
 //
 //	void return
 // =============================================================
-void TV_Saturation(unsigned int satu){
+void tv_saturation(unsigned int satu){
 	
 	*P_TV_SATURATION_SETUP = satu & 0x000000ff;
 }
 
 // =============================================================
-//	void TV_Hue(unsigned int hue)
+//	void tv_hue(unsigned int hue)
 // 
 //	This sets TV hue
 // 
 //	void return
 // =============================================================
-void TV_Hue(unsigned int hue){
+void tv_hue(unsigned int hue){
 	
 	*P_TV_HUE_SETUP = hue & 0x000000ff;
 }
 
 // =============================================================
-//	void TV_Fade(unsigned int fade)
+//	void tv_fade(unsigned int fade)
 // 
 //	This sets TV fade
 // 
 //	void return
 // =============================================================
-void TV_Fade(unsigned int fade){
+void tv_fade(unsigned int fade){
 	
 	*P_TV_FADE_SETUP = fade & 0x000000ff;
 }
 
 // =============================================================
-//	void TV_Print(unsigned int x, unsigned int y, unsigned char *text)
+//	void tv_print(unsigned int x, unsigned int y, unsigned char *text)
 // 
 //	Print to TV screen via low level framebuffer access
 // 
 //	void return
 // =============================================================
-void TV_Print(unsigned short *fb, unsigned int x, unsigned int y, const char *text){
+void tv_print(unsigned short *fb, unsigned int x, unsigned int y, const char *text){
 	
     short xx, yy;
     unsigned short colorz;
@@ -150,13 +150,13 @@ void TV_Print(unsigned short *fb, unsigned int x, unsigned int y, const char *te
 }
 
 // =============================================================
-//	void TV_PrintColor(unsigned int x, unsigned int y, unsigned char *text, unsigned short color)
+//	void tv_printcolor(unsigned int x, unsigned int y, unsigned char *text, unsigned short color)
 // 
 //	Print to TV screen via low level framebuffer access, but with color
 // 
 //	void return
 // =============================================================
-void TV_PrintColor(unsigned short *fb, unsigned int x, unsigned int y, const char *text, unsigned short color){
+void tv_printcolor(unsigned short *fb, unsigned int x, unsigned int y, const char *text, unsigned short color){
 	
     short xx, yy;
     while (*text) 
@@ -177,13 +177,13 @@ void TV_PrintColor(unsigned short *fb, unsigned int x, unsigned int y, const cha
 }
 
 // =============================================================
-// void TV_Print(unsigned int x, unsigned int y, unsigned char *text)
+// void tv_printhex(unsigned int x, unsigned int y, unsigned char *text)
 // 
-// Print to TV screen via low level framebuffer access
+// Print hex value to TV screen via low level framebuffer access
 // 
 // void return
 // =============================================================
-void TV_PrintHex(unsigned short *fb, unsigned int x, unsigned int y, unsigned long value){
+void tv_printhex(unsigned short *fb, unsigned int x, unsigned int y, unsigned long value){
 	
 	unsigned long i;
 	unsigned long digit;
@@ -196,42 +196,42 @@ void TV_PrintHex(unsigned short *fb, unsigned int x, unsigned int y, unsigned lo
 	}
 	
 	s[8]=0x00;
-	TV_Print(fb, x, y, "0x");
+	tv_print(fb, x, y, "0x");
 	x++;
 	x++;
-	TV_Print(fb, x, y, s);
+	tv_print(fb, x, y, s);
 }
 
 //==============================================================
-//	void TV_FadeOut(void)
+//	void tv_fadeout(void)
 //
-//	This will perform a predefined fade-out using the "TV_Fade" primative
+//	This will perform a predefined fade-out using the "tv_fade" primative
 //
 //	void return
 //==============================================================
-void TV_FadeOut(void)    
+void tv_fadeout(void)    
 {
 	unsigned int i, j;
 	for(i=0; i<256; i++)
 	{
-		TV_Fade(i);
+		tv_fade(i);
 		for(j=0; j<1024*6; j++);
 	}
 }
 
 //==============================================================
-//	void TV_FadeIn(void)
+//	void tv_fadein(void)
 //
-//	This will perform a predefined fade-in using the "TV_Fade" primative
+//	This will perform a predefined fade-in using the "tv_fade" primative
 //
 //	void return
 //==============================================================
-void TV_FadeIn(void)     
+void tv_fadein(void)     
 {
 	unsigned int i, j;
 	for(i=0; i<256; i++)
 	{
-		TV_Fade(255-i);
+		tv_fade(255-i);
 		for(j=0; j<1024*8; j++);
 	}
 }

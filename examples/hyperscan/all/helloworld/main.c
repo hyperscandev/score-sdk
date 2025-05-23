@@ -25,12 +25,12 @@ int main(){
 	 to stupid framebuffer address, TV_Init will select the first framebuffer
 	 as default.
 	*/
-	TV_Init(RESOLUTION_640_480, COLOR_RGB565, 0xA0400000, 0xA0400000, 0xA0400000);
+	tv_init(RESOLUTION_640_480, COLOR_RGB565, 0xA0400000, 0xA0400000, 0xA0400000);
 
 	while(1){
 				
 		// Print text on TV
-		TV_Print(fb, 28, 2, "Hello World!");
+		tv_print(fb, 28, 2, "Hello World!");
 				
 	}
 		
