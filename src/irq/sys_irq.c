@@ -1,192 +1,76 @@
-extern void IRQ63(void);
-extern void IRQ62(void);
-extern void IRQ61(void);
-extern void IRQ60(void);
-extern void IRQ59(void);
-extern void IRQ58(void);
-extern void IRQ57(void);
-extern void IRQ56(void);
-extern void IRQ55(void);
-extern void IRQ54(void);
-extern void IRQ53(void);
-extern void IRQ52(void);
-extern void IRQ51(void);
-extern void IRQ50(void);
-extern void IRQ49(void);
-extern void IRQ48(void);
-extern void IRQ47(void);
-extern void IRQ46(void);
-extern void IRQ45(void);
-extern void IRQ44(void);
-extern void IRQ43(void);
-extern void IRQ42(void);
-extern void IRQ41(void);
-extern void IRQ40(void);
-extern void IRQ39(void);
-extern void IRQ38(void);
-extern void IRQ37(void);
-extern void IRQ36(void);
-extern void IRQ35(void);
-extern void IRQ34(void);
-extern void IRQ33(void);
-extern void IRQ32(void);
-extern void IRQ31(void);
-extern void IRQ30(void);
-extern void IRQ29(void);
-extern void IRQ28(void);
-extern void IRQ27(void);
-extern void IRQ26(void);
-extern void IRQ25(void);
-extern void IRQ24(void);
+// Used to reference start of exception vector
+extern void norm_debug_vec(void);
 
-//====================================================
-// void intmsg(void)
-//
-//
-//
-//====================================================
-void intmsg(void)
-{
-	while(1);
-}
+// Max/Min number of IRQs
+// For now we will only attach handlers for 24~63 but
+// will later add support for the CPU exceptions and 
+// custom handling of those (for now those just freeze
+// with a jump to self at intmsg)
+#define MAX_IRQ 63
+#define MIN_IRQ 24
 
-//====================================================
-// void irq_dispatch(unsigned int cp0_cause)
-//
-//
-//
-//
-//====================================================
-void irq_dispatch(unsigned int cp0_cause)
-{
-	int intvec = 0;
+// Type for an ISR callback
+typedef void (*isr_handler)(void);
 
-	intvec = (cp0_cause & 0x00FC0000)>>18;
+// Dispatch table, all entries == NULL
+static isr_handler isr_table[MAX_IRQ] = { 0 };
+
+// Fallback when no handler is attached
+static void handler_placeholder(void) { }
+
+// Hook IRQ ISR
+void attach_isr(unsigned int irq, isr_handler handler) {
 	
-	switch (intvec)
-	{
-		case 63:				//
-	   		IRQ63();
-			break;
-		case 62:				//
-	   		IRQ62();
-			break;
-		case 61:				//
-	   		IRQ61();
-			break;
-		case 60:				//
-	   		IRQ60();
-			break;
-		case 59:				//
-	   		IRQ59();
-			break;
-		case 58:				//
-	   		IRQ58();
-			break;
-		case 57:				//
-	   		IRQ57();
-			break;
-		case 56:
-			IRQ56();			//
-			break;
-		case 55:
-			IRQ55(); 			//
-			break;
-		case 54:
-			IRQ54();			//
-			break;
-		case 53:
-			IRQ53();			//
-			break;
- 		case 52: 				//
-			IRQ52();
-			break;
-		case 51:				//
-	   		IRQ51();
-			break;
-		case 50:				//
-	   		IRQ50();
-			break;
-		case 49:				//
-	  	 	IRQ49();
-			break;
-		case 48:				//
-	   		IRQ48();
-			break;
-		case 47:				//
-	   		IRQ47();
-			break;
-		case 46:				//
-	   		IRQ46();
-			break;
-		case 45:				//
-	   		IRQ45();
-			break;
-		case 44:				//
-	   		IRQ44();
-			break;
-		case 43:				//
-	   		IRQ43();
-			break;
-		case 42:				//
-	   		IRQ42();
-			break;
-		case 41:				//
-	   		IRQ41();
-			break;
-		case 40:				//
-	  	 	IRQ40();
-			break;
-		case 39:				//
-			IRQ39();
-			break;
-		case 38:				//
-			IRQ38();
-			break;
-		case 37:				//
-			IRQ37();
-			break;
-		case 36:				//
-			IRQ36();
-			break;
-		case 35:				//
-			IRQ35();
-			break;
-		case 34:				//
-			IRQ34();
-			break;
-		case 33:				//
-			IRQ33();
-			break;
-		case 32:				//
-			IRQ32();
-			break;
-		case 31:				//
-			IRQ31();
-			break;
-		case 30:				//
-			IRQ30();
-			break;
- 		case 29:				//
-	   		IRQ29();
-			break;
- 		case 28:				//
-	  	 	IRQ28();
-			break;
- 		case 27:				//
-	  	 	IRQ27();
-			break;
- 		case 26:				//
-	  	 	IRQ26();
-			break;
- 		case 25:				//
-	  	 	IRQ25();
-			break;
- 		case 24:				//
-	  	 	IRQ24();
-			break;
-		default:
-			break;
-	}
-	return;
+	// Only attach handler if our irq is within the appropriate IRQ firing range
+    if (irq >= MIN_IRQ && irq <= MAX_IRQ) {
+    	isr_table[irq] = handler;
+    
+		// There seems to possibly be a bug in SPG290 (maybe other score7 based SoC?) where it seems
+		// like the vector table won't properly relocate (I could be wrong) but this is fine (I think?) 
+		// as we can just copy only the vectors that we expect to use over the fixed default vector
+		// address space (0xA00001FC) and use the attach_isr to hook into the vector table with
+		// our handler
+		
+		// Patch the irq_dispatch vector from our current one, to the fixed address (0xA00001FC area)
+		// to use our custom isr dispatch for specified isr. This could possibly only work on Hyperscan
+		// since I haven't seen any examples of other score7 based systems and their memory map, but if so
+		// this could easily be fixed to accomodate those systems as well with our -D(platform) configuration switch
+		unsigned int *current_irq_dispatch = (unsigned int *)&norm_debug_vec + 1 + irq; // norm_debug_vec used to get start of exception_vec
+		unsigned int *fixed_irq_dispatch = (unsigned int *)0xA00001FC + 1 + irq;
+  
+		// Disable interrupts
+		asm("li r4, 0x0");
+		asm("mtcr r4, cr0");
+		asm("nop");
+		asm("nop");
+		asm("nop");
+		asm("nop");
+		asm("nop");
+		
+		// Swap handler at fixed vector with the one from our (unused) current vector
+		*fixed_irq_dispatch = *current_irq_dispatch;
+		
+		// Enable interrupts
+		asm("li r4, 0x1");
+		asm("mtcr r4, cr0");
+		asm("nop");
+		asm("nop");
+		asm("nop");
+		asm("nop");
+		asm("nop");
+    }
 }
+
+// Get cause and handle IRQ
+void irq_dispatch(unsigned int cp0_cause) {
+    // bits [23:18] of cause register gives the IRQ number
+    unsigned int intvec = (cp0_cause & 0x00FC0000u) >> 18;
+
+	// Only hook between MIN_IRQ and MAX_IRQ (24~63) for now, until we add custom CPU exception handling
+	if (intvec >= MIN_IRQ && intvec <= MAX_IRQ) {
+    	// look it up in the table
+    	isr_handler h = isr_table[intvec];
+    	if (h) h(); else handler_placeholder();
+	}
+}
+

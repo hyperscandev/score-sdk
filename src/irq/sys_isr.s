@@ -61,11 +61,12 @@
 #define STACK_SIZE   32
 
 .org 0
-.section .exception_vec,"ax"   // 0xa00901fc
+.section .exception_vec,"ax"
 //=========================================================
 // General/Debug
 //=========================================================
 .align 2
+.global norm_debug_vec // Make this one global so we can reference the start of vector addr
 norm_debug_vec:         // DebugVec
     j norm_debug_service
 
@@ -266,7 +267,7 @@ int62_vec:              // IRQ62
 int63_vec:              // IRQ63
     j save_reg          // save_reg
 
-.extern intmsg          // intmsg from SysIRQ.c
+.extern intmsg          // intmsg from sys_irq.c
 //=========================================================
 // IRQ SVC
 //=========================================================
@@ -279,94 +280,149 @@ general_service:        // General
 int_service:
     jl intmsg           // intmsg();
 
-.extern irq_dispatch    // irq_dispatch from SysIRQ.c
+//=========================================================
+// void intmsg(void)
+// General exception/svc/debug - unimplemented for now
+//
+//
+//=========================================================
+intmsg:
+	j intmsg
+	nop
+	
+.extern irq_dispatch    // irq_dispatch from sys_irq.c
 .set r1
 //=========================================================
 // void save_reg(void)
-// Save all register and jump to interrupt label table
-// After completing service routine, load all register
-//
+// Save all registers and jump to interrupt label table
+// After completing service routine, then restore all 
+// registers
 //
 //=========================================================
 save_reg:
-    subi SP, 38*4
-    sw r1,  [SP, 1*4]
-    sw r2,  [SP, 2*4]
-    sw r3,  [SP, 3*4]
-    sw r4,  [SP, 4*4]
-    sw r5,  [SP, 5*4]
-    sw r6,  [SP, 6*4]
-    sw r7,  [SP, 7*4]
-    sw r8,  [SP, 8*4]
-    sw r9,  [SP, 9*4]
-    sw r10, [SP, 10*4]
-    sw r11, [SP, 11*4]
-    sw r12, [SP, 12*4]
-    sw r13, [SP, 13*4]
-    sw r14, [SP, 14*4]
-    sw r15, [SP, 15*4]
-    sw r16, [SP, 16*4]
-    sw r17, [SP, 17*4]
-    sw r18, [SP, 18*4]
-    sw r19, [SP, 19*4]
-    sw r20, [SP, 20*4]
-    sw r21, [SP, 21*4]
-    sw r22, [SP, 22*4]
-    sw r23, [SP, 23*4]
-    sw r24, [SP, 24*4]
-    sw r25, [SP, 25*4]
-    sw r26, [SP, 26*4]
-    sw r27, [SP, 27*4]
-    sw r28, [SP, 28*4]
-    sw r29, [SP, 29*4]
-    sw r30, [SP, 30*4]
-    sw r31, [SP, 31*4]
+	// Save registers
+    subi SP, 0x98
+    sw r1,  [SP, 0x4]
+    sw r2,  [SP, 0x8]
+    sw r3,  [SP, 0xC]
+    sw r4,  [SP, 0x10]
+    sw r5,  [SP, 0x14]
+    sw r6,  [SP, 0x18]
+    sw r7,  [SP, 0x1C]
+    sw r8,  [SP, 0x20]
+    sw r9,  [SP, 0x24]
+    sw r10, [SP, 0x28]
+    sw r11, [SP, 0x2C]
+    sw r12, [SP, 0x30]
+    sw r13, [SP, 0x34]
+    sw r14, [SP, 0x38]
+    sw r15, [SP, 0x3C]
+    sw r16, [SP, 0x40]
+    sw r17, [SP, 0x44]
+    sw r18, [SP, 0x48]
+    sw r19, [SP, 0x4C]
+    sw r20, [SP, 0x50]
+    sw r21, [SP, 0x54]
+    sw r22, [SP, 0x58]
+    sw r23, [SP, 0x5C]
+    sw r24, [SP, 0x60]
+    sw r25, [SP, 0x64]
+    sw r26, [SP, 0x68]
+    sw r27, [SP, 0x6C]
+    sw r28, [SP, 0x70]
+    sw r29, [SP, 0x74]
+    sw r30, [SP, 0x78]
+    sw r31, [SP, 0x7C]
     mfcr    r13, cr1
+    nop
+    nop
+    nop
+    nop
+    nop
     mfcr    r15, cr5
-    sw r13, [SP, 33*4]
-    sw r15, [SP, 35*4]
-
+    nop
+    nop
+    nop
+    nop
+    nop
+    sw r13, [SP, 0x84]
+    sw r15, [SP, 0x8C]
+	mfcehl r13, r14
+	nop
+	nop
+	nop
+	nop
+	nop
+	sw r13, [SP, 0x90]
+	sw r14, [SP, 0x94]
+	la r28, _gp
+	nop
     mfcr    r4, cr2
+    nop
+    nop
+    nop
+    nop
+    nop
     jl	irq_dispatch
+    nop
     
-    lw r1,  [SP, 1*4]
-    lw r2,  [SP, 2*4]
-    lw r3,  [SP, 3*4]
-    lw r4,  [SP, 4*4]
-    lw r5,  [SP, 5*4]
-    lw r6,  [SP, 6*4]
-    lw r7,  [SP, 7*4]
-    lw r8,  [SP, 8*4]
-    lw r9,  [SP, 9*4]
-    lw r10, [SP, 10*4]
-    lw r11, [SP, 11*4]
-    lw r12, [SP, 12*4]
-    lw r13, [SP, 13*4]
-    lw r14, [SP, 14*4]
-    lw r15, [SP, 15*4]
-    lw r16, [SP, 16*4]
-    lw r17, [SP, 17*4]
-    lw r18, [SP, 18*4]
-    lw r19, [SP, 19*4]
-    lw r20, [SP, 20*4]
-    lw r21, [SP, 21*4]
-    lw r22, [SP, 22*4]
-    lw r23, [SP, 23*4]
-    lw r24, [SP, 24*4]
-    lw r25, [SP, 25*4]
-    lw r26, [SP, 26*4]
-    lw r27, [SP, 27*4]
-    lw r28, [SP, 28*4]
-    lw r29, [SP, 29*4]
-    lw r30, [SP, 30*4]
-    lw r31, [SP, 31*4]
-	lw r30, [SP, 33*4]
-    lw r31, [SP, 35*4]
-    mtcr    r30, cr1
-    mtcr    r31, cr5
-    addi	SP, 38*4
+    // Restore registers
+    lw r13, [SP, 0x90]
+    lw r14, [SP, 0x94]
+    mtcehl r13, r14
+    nop
+    nop
+    nop
+    nop
+    nop
+    lw r30, [SP, 0x84]
+    lw r31, [SP, 0x8C]
+    mtcr r30, cr1
+    nop
+    nop
+    nop
+    nop
+    nop
+    mtcr r31, cr5
+    nop
+    nop
+    nop
+    nop
+    nop
+    lw r1,  [SP, 0x04]
+    lw r2,  [SP, 0x08]
+    lw r3,  [SP, 0x0C]
+    lw r4,  [SP, 0x10]
+    lw r5,  [SP, 0x14]
+    lw r6,  [SP, 0x18]
+    lw r7,  [SP, 0x1C]
+    lw r8,  [SP, 0x20]
+    lw r9,  [SP, 0x24]
+    lw r10, [SP, 0x28]
+    lw r11, [SP, 0x2C]
+    lw r12, [SP, 0x30]
+    lw r13, [SP, 0x34]
+    lw r14, [SP, 0x38]
+    lw r15, [SP, 0x3C]
+    lw r16, [SP, 0x40]
+    lw r17, [SP, 0x44]
+    lw r18, [SP, 0x48]
+    lw r19, [SP, 0x4C]
+    lw r20, [SP, 0x50]
+    lw r21, [SP, 0x54]
+    lw r22, [SP, 0x58]
+    lw r23, [SP, 0x5C]
+    lw r24, [SP, 0x60]
+    lw r25, [SP, 0x64]
+    lw r26, [SP, 0x68]
+    lw r27, [SP, 0x6C]
+    lw r28, [SP, 0x70]
+    lw r29, [SP, 0x74]
+    lw r30, [SP, 0x78]
+    lw r31, [SP, 0x7C]
+    addi	SP, 0x98
     rte
-
- 
+	nop
+	nop
 	
 

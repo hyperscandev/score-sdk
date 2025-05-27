@@ -13,8 +13,9 @@ usbloader
 #include "mp3drv/mp3.h"
 #include "mp3drv/mp3drv.h"
 
-#include "hyperscan/fatfs/ff.h"
 #include "tv/tv.h"
+#include "irq/interrupts.h"
+#include "hyperscan/fatfs/ff.h"
 #include "score7_registers.h"
 #include "score7_constants.h"
 #include "hyperscan/hs_controller/hs_controller.h"
@@ -324,7 +325,9 @@ static inline unsigned int asm_j_insn(unsigned int address, unsigned int link) {
 int main(){
 
 	// Initialize DAC interrupt handling
-	dac_Init();
+	//dac_Init();
+	
+	attach_isr(61, MP3_Service_Loop_ISR);
 	    
 	// Stupid Framebuffer
 	unsigned short *fb = (unsigned short *)FRAMEBUFFER_ADDRESS;

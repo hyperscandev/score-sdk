@@ -1,8 +1,10 @@
-#ifndef __INTENABLE_H__
-#define __INTENABLE_H__
+#ifndef __INTERRUPTS_H__
+#define __INTERRUPTS_H__
 
-#include "../../include/SPG290_Registers.h"
-#include "../../include/SPG290_Constants.h"
+#include "score7_registers.h"
+#include "score7_constants.h"
+
+extern void attach_isr(unsigned int irq, void (*handler)(void));
 
 //===================================================
 // Unmask Ints

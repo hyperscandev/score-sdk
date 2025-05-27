@@ -35,7 +35,7 @@ Stack base address = a0fffff0
 Pre-Link Description = 
 Pre-Link Command = 
 Post-Build Description = makehyper
-Post-Build Command = 	cd ./Debug && move hyperscan.elf.bin Hyper.Exe	cd ./Debug && del *.o *.bin *.elf *.map *.d *.srec *.dbg *.res
+Post-Build Command = 	cd ./Debug && move hyperscan.elf.bin Hyper.Exe	cd ./Debug && move Hyper.Exe d:/apps/test/hyper.exe
 Custom Build Enable = 0
 WorkDir = 
 Custom Build = 
@@ -219,12 +219,6 @@ USEPARAM=FALSE
 PARAM=
 # End Source File
 
-# Begin Source File
-SOURCE=..\..\..\..\src\irq\user_irq.c
-USEPARAM=FALSE
-PARAM=
-# End Source File
-
 # End Group
 # Begin Group "norflash"
 #PROP Default_Filter = 
@@ -334,7 +328,7 @@ PARAM=
 #PROP Default_Filter = 
 
 # Begin Source File
-SOURCE=..\..\..\..\include\irq\intenable.h
+SOURCE=..\..\..\..\include\irq\interrupts.h
 USEPARAM=FALSE
 PARAM=
 # End Source File

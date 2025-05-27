@@ -11,14 +11,22 @@ This is the basic Hello World! example. It contains the very barebones code nece
 #include "tv/tv.h"
 #include "cpu/discpu_func.h"
 #include "score7_registers.h"
+#include "score7_constants.h"
+#include "irq/interrupts.h"
 
 // Stupid framebuffer for now
 unsigned short *fb = (unsigned short *) 0xA0400000;
 
+void irq55_handler() {
+	HS_LEDS(0xf0);
+}
+
 int main(){
 	
-	change_clk(CPU108_SDRAM108, 0, 0);
-	HS_LEDS(0xFF);
+	attach_isr(55, irq55_handler);	
+	
+	//change_clk(CPU108_SDRAM108, 0, 0);
+	//HS_LEDS(0xFF);
 	
 	int nExitCode = 0;
 	/************************************************************************/

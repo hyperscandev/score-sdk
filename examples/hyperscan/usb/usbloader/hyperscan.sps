@@ -219,12 +219,6 @@ USEPARAM=FALSE
 PARAM=
 # End Source File
 
-# Begin Source File
-SOURCE=..\..\..\..\src\irq\user_irq.c
-USEPARAM=FALSE
-PARAM=
-# End Source File
-
 # End Group
 # Begin Group "mp3drv"
 #PROP Default_Filter = 
@@ -332,7 +326,7 @@ PARAM=
 #PROP Default_Filter = 
 
 # Begin Source File
-SOURCE=..\..\..\..\include\irq\intenable.h
+SOURCE=..\..\..\..\include\irq\interrupts.h
 USEPARAM=FALSE
 PARAM=
 # End Source File

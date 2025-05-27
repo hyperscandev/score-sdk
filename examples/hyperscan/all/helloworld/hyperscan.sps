@@ -35,7 +35,7 @@ Stack base address = a0fffff0
 Pre-Link Description = 
 Pre-Link Command = 
 Post-Build Description = makehyper
-Post-Build Command = 	cd ./Debug && move hyperscan.elf.bin Hyper.Exe	cd ./Debug && del *.o *.bin *.elf *.map *.d *.srec *.dbg *.res
+Post-Build Command = 	cd ./Debug && move hyperscan.elf.bin Hyper.Exe
 Custom Build Enable = 0
 WorkDir = 
 Custom Build = 
@@ -215,12 +215,6 @@ PARAM=
 
 # Begin Source File
 SOURCE=..\..\..\..\src\irq\sys_isr.s
-USEPARAM=FALSE
-PARAM=
-# End Source File
-
-# Begin Source File
-SOURCE=..\..\..\..\src\irq\user_irq.c
 USEPARAM=FALSE
 PARAM=
 # End Source File
