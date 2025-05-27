@@ -1,3 +1,5 @@
+#include "score7_registers.h"
+
 // Used to reference start of exception vector
 extern void norm_debug_vec(void);
 
@@ -16,13 +18,24 @@ typedef void (*isr_handler)(void);
 static isr_handler isr_table[MAX_IRQ] = { 0 };
 
 // Fallback when no handler is attached
-static void handler_placeholder(void) { }
+static void handler_placeholder(void) { HS_LEDS(0xFF); }
 
 // Hook IRQ ISR
 void attach_isr(unsigned int irq, isr_handler handler) {
 	
 	// Only attach handler if our irq is within the appropriate IRQ firing range
     if (irq >= MIN_IRQ && irq <= MAX_IRQ) {
+    	
+    	// Disable interrupts
+		asm("li r4, 0x0");
+		asm("mtcr r4, cr0");
+		asm("nop");
+		asm("nop");
+		asm("nop");
+		asm("nop");
+		asm("nop");
+		
+		// Install handler to isr_table
     	isr_table[irq] = handler;
     
 		// There seems to possibly be a bug in SPG290 (maybe other score7 based SoC?) where it seems
@@ -35,20 +48,13 @@ void attach_isr(unsigned int irq, isr_handler handler) {
 		// to use our custom isr dispatch for specified isr. This could possibly only work on Hyperscan
 		// since I haven't seen any examples of other score7 based systems and their memory map, but if so
 		// this could easily be fixed to accomodate those systems as well with our -D(platform) configuration switch
-		unsigned int *current_irq_dispatch = (unsigned int *)&norm_debug_vec + 1 + irq; // norm_debug_vec used to get start of exception_vec
-		unsigned int *fixed_irq_dispatch = (unsigned int *)0xA00001FC + 1 + irq;
-  
-		// Disable interrupts
-		asm("li r4, 0x0");
-		asm("mtcr r4, cr0");
-		asm("nop");
-		asm("nop");
-		asm("nop");
-		asm("nop");
-		asm("nop");
+		unsigned int *current_irq_dispatch = (unsigned int *)&norm_debug_vec + 1;
+		unsigned int *fixed_irq_dispatch = (unsigned int *)0xA00001FC + 1;
+		
+		unsigned int irq_offset = irq;
 		
 		// Swap handler at fixed vector with the one from our (unused) current vector
-		*fixed_irq_dispatch = *current_irq_dispatch;
+		fixed_irq_dispatch[irq_offset] = current_irq_dispatch[irq_offset];
 		
 		// Enable interrupts
 		asm("li r4, 0x1");

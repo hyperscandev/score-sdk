@@ -1,8 +1,6 @@
 /*
 
 This is part of the Mattel HyperScan SDK by ppcasm (ppcasm@gmail.com)
-
-usbloader
  
 */
 
@@ -75,38 +73,6 @@ void menu_border(unsigned short* framebuffer, int x, int y, int width, int heigh
     }
 }
 
-void dac_Init(){
-	
-	// Patch the excvec to allow fixed exc handler
-	// to use our DAC ISR while still keeping firmware
-	// in control of the exc vec
-	unsigned int *excvec_old_dac = (unsigned int *)0xA0E002FC;
-	unsigned int *excvec_new_dac = (unsigned int *)0xA00002FC;
-	
-	asm("li r4, 0x0");
-	asm("mtcr r4, cr0");
-	asm("nop");
-	asm("nop");
-	asm("nop");
-	asm("nop");
-	asm("nop");
-	
-	*excvec_new_dac = *excvec_old_dac;	
-
-	asm("li r4, 0x1");
-	asm("mtcr r4, cr0");
-	asm("nop");
-	asm("nop");
-	asm("nop");
-	asm("nop");
-	asm("nop");
-	
-	// Then intialize the DAC interrupts
-	*P_INT_MASK_CTRL1 = ~0x00000001;
-	*P_DAC_CLK_CONF = 0x00000003;
-	*P_DAC_MODE_CTRL1 = ~0x00000003;
-}
-
 void load_bg_music(const char *filename){
 	
 	FATFS fs0;
@@ -126,7 +92,7 @@ void load_bg_music(const char *filename){
 	file_size = f_size(&fil);
 
 	// Create a buffer for storing the background music MP3
-	unsigned char *mp3ptr = (unsigned char *)LOAD_ADDRESS;
+	unsigned char *mp3ptr = (unsigned char *)ENTRY_ADDRESS;
 	
 	// Read the background music MP3 into buffer
 	fr = f_read(&fil, mp3ptr, file_size, &br);
@@ -304,30 +270,26 @@ void execute_binary(char *dir_buf){
 	entry_start();
 }
 
-static inline unsigned int asm_j_insn(unsigned int address, unsigned int link) {
-    // low half: bits [14:0] of address, plus the p-bit at bit 15
-    unsigned int insn_l = (address & 0x7FFFU)    // mask low 15 bits
-                    | (1U << 15);            // set p-bit
+static void int63_handler(void) {
+	HS_LEDS(0xFF);
+	//MP3_Service_Loop_ISR();
+}
 
-    // high half: bits [28:16] of (address<<1), plus bits 31 and 27
-    unsigned int insn_h = ((address << 1) & 0x1FFF0000U)  // mask bits [28:16]
-                    | (1U << 31)                   // set bit 31
-                    | (1U << 27);                  // set bit 27
+void dac_Init(){
+	
+	attach_isr(63, int63_handler);
+	
 
-    // combine halves and add the link field
-    unsigned int assembled = (insn_h & 0xFFFF0000U)    // upper 16 bits
-                       | (insn_l & 0x0000FFFFU);  // lower 16 bits
-    assembled += link;
-
-    return assembled;
+	// Then intialize the DAC interrupts
+//	*P_INT_MASK_CTRL1 = ~0x00000001;
+//	*P_DAC_CLK_CONF = 0x00000003;
+//	*P_DAC_MODE_CTRL1 = ~0x00000003;
 }
 
 int main(){
 
 	// Initialize DAC interrupt handling
-	//dac_Init();
-	
-	attach_isr(61, MP3_Service_Loop_ISR);
+	dac_Init();
 	    
 	// Stupid Framebuffer
 	unsigned short *fb = (unsigned short *)FRAMEBUFFER_ADDRESS;
@@ -348,37 +310,19 @@ int main(){
 	/* Initalize Mattel HyperScan controller interface */
 	hs_controller_init();
 	
-	// If start is held at boot of usbload then continue as normal
-	hs_controller_read();
-	if(controller[hs_controller_1].input.start){
-		int i = 0;
-		
-		volatile unsigned int *src = (volatile unsigned int *)0x9F001000;
-		volatile unsigned int *dst = (volatile unsigned int *)0xA00001FC;
-		unsigned int n = (0xFF000 / 4);
-
-		for(i = 0; i < n; i++) {
-			dst[i] = src[i];
-		}
-		
-		// You could place firmware patches here that would get applied before booting HyperScanOS
-		// RESET PATCH EXAMPLE (resets when printing from coords takes place)
-		//*(volatile unsigned int *)0xa000d2b0 = 0x84D88080;
-		//*(volatile unsigned int *)0xa000d2b4 = 0x94FA9042;
-		//*(volatile unsigned int *)0xa000d2b8 = 0x267c0000;
-		//*(volatile unsigned int *)0xa000d2b0 = asm_j_insn(0xA0091000, 0);
-		//*(volatile unsigned int *)0xa000d2b4 = 0x00000000;
-		
-		void (*entry_start)(void) = (void *)0xA0001000;
-		entry_start();
-	}
-	
 	/*
 	Set TV output up with RGB565 color scheme and make set all framebuffers
 	to stupid framebuffer address, tv_init will select the first framebuffer
 	as default.
 	*/
 	tv_init(RESOLUTION_640_480, COLOR_RGB565, FRAMEBUFFER_ADDRESS, FRAMEBUFFER_ADDRESS, FRAMEBUFFER_ADDRESS);
+	unsigned int *stuff = (unsigned int *)0xa00002f4;
+	
+	int i = 0;
+	for(i=0;i<8;i++) {
+		tv_printhex(0xa0400000, 2, 2+i, &stuff[i]);
+		tv_printhex(0xa0400000, 2, 14+i, stuff[i]);
+	}
 
 	tv_print(fb, (((640/8)-strlen(header1))/2), 2, header1);
 	tv_print(fb, (((640/8)-strlen(header2))/2), 3, header2);
@@ -426,13 +370,14 @@ int main(){
 			int mp3_mode = 1;
 			int count = 0;
 			
-			load_bg_music("/mp3/bg.mp3");
+			load_bg_music("bg.mp3");
 
 			while(mp3_mode){
 				// Handle MP3 stream
-				for(count=0;count<=100000;count++) MP3_Service_Loop();
+				for(count=0;count<=100000;count++) { MP3_Service_Loop(); }
 	
 				hs_controller_read();
+				MP3_Service_Loop_ISR();
 				MP3_Service_Loop();
 					
 				if(controller[hs_controller_1].input.select) mp3_mode = 0;

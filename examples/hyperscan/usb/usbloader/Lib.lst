@@ -1,3 +1,4 @@
 /*	Lib Lst file created by MIDE	*/
 
+INPUT("..\..\..\..\libs\MP3\MP3Core.a")
 

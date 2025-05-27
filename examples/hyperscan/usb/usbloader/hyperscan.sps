@@ -12,8 +12,8 @@ OutPut Dir = Debug
 Inc Path = ..\..\..\..\include
 Lib Path = ..\..\..\..\libs\MP3
 Compiler = ..\S_CORE~1.1\GNU\bin\gcc
-Compiler DefFlag = -mscore7 -mel -g -Wall -Os
-Compiler AddFlag = -Dhyperscan -Dmax_heap_size=3*(512*1024) -Dmp3drv
+Compiler DefFlag = -mscore7 -mel -g -Wall
+Compiler AddFlag = -Dhyperscan -Dmax_heap_size=3*(1024*1024) -Dmp3drv
 Assembler = ..\S_CORE~1.1\GNU\bin\as
 Assembler DefFlag = -Wa,-gdwarf-2  -x assembler-with-cpp
 Assembler AddFlag = 
@@ -30,7 +30,7 @@ OBJDUMP = ..\S_CORE~1.1\GNU\bin\objdump
 OBJDUMP FLag = 
 IMG2BIN = ..\S_CORE~1.1\GNU\bin\img2bin
 IMG2BIN FLag = 
-Lik Lib = 
+Lik Lib = ..\..\..\..\libs\MP3\MP3Core.a
 Stack base address = a0fffff0
 Pre-Link Description = 
 Pre-Link Command = 

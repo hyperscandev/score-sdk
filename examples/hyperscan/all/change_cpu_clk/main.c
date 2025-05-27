@@ -43,7 +43,7 @@ int main(){
 	while(1){
 				
 		// Print text on TV
-		tv_print(fb, 28, 2, "Freq Changed");
+		tv_print(fb, 28, 2, "Testing");
 				
 	}
 		

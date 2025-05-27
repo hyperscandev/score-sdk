@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <fcntl.h>
+#include "score7_registers.h"
 
 /*
 	_putc_r  -- put a character out of the serial port.
