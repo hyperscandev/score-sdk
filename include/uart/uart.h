@@ -19,10 +19,23 @@ extern "C" {
 #define  BAUD_RATE_57600       0x01D4
 #define  BAUD_RATE_115200      0x00EA
 
+#define BIT(n)	(1 << n)
+
+#define SW_UART_UART	BIT(24)
+
+#define UART_BUSY	BIT(3)
+#define UART_TRANSMIT_EMPTY	BIT(7)
+#define UART_TRANSMIT_FULL	BIT(5)
+#define UART_RECEIVE_EMPTY	BIT(4)
+#define UART_RECEIVE_FULL	BIT(6)
 
 /**************************************************************************
  *               F U N C T I O N    D E C L A R A T I O N S               *
  **************************************************************************/
+void uart_print_string(const char *str);
+void uart_enable_interface();
+void uart_write_byte(unsigned int c);
+unsigned char uart_read_byte();
 void uart_initial(int baudrate);
 void uart_sendchar(char data);
 char uart_getchar();

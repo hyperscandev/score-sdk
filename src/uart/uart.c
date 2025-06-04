@@ -48,3 +48,65 @@ char uart_getchar(){
     return cdata;
 }
 
+//=============================================================
+//	void uart_enable_interface();
+//	
+//	Enable UART
+//
+//	return: None
+//=============================================================
+void uart_enable_interface() {
+	*P_UART_INTERFACE_SEL |= SW_UART_UART;
+}
+
+//=============================================================
+//	void uart_wait_nonbusy();
+//	
+//	Wait for UART to be free
+//
+//	return: None
+//=============================================================
+static void uart_wait_nonbusy() {
+	unsigned int status = *P_UART_TXRX_STATUS;
+	while (status & UART_BUSY || status & UART_TRANSMIT_FULL || !(status & UART_TRANSMIT_EMPTY)) {
+		status = *P_UART_TXRX_STATUS;
+	}
+}
+
+//=============================================================
+//	void uart_write_byte(unsigned int c);
+//	
+//	Write a byte over UART
+//
+//	return: None
+//=============================================================
+void uart_write_byte(unsigned int c) {
+	*P_UART_TXRX_DATA = c;
+	uart_wait_nonbusy();
+}
+
+//=============================================================
+//	void uart_print_string(const char *str);
+//	
+//	Write a string over UART
+//
+//	return: None
+//=============================================================
+void uart_print_string(const char *str) {
+	while (*str) {
+		uart_write_byte(*str++);
+	}
+}
+
+//=============================================================
+//	unsigned char uart_read_byte();
+//	
+//	Gett a byte over UART
+//
+//	return: byte
+//=============================================================
+unsigned char uart_read_byte() {
+	while (*P_UART_TXRX_STATUS & UART_RECEIVE_EMPTY);
+	return *P_UART_TXRX_DATA;
+}
+

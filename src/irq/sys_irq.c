@@ -1,7 +1,8 @@
+#include <stdio.h>
 #include "score7_registers.h"
 
 // Used to reference start of exception vector
-extern void norm_debug_vec(void);
+extern void int1_vec(void);
 
 // Max/Min number of IRQs
 // For now we will only attach handlers for 24~63 but
@@ -18,11 +19,11 @@ typedef void (*isr_handler)(void);
 static isr_handler isr_table[MAX_IRQ] = { 0 };
 
 // Fallback when no handler is attached
-static void handler_placeholder(void) { HS_LEDS(0xFF); }
+static void handler_placeholder(void) { }
 
 // Hook IRQ ISR
 void attach_isr(unsigned int irq, isr_handler handler) {
-	
+
 	// Only attach handler if our irq is within the appropriate IRQ firing range
     if (irq >= MIN_IRQ && irq <= MAX_IRQ) {
     	
@@ -48,13 +49,42 @@ void attach_isr(unsigned int irq, isr_handler handler) {
 		// to use our custom isr dispatch for specified isr. This could possibly only work on Hyperscan
 		// since I haven't seen any examples of other score7 based systems and their memory map, but if so
 		// this could easily be fixed to accomodate those systems as well with our -D(platform) configuration switch
-		unsigned int *current_irq_dispatch = (unsigned int *)&norm_debug_vec + 1;
-		unsigned int *fixed_irq_dispatch = (unsigned int *)0xA00001FC + 1;
+		unsigned int *current_irq_dispatch = (unsigned int *)&int1_vec;
+		unsigned int *fixed_irq_dispatch = (unsigned int *)0x80000200;
 		
 		unsigned int irq_offset = irq;
 		
 		// Swap handler at fixed vector with the one from our (unused) current vector
 		fixed_irq_dispatch[irq_offset] = current_irq_dispatch[irq_offset];
+		
+		printf("Installing handler for IRQ%d @ 0x%08x\n", irq, (unsigned int)&fixed_irq_dispatch[irq_offset]);
+		
+		// invalidate D-Cache
+		asm("cache 0x18, [r15, 0]");
+		asm("nop");
+		asm("nop!");
+		asm("nop!");
+		asm("nop!");
+		asm("nop!");
+		asm("nop");
+		
+		//	invalidate I-Cache
+		asm("cache 0x10, [r15, 0]");
+		asm("nop");
+		asm("nop!");
+		asm("nop!");
+		asm("nop!");
+		asm("nop!");
+		asm("nop");
+
+		// Drain write buffer
+		asm("cache 0x1A, [r15, 0]");
+		asm("nop");
+		asm("nop!");
+		asm("nop!");
+		asm("nop!");
+		asm("nop!");
+		asm("nop");
 		
 		// Enable interrupts
 		asm("li r4, 0x1");
@@ -79,4 +109,6 @@ void irq_dispatch(unsigned int cp0_cause) {
     	if (h) h(); else handler_placeholder();
 	}
 }
+
+
 

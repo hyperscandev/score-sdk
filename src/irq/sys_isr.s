@@ -66,7 +66,6 @@
 // General/Debug
 //=========================================================
 .align 2
-.global norm_debug_vec // Make this one global so we can reference the start of vector addr
 norm_debug_vec:         // DebugVec
     j norm_debug_service
 
@@ -78,6 +77,7 @@ general_vec:            // GeneralVec
 // IRQ 1~63
 //=========================================================
 .align 2
+.global int1_vec // Make this one global so we can reference the start of vector addr
 int1_vec:               // IRQ1
     j int_service       // int_service
 .align 2

@@ -8,12 +8,12 @@ This is part of the Mattel HyperScan SDK by ppcasm (ppcasm@gmail.com)
 #include <stdlib.h>
 #include <string.h>
 
-#include "mp3drv/mp3.h"
-#include "mp3drv/mp3drv.h"
-
 #include "tv/tv.h"
+#include "uart/uart.h"
 #include "irq/interrupts.h"
 #include "hyperscan/fatfs/ff.h"
+#include "hyperscan/hyperscan.h"
+
 #include "score7_registers.h"
 #include "score7_constants.h"
 #include "hyperscan/hs_controller/hs_controller.h"
@@ -24,6 +24,10 @@ This is part of the Mattel HyperScan SDK by ppcasm (ppcasm@gmail.com)
 
 #define LOAD_ADDRESS 0xA00901FC
 #define ENTRY_ADDRESS 0xA0091000
+
+static FATFS fs0; //FatFS mountpoint
+static FIL callback_fil;
+static char filename_buf[128];
 
 void draw_pixel(unsigned short* framebuffer, int x, int y, unsigned short color) {
     if (x >= 0 && x < FRAMEBUFFER_WIDTH && y >= 0 && y < FRAMEBUFFER_HEIGHT) {
@@ -73,55 +77,14 @@ void menu_border(unsigned short* framebuffer, int x, int y, int width, int heigh
     }
 }
 
-void load_bg_music(const char *filename){
-	
-	FATFS fs0;
-	FIL fil;
-	FRESULT fr;
-	UINT br;
-	
-	int file_size = 0;
-	
-	// Mount the USB drive with FatFS support
-	f_mount(&fs0, "0:", 1);
-	
-	// Open background music MP3
-	fr = f_open(&fil, filename, FA_READ);
-
-	// Get size of background music MP3
-	file_size = f_size(&fil);
-
-	// Create a buffer for storing the background music MP3
-	unsigned char *mp3ptr = (unsigned char *)ENTRY_ADDRESS;
-	
-	// Read the background music MP3 into buffer
-	fr = f_read(&fil, mp3ptr, file_size, &br);
-	
-	// Close file
-	f_close(&fil);
-	
-	// Unmount
-    f_mount(NULL, "0:", 0);
-    
-    // Address points to mp3 buffer
-	Address = (unsigned short*)mp3ptr; 
-
-	// Play mp3
-	Play_MP3((unsigned int)Address,file_size/2);
-	
-	// Repeat
-	Repeat_ON_MP3();
-}
-
 int get_dir_list_size(){
+	
+	FILINFO fno; // File information object
+	DIR dir; // Directory object
+	FRESULT res; // FatFs result variable
 	
 	int dir_count = 0;
 	
-	FATFS fs0; // FatFS mountpoint
-    FRESULT res; // FatFs result variable
-    DIR dir; // Directory object
-    FILINFO fno; // File information object
-
     // Mount the file system
     res = f_mount(&fs0, "", 1);
     
@@ -160,14 +123,13 @@ int get_dir_list_size(){
 }
 
 int load_directory_list(char **dir_buf){
+
+	FILINFO fno; // File information object
+	DIR dir; // Directory object
+	FRESULT res; // FatFs result variable
 	
 	int dir_count = 0;
 	
-	FATFS fs0; // FatFS mountpoint
-    FRESULT res; // FatFs result variable
-    DIR dir; // Directory object
-    FILINFO fno; // File information object
-
     // Mount the file system
     res = f_mount(&fs0, "", 1);
     
@@ -233,15 +195,14 @@ static int show_selection(char **dir_buf, int dir_count, int index, int selectio
     
 void execute_binary(char *dir_buf){
 
+	FRESULT res; // FatFs result variable
+	UINT br;
+	FIL fil;
+	
 	int file_size = 0;
 	
 	unsigned int *ldrptr = (unsigned int *)LOAD_ADDRESS;
 	void (*entry_start)(void) = (void *)ENTRY_ADDRESS;
-	
-	FATFS fs0; // FatFS mountpoint
-	FIL fil;
-    FRESULT res; // FatFs result variable
-	UINT br;
 	
     // Mount the file system
     res = f_mount(&fs0, "", 1);
@@ -270,28 +231,103 @@ void execute_binary(char *dir_buf){
 	entry_start();
 }
 
-static void int63_handler(void) {
-	HS_LEDS(0xFF);
-	//MP3_Service_Loop_ISR();
+static inline unsigned int asm_j_insn(unsigned int address, unsigned int link) {
+    // low half: bits [14:0] of address, plus the p-bit at bit 15
+    unsigned int insn_l = (address & 0x7FFFU)    // mask low 15 bits
+                    | (1U << 15);            // set p-bit
+
+    // high half: bits [28:16] of (address<<1), plus bits 31 and 27
+    unsigned int insn_h = ((address << 1) & 0x1FFF0000U)  // mask bits [28:16]
+                    | (1U << 31)                   // set bit 31
+                    | (1U << 27);                  // set bit 27
+
+    // combine halves and add the link field
+    unsigned int assembled = (insn_h & 0xFFFF0000U)    // upper 16 bits
+                       | (insn_l & 0x0000FFFFU);  // lower 16 bits
+    assembled += link;
+
+    return assembled;
 }
 
-void dac_Init(){
+int iso_init_callback() {
+	asm("la r18, _gp");
 	
-	attach_isr(63, int63_handler);
-	
+	HS_LEDS(0x01);
+	printf("iso_init... Go fuck yourself\n");
+	return 1;
+}
 
-	// Then intialize the DAC interrupts
-//	*P_INT_MASK_CTRL1 = ~0x00000001;
-//	*P_DAC_CLK_CONF = 0x00000003;
-//	*P_DAC_MODE_CTRL1 = ~0x00000003;
+int iso_open_callback(char *filename) {
+	asm("la r28, _gp");
+	
+	FRESULT res; // FatFs result variable
+
+	HS_LEDS(0x02);
+	printf("iso_open: %s\n", filename);
+	
+    // Mount the file system
+    res = f_mount(&fs0, "", 1);
+    
+    if (res != FR_OK) {
+        printf("Failed to mount the file system. Error code: %d\n", res);
+        while(1);
+    }
+
+    // Open the file
+	char *filepath = (char *)malloc(128);
+	sprintf(filepath, "%s", filename);
+	
+    res = f_open(&callback_fil, filepath, FA_READ);
+    
+    strncpy(filename_buf, filename, 128);
+    
+    return 1;
+}
+
+void iso_read_callback(int filedes, void *buffer, unsigned int size) {
+	asm("la r28, _gp");
+
+	FRESULT res; // FatFs result variable
+	UINT br;
+	
+	HS_LEDS(0x04);
+
+	printf("iso_read: filedes(%x) | buffer{%p) | size(%x)\n", filedes, buffer, size);
+	
+	res = f_read(&callback_fil, buffer, size, &br);
+
+	if(strcmp(filename_buf, "DAT\\IWL.EXE") == 0){
+		printf("Patching stack pointer\n");
+		*(unsigned int *)0xa00a409c = 0x00000000;
+		*(unsigned int *)0xa00a40a0 = 0x00000000;
+		*(unsigned int *)0xa00a40a4 = asm_j_insn(0xA005E000, 1);
+	}
+	
+    // Close the directory
+    f_close(&callback_fil);
+}
+
+int iso_lseek_callback(int fd, int offset, int whence) {
+	asm("la r28, _gp");
+	HS_LEDS(0x08);
+	
+	while(1) { printf("iso_lseek");}
+	
+	return 0;
+}
+
+void iso_close_callback(int filedes) {
+	asm("la r28, _gp");
+	HS_LEDS(0xF0);
+	
+	printf("iso_close()\n");
+
+    // Unmount the file system
+    f_mount(NULL, "", 0);
 }
 
 int main(){
 
-	// Initialize DAC interrupt handling
-	dac_Init();
-	    
-	// Stupid Framebuffer
 	unsigned short *fb = (unsigned short *)FRAMEBUFFER_ADDRESS;
 	
 	int dir_count = 0;
@@ -310,19 +346,195 @@ int main(){
 	/* Initalize Mattel HyperScan controller interface */
 	hs_controller_init();
 	
+	// If start is held at boot of usbload then continue as normal
+	hs_controller_read();
+	
+	if(controller[hs_controller_1].input.ls && controller[hs_controller_1].input.rs){
+		printf("Dumping RAM...\n");
+		
+		UINT bw;
+		FIL fil;
+		FRESULT res; // FatFs result variable
+
+		unsigned char *ram_ptr = (unsigned char *)0xA0000000;
+		unsigned int chunk_size = (4 * 1024);
+		unsigned int total_sectors = (16 * (1024 * 1024)) / chunk_size;
+		unsigned char save_buffer[chunk_size];
+		
+		int count = 0;
+		
+	    // Mount the file system
+		res = f_mount(&fs0, "", 1);
+    
+		if (res != FR_OK) {
+			printf("Failed to mount the file system. Error code: %d\n", res);
+			while(1);
+		}
+		
+		res = f_open(&fil, "ramdump.bin", FA_WRITE | FA_CREATE_ALWAYS);
+		if (res != FR_OK) {
+			printf("Failed to open the file. Error code: %d\n", res);
+			while(1);    
+    	}
+    	
+    	for(count=0;count<total_sectors;count++) {
+    		
+    		memcpy((void *)save_buffer, (const void *)ram_ptr, chunk_size);
+    		
+    		res = f_write(&fil, save_buffer, chunk_size, &bw);
+    		
+    		if(res != FR_OK || bw < chunk_size) {
+    			printf("Failed to write the file. Error code: %d\n", res);
+    			f_close(&fil);
+    			while(1); 
+    		}
+    		
+    		ram_ptr += chunk_size;
+    		printf("Sector: %d - Addr: %p\n", count, ram_ptr);
+
+			res = f_sync(&fil);
+    		if(res != FR_OK) {
+				printf("Failed to commit. Error code: %d\n", res);
+			f_close(&fil);
+			while(1);
+    		}
+    	}
+    	
+		printf("Done!\n");
+	}
+	
+	if(controller[hs_controller_1].input.start){
+		int i = 0;
+		
+		volatile unsigned int *src = (volatile unsigned int *)0x9F001000;
+		volatile unsigned int *dst = (volatile unsigned int *)0x800001FC;
+		unsigned int n = (0xFF000 / 4);
+
+		// invalidate D-Cache
+		asm("cache 0x18, [r15, 0]");
+		asm("nop");
+		asm("nop!");
+		asm("nop!");
+		asm("nop!");
+		asm("nop!");
+		asm("nop");
+		
+		//	invalidate I-Cache
+		asm("cache 0x10, [r15, 0]");
+		asm("nop");
+		asm("nop!");
+		asm("nop!");
+		asm("nop!");
+		asm("nop!");
+		asm("nop");
+
+		// Drain write buffer
+		asm("cache 0x1A, [r15, 0]");
+		asm("nop");
+		asm("nop!");
+		asm("nop!");
+		asm("nop!");
+		asm("nop!");
+		asm("nop");
+		
+		for(i = 0; i < n; i++) {
+			dst[i] = src[i];
+		}
+		
+		// invalidate D-Cache
+		asm("cache 0x18, [r15, 0]");
+		asm("nop");
+		asm("nop!");
+		asm("nop!");
+		asm("nop!");
+		asm("nop!");
+		asm("nop");
+		
+		//	invalidate I-Cache
+		asm("cache 0x10, [r15, 0]");
+		asm("nop");
+		asm("nop!");
+		asm("nop!");
+		asm("nop!");
+		asm("nop!");
+		asm("nop");
+
+		// Drain write buffer
+		asm("cache 0x1A, [r15, 0]");
+		asm("nop");
+		asm("nop!");
+		asm("nop!");
+		asm("nop!");
+		asm("nop!");
+		asm("nop");
+		
+		// You could place firmware patches here that would get applied before booting HyperScanOS
+
+		// Patch iso_init callback
+		//*(volatile unsigned int *)0x80000890 = 0x00000000; 
+		//*(volatile unsigned int *)0x80000894 = 0x00000000;
+		//*(volatile unsigned int *)0x80000898 = asm_j_insn((unsigned int)iso_init_callback, 0);
+
+		// Patch iso_open callback
+		//*(volatile unsigned int *)0x8000089C = 0x00000000;
+		//*(volatile unsigned int *)0x800008A0 = 0x00000000;
+		//*(volatile unsigned int *)0x800008A4 = asm_j_insn((unsigned int)iso_open_callback, 0);
+
+		// Patch iso_read callback
+		//*(volatile unsigned int *)0x800008A8 = 0x00000000;
+		//*(volatile unsigned int *)0x800008AC = 0x00000000;
+		//*(volatile unsigned int *)0x800008B0 = asm_j_insn((unsigned int)iso_read_callback, 0);
+
+		// Patch iso_lseek callback
+		//*(volatile unsigned int *)0x800008B4 = 0x00000000;
+		//*(volatile unsigned int *)0x800008B8 = 0x00000000;
+		//*(volatile unsigned int *)0x800008BC = asm_j_insn((unsigned int)iso_lseek_callback, 0);
+
+		// Patch iso_close callback
+		//*(volatile unsigned int *)0x800008C0 = 0x00000000;
+		//*(volatile unsigned int *)0x800008C4 = 0x00000000;
+		//*(volatile unsigned int *)0x800008C8 = asm_j_insn((unsigned int)iso_close_callback, 0);
+
+		// Patch checksum
+		//*(volatile unsigned int *)0xA000F740 = 0x84B88018;
+		
+		// invalidate D-Cache
+		asm("cache 0x18, [r15, 0]");
+		asm("nop");
+		asm("nop!");
+		asm("nop!");
+		asm("nop!");
+		asm("nop!");
+		asm("nop");
+		
+		//	invalidate I-Cache
+		asm("cache 0x10, [r15, 0]");
+		asm("nop");
+		asm("nop!");
+		asm("nop!");
+		asm("nop!");
+		asm("nop!");
+		asm("nop");
+
+		// Drain write buffer
+		asm("cache 0x1A, [r15, 0]");
+		asm("nop");
+		asm("nop!");
+		asm("nop!");
+		asm("nop!");
+		asm("nop!");
+		asm("nop");
+		
+		void (*entry_start)(void) = (void *)0xA0001000;
+		entry_start();
+	}
+	
 	/*
 	Set TV output up with RGB565 color scheme and make set all framebuffers
 	to stupid framebuffer address, tv_init will select the first framebuffer
 	as default.
 	*/
 	tv_init(RESOLUTION_640_480, COLOR_RGB565, FRAMEBUFFER_ADDRESS, FRAMEBUFFER_ADDRESS, FRAMEBUFFER_ADDRESS);
-	unsigned int *stuff = (unsigned int *)0xa00002f4;
-	
-	int i = 0;
-	for(i=0;i<8;i++) {
-		tv_printhex(0xa0400000, 2, 2+i, &stuff[i]);
-		tv_printhex(0xa0400000, 2, 14+i, stuff[i]);
-	}
 
 	tv_print(fb, (((640/8)-strlen(header1))/2), 2, header1);
 	tv_print(fb, (((640/8)-strlen(header2))/2), 3, header2);
@@ -338,6 +550,43 @@ int main(){
 	
 	show_selection(dir_buf, dir_count, 0, selection);
 
+
+	// patch timer int handler
+	volatile unsigned int *timerpatch = (volatile unsigned int *)0x8000c62c;
+	int z = 0;
+	for(z=0;z<=0x80;z++){
+		timerpatch[z] = 0x00000000;
+	}
+	//*(volatile unsigned int *)0x8000C62C = 0x10804084;
+	//*(volatile unsigned int *)0x8000C630 = 0x00002300;
+	//*(volatile unsigned int *)0x8000C634 = 0x0a230a22;
+	//*(volatile unsigned int *)0x8000C638 = 0x0000340f;
+	
+	// Patch iso_init callback
+	*(volatile unsigned int *)0x80000890 = 0x00000000; 
+	*(volatile unsigned int *)0x80000894 = 0x00000000;
+	*(volatile unsigned int *)0x80000898 = asm_j_insn((unsigned int)iso_init_callback, 0);
+		
+	// Patch iso_open callback
+	*(volatile unsigned int *)0x8000089C = 0x00000000;
+	*(volatile unsigned int *)0x800008A0 = 0x00000000;
+	*(volatile unsigned int *)0x800008A4 = asm_j_insn((unsigned int)iso_open_callback, 0);
+
+	// Patch iso_read callback
+	*(volatile unsigned int *)0x800008A8 = 0x00000000;
+	*(volatile unsigned int *)0x800008AC = 0x00000000;
+	*(volatile unsigned int *)0x800008B0 = asm_j_insn((unsigned int)iso_read_callback, 0);
+
+	// Patch iso_lseek callback
+	*(volatile unsigned int *)0x800008B4 = 0x00000000;
+	*(volatile unsigned int *)0x800008B8 = 0x00000000;
+	*(volatile unsigned int *)0x800008BC = asm_j_insn((unsigned int)iso_lseek_callback, 0);
+
+	// Patch iso_close callback
+	*(volatile unsigned int *)0x800008C0 = 0x00000000;
+	*(volatile unsigned int *)0x800008C4 = 0x00000000;
+	*(volatile unsigned int *)0x800008C8 = asm_j_insn((unsigned int)iso_close_callback, 0);
+		
 	while(1){
 		
 		// If right trigger is pressed, move menu select down
@@ -362,32 +611,6 @@ int main(){
 			tv_print((unsigned short *)FRAMEBUFFER_ADDRESS, 40-(strlen(dir_buf[selection])/2), 28, dir_buf[selection]);
 			execute_binary(dir_buf[selection]);
 		}
-		
-		hs_controller_read();
-		if(controller[hs_controller_1].input.select){
-			tv_print((unsigned short *)FRAMEBUFFER_ADDRESS, 40-(strlen("MP3 Mode")/2), 27, "MP3 Mode");
-
-			int mp3_mode = 1;
-			int count = 0;
-			
-			load_bg_music("bg.mp3");
-
-			while(mp3_mode){
-				// Handle MP3 stream
-				for(count=0;count<=100000;count++) { MP3_Service_Loop(); }
-	
-				hs_controller_read();
-				MP3_Service_Loop_ISR();
-				MP3_Service_Loop();
-					
-				if(controller[hs_controller_1].input.select) mp3_mode = 0;
-	
-			}
-			tv_print((unsigned short *)FRAMEBUFFER_ADDRESS, 40-(strlen("MP3 Mode")/2), 27, "         ");
-			Stop_MP3();
-			for(count=0;count<=100000;count++);
-		}
-		
 	}
 	
 	return nExitCode;

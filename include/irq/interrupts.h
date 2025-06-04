@@ -15,6 +15,7 @@ extern void attach_isr(unsigned int irq, void (*handler)(void));
 #define TMB_INT_UNMASK()			(*P_INT_MASK_CTRL1 &= ~C_INT_TMB_DIS)
 #define TIMER_INT_UNMASK()			(*P_INT_MASK_CTRL1 &= ~C_INT_TIMER_DIS)
 #define LCDVS_INT_UNMASK()			(*P_INT_MASK_CTRL1 &= ~C_INT_LCDVS_DIS)
+#define FRAME_INT_UNMASK()			(*P_INT_MASK_CTRL1 &= ~C_INT_FRAME_DIS)
 #define USB_INT_UNMASK()			(*P_INT_MASK_CTRL1 &= ~C_INT_USB_DIS)
 #define SIO_INT_UNMASK()			(*P_INT_MASK_CTRL1 &= ~C_INT_SIO_DIS)
 #define SPI_INT_UNMASK()			(*P_INT_MASK_CTRL1 &= ~C_INT_SPI_DIS)

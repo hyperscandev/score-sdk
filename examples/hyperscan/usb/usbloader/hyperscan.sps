@@ -10,10 +10,10 @@ CFG = Debug
 OutPut Type = elf
 OutPut Dir = Debug
 Inc Path = ..\..\..\..\include
-Lib Path = ..\..\..\..\libs\MP3
+Lib Path = 
 Compiler = ..\S_CORE~1.1\GNU\bin\gcc
-Compiler DefFlag = -mscore7 -mel -g -Wall
-Compiler AddFlag = -Dhyperscan -Dmax_heap_size=3*(1024*1024) -Dmp3drv
+Compiler DefFlag = -mscore7 -mel -g -Wall -Os
+Compiler AddFlag = -Dhyperscan -Dmax_heap_size=1*(1024*1024)
 Assembler = ..\S_CORE~1.1\GNU\bin\as
 Assembler DefFlag = -Wa,-gdwarf-2  -x assembler-with-cpp
 Assembler AddFlag = 
@@ -30,7 +30,7 @@ OBJDUMP = ..\S_CORE~1.1\GNU\bin\objdump
 OBJDUMP FLag = 
 IMG2BIN = ..\S_CORE~1.1\GNU\bin\img2bin
 IMG2BIN FLag = 
-Lik Lib = ..\..\..\..\libs\MP3\MP3Core.a
+Lik Lib = 
 Stack base address = a0fffff0
 Pre-Link Description = 
 Pre-Link Command = 
@@ -220,16 +220,6 @@ PARAM=
 # End Source File
 
 # End Group
-# Begin Group "mp3drv"
-#PROP Default_Filter = 
-
-# Begin Source File
-SOURCE=..\..\..\..\src\mp3drv\mp3drv.c
-USEPARAM=FALSE
-PARAM=
-# End Source File
-
-# End Group
 # Begin Group "norflash"
 #PROP Default_Filter = 
 
@@ -311,6 +301,12 @@ PARAM=
 # End Source File
 
 # End Group
+# Begin Source File
+SOURCE=..\..\..\..\include\hyperscan\hyperscan.h
+USEPARAM=FALSE
+PARAM=
+# End Source File
+
 # End Group
 # Begin Group "i2cH"
 #PROP Default_Filter = 
@@ -327,22 +323,6 @@ PARAM=
 
 # Begin Source File
 SOURCE=..\..\..\..\include\irq\interrupts.h
-USEPARAM=FALSE
-PARAM=
-# End Source File
-
-# End Group
-# Begin Group "mp3drvH"
-#PROP Default_Filter = 
-
-# Begin Source File
-SOURCE=..\..\..\..\include\mp3drv\mp3.h
-USEPARAM=FALSE
-PARAM=
-# End Source File
-
-# Begin Source File
-SOURCE=..\..\..\..\include\mp3drv\mp3drv.h
 USEPARAM=FALSE
 PARAM=
 # End Source File

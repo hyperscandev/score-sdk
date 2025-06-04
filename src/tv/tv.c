@@ -37,8 +37,10 @@ void tv_init(unsigned int resolution, unsigned int colormode, unsigned int fb1_a
 					| C_TV_NTSC_MODE 				
 					| C_TV_INTERLACE_MODE 
 					| C_TV_NTSC_TYPE 		
-					| C_TV_LITTLE_ENDIAN; 	
+					| C_TV_LITTLE_ENDIAN
+					| C_TV_VBLANKINGSINT_EN; 	
 
+	*(volatile unsigned int *)0x88010000 |= 0x0001;
 	if(resolution == RESOLUTION_640_480){
 		*P_TV_MODE_CTRL |= C_TV_VGA_MODE;
 	}

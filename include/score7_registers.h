@@ -639,4 +639,738 @@ typedef volatile unsigned int UV32;
 #define P_DRAM_GPIO_SETUP                   (UV32*)0x88200050
 #define P_DRAM_GPIO_INPUT                   (UV32*)0x88200070
 
+
+//////////////////////////////////////////////////////////////////
+//						New register map                        //
+//////////////////////////////////////////////////////////////////
+
+/**
+ * CSI:	0x0800_0000 ~ 0x0800_FFFF
+ */
+#define CSIBASE					0x88000000
+	#define P_CSI_TG_CR				(UV32*)(CSIBASE + 0x00000000)
+	#define P_CSI_TG_LSTART			(UV32*)(CSIBASE + 0x00000004)
+	#define P_CSI_TG_START			(UV32*)(CSIBASE + 0x00000008)
+	#define P_CSI_TG_END			(UV32*)(CSIBASE + 0x0000000C)
+	#define P_CSI_TG_BLACK			(UV32*)(CSIBASE + 0x00000010)
+	#define P_CSI_TG_BSUPPER		(UV32*)(CSIBASE + 0x00000014)
+	#define P_CSI_TG_BSLOWER		(UV32*)(CSIBASE + 0x00000018)
+	#define P_CSI_TG_TRANSP			(UV32*)(CSIBASE + 0x0000001C)
+	#define P_CSI_TG_FBSADDR0     	(UV32*)(CSIBASE + 0x00000020)
+	#define P_CSI_TG_FBSADDR1     	(UV32*)(CSIBASE + 0x00000024)
+	#define P_CSI_TG_FBSADDR2     	(UV32*)(CSIBASE + 0x00000028)
+	#define P_CSI_TG_CAP          	(UV32*)(CSIBASE + 0x0000002C)
+	#define P_CSI_MD_CR           	(UV32*)(CSIBASE + 0x00000030)
+	#define P_CSI_MD_SADDR        	(UV32*)(CSIBASE + 0x00000034)
+	#define P_CSI_MD_POS          	(UV32*)(CSIBASE + 0x00000038)
+	#define P_CSI_MD_SADDR1       	(UV32*)(CSIBASE + 0x0000003C)
+	#define P_CSI_MD_CTABLE0      	(UV32*)(CSIBASE + 0x00000040)
+	#define P_CSI_MD_CTABLE1      	(UV32*)(CSIBASE + 0x00000044)
+	#define P_CSI_MD_CTABLE2      	(UV32*)(CSIBASE + 0x00000048)
+	#define P_CSI_MD_CTABLE3      	(UV32*)(CSIBASE + 0x0000004C)
+	#define P_CSI_MD_REG1         	(UV32*)(CSIBASE + 0x00000050)
+	#define P_CSI_MD_REG2         	(UV32*)(CSIBASE + 0x00000054)
+	#define P_CSI_MD_REG3         	(UV32*)(CSIBASE + 0x00000058)
+	#define P_CSI_MD_TH           	(UV32*)(CSIBASE + 0x0000005C)
+	#define P_CSI_MD_YUV          	(UV32*)(CSIBASE + 0x00000070)
+	#define P_CSI_MD_RGB          	(UV32*)(CSIBASE + 0x00000074)
+	#define P_CSI_IRQEN      	  	(UV32*)(CSIBASE + 0x00000078)
+	#define P_CSI_IRQSTS          	(UV32*)(CSIBASE + 0x0000007C)
+	#define P_CSI_Y2R_A1          	(UV32*)(CSIBASE + 0x000000E8)
+	#define P_CSI_Y2R_A2          	(UV32*)(CSIBASE + 0x000000EC)
+	#define P_CSI_Y2R_A3          	(UV32*)(CSIBASE + 0x000000F0)
+	#define P_CSI_R2Y_A1          	(UV32*)(CSIBASE + 0x000000F4)
+	#define P_CSI_R2Y_A2          	(UV32*)(CSIBASE + 0x000000F8)
+	#define P_CSI_R2Y_A3          	(UV32*)(CSIBASE + 0x000000FC)
+
+/**
+ * PPU:	0x0801_0000 ~ 0x0801_FFFF
+ */
+#define PPUBASE					0x88010000
+	#define P_PPU_CONTROL           (UV32*)(PPUBASE + 0x00000000)
+	#define P_SP_Control			((volatile P_Sp_Control_DEF *)		(PPUBASE + 0x00000004))
+	#define P_SP_MAX				(UV32*)(PPUBASE + 0x00000008)	
+	#define P_BLN_FORMULA			(UV32*)(PPUBASE + 0x0000000C)	
+	#define P_TRANS_RGB				(UV32*)(PPUBASE + 0x00000010)		
+	#define P_PPU_TX1_X             (UV32*)(PPUBASE + 0x00000020)
+	#define P_PPU_TX1_Y             (UV32*)(PPUBASE + 0x00000024)
+	#define P_PPU_TX1_Attribute		(UV32*)(PPUBASE + 0x00000028) 	
+	#define P_PPU_TX1_Control       (UV32*)(PPUBASE + 0x0000002C)
+	#define P_PPU_TX1_N_PTR         (UV32*)(PPUBASE + 0x00000030)
+	#define P_PPU_TX1_Blending      (UV32*)(PPUBASE + 0x00000038)
+	#define P_PPU_TX2_X             (UV32*)(PPUBASE + 0x0000003C)
+	#define P_PPU_TX2_Y             (UV32*)(PPUBASE + 0x00000040)
+	#define P_PPU_TX2_Attribute		(UV32*)(PPUBASE + 0x00000044) 	
+	#define P_PPU_TX2_Control       (UV32*)(PPUBASE + 0x00000048)
+	#define P_PPU_TX2_N_PTR         (UV32*)(PPUBASE + 0x0000004C)
+	#define P_PPU_TX2_Blending      (UV32*)(PPUBASE + 0x00000054)
+	#define P_PPU_TX3_X             (UV32*)(PPUBASE + 0x00000058)
+	#define P_PPU_TX3_Y             (UV32*)(PPUBASE + 0x0000005C)
+	#define P_PPU_TX3_Attribute		(UV32*)(PPUBASE + 0x00000060) 	
+	#define P_PPU_TX3_Control       (UV32*)(PPUBASE + 0x00000064)
+	#define P_PPU_TX3_N_PTR         (UV32*)(PPUBASE + 0x00000068)
+	#define P_PPU_TX3_Blending      (UV32*)(PPUBASE + 0x00000070)
+	#define P_PPU_VComp_Value		(UV32*)(PPUBASE + 0x00000074)
+	#define P_PPU_VComp_Offset		(UV32*)(PPUBASE + 0x00000078)
+	#define P_PPU_VComp_Step		(UV32*)(PPUBASE + 0x0000007C)
+	#define P_IRQ_CONTROL			(UV32*)(PPUBASE + 0x00000080)
+	#define P_IRQ_STATUS			(UV32*)(PPUBASE + 0x00000084)
+	#define P_IRQ_TMV				(UV32*)(PPUBASE + 0x00000088)
+	#define P_IRQ_TMH				(UV32*)(PPUBASE + 0x0000008C)
+	#define P_VBLK_TIME				(UV32*)(PPUBASE + 0x00000090)
+	#define P_LINE_COUNTER			(UV32*)(PPUBASE + 0x00000094)
+	#define P_PPU_TX1_START_ADR1    (UV32*)(PPUBASE + 0x000000A0)
+	#define P_PPU_TX1_START_ADR2    (UV32*)(PPUBASE + 0x000000A4)
+	#define P_PPU_TX1_START_ADR3    (UV32*)(PPUBASE + 0x000000A8)
+	#define P_PPU_TX2_START_ADR1    (UV32*)(PPUBASE + 0x000000AC)
+	#define P_PPU_TX2_START_ADR2    (UV32*)(PPUBASE + 0x000000B0)
+	#define P_PPU_TX2_START_ADR3    (UV32*)(PPUBASE + 0x000000B4)
+	#define P_PPU_TX3_START_ADR1    (UV32*)(PPUBASE + 0x000000B8)
+	#define P_PPU_TX3_START_ADR2    (UV32*)(PPUBASE + 0x000000BC)
+	#define P_PPU_TX3_START_ADR3    (UV32*)(PPUBASE + 0x000000C0)
+	#define P_PPU_FB_START_ADR1     (UV32*)(PPUBASE + 0x000000C4)
+	#define P_PPU_FB_START_ADR2     (UV32*)(PPUBASE + 0x000000C8)
+	#define P_PPU_FB_START_ADR3     (UV32*)(PPUBASE + 0x000000CC)	
+	#define P_SP_BUF_SA				((volatile GEN_REG_DEF *)		(PPUBASE + 0x000000D0))
+	#define P_BG_COLOR_PALETTE		(UV32*)(PPUBASE + 0x00001000)	
+	#define P_SP_COLOR_PALETTE		(UV32*)(PPUBASE + 0x00001800)
+	#define P_PPU_Tx_HOffset_ADR	(UV32*)(PPUBASE + 0x00002000)		
+	#define P_PPU_Tx1_HCmp_ADR	    (UV32*)(PPUBASE + 0x00003000)
+	#define P_PPU_Sprite			(UV32*)(PPUBASE + 0x00004000)
+
+/**
+ * JPG:	0x0802_0000 ~ 0x0802_FFFF
+ */
+#define JPGBASE					0x88020000
+
+/**
+ * TV:	0x0803_0000 ~ 0x0803_FFFF
+ */
+#define TVEBASE					0x88030000
+	#define P_TV_CONTROL          	(UV32*)(TVEBASE + 0x00000000)
+	#define P_TV_SAT              	(UV32*)(TVEBASE + 0x00000004)
+	#define P_TV_HUE              	(UV32*)(TVEBASE + 0x00000008)
+	#define P_TV_FADE             	(UV32*)(TVEBASE + 0x0000000C)
+	#define P_TV_ACT_START        	(UV32*)(TVEBASE + 0x00000010)
+	#define P_TV_ACT_END          	(UV32*)(TVEBASE + 0x00000014)
+	#define P_TV_IRQTMV           	(UV32*)(TVEBASE + 0x00000018)
+	#define P_TV_IRQTMH           	(UV32*)(TVEBASE + 0x0000001C)
+	#define P_TV_LINECON          	(UV32*)(TVEBASE + 0x00000020)
+	#define P_TV_TEST	          	(UV32*)(TVEBASE + 0x0000003C)
+	#define P_TV_LPCON	          	(UV32*)(TVEBASE + 0x00000040)
+	#define P_TV_LPV	          	(UV32*)(TVEBASE + 0x00000044)
+	#define P_TV_LPH	          	(UV32*)(TVEBASE + 0x00000048)
+
+/**
+ * LCD:	0x0804_0000 ~ 0x0804_FFFF
+ */
+#define LCDBASE					0x88040000
+
+/**
+ * SPU:	0x0805_0000 ~ 0x0805_FFFF
+ */
+#define SPUBASE					0x88050000
+
+/**
+ * CD:	0x0806_0000 ~ 0x0806_FFFF
+ */
+#define CDBASE					0x88060000
+
+/**
+ * MIU1: 0x0807_0000 ~ 0x0807_FFFF
+ */
+#define MIU1BASE					0x88070000
+	#define P_CSI_START_ADR1        (UV32*)(MIU1BASE + 0x00000000)
+	#define P_CSI_START_ADR2        (UV32*)(MIU1BASE + 0x00000004)
+	#define P_CSI_START_ADR3        (UV32*)(MIU1BASE + 0x00000008)
+	#define P_PPU_TEXT1_START_ADR1  (UV32*)(MIU1BASE + 0x0000000C)
+	#define P_PPU_TEXT1_START_ADR2  (UV32*)(MIU1BASE + 0x00000010)
+	#define P_PPU_TEXT1_START_ADR3  (UV32*)(MIU1BASE + 0x00000014)
+	#define P_PPU_TEXT2_START_ADR1  (UV32*)(MIU1BASE + 0x00000018)
+	#define P_PPU_TEXT2_START_ADR2  (UV32*)(MIU1BASE + 0x0000001C)
+	#define P_PPU_TEXT2_START_ADR3  (UV32*)(MIU1BASE + 0x00000020)
+	#define P_PPU_TEXT3_START_ADR1  (UV32*)(MIU1BASE + 0x00000024)
+	#define P_PPU_TEXT3_START_ADR2  (UV32*)(MIU1BASE + 0x00000028)
+	#define P_PPU_TEXT3_START_ADR3  (UV32*)(MIU1BASE + 0x0000002C)
+	#define P_PPU_START_ADR1        (UV32*)(MIU1BASE + 0x00000030)
+	#define P_PPU_START_ADR2        (UV32*)(MIU1BASE + 0x00000034)
+	#define P_JPG_START_ADR1        (UV32*)(MIU1BASE + 0x00000038)
+	#define P_JPG_START_ADR2        (UV32*)(MIU1BASE + 0x0000003C)
+	#define P_JPGB_START_ADR        (UV32*)(MIU1BASE + 0x00000040)
+	#define P_TV_START_ADR1         (UV32*)(MIU1BASE + 0x00000044)
+	#define P_TV_START_ADR2         (UV32*)(MIU1BASE + 0x00000048)
+	#define P_LCD_START_ADR1        (UV32*)(MIU1BASE + 0x0000004C)
+	#define P_LCD_START_ADR2        (UV32*)(MIU1BASE + 0x00000050)
+	#define P_SPU_START_ADR         (UV32*)(MIU1BASE + 0x00000054)
+	#define P_CD_START_ADR          (UV32*)(MIU1BASE + 0x00000058)
+	#define P_SDRAM_POWER_DOWN      (UV32*)(MIU1BASE + 0x0000005C)
+	#define P_MIU1_SDRAM_SETTING    (UV32*)(MIU1BASE + 0x00000060)
+	#define P_TV_START_ADR3         (UV32*)(MIU1BASE + 0x00000064)
+	#define P_LCD_START_ADR3        (UV32*)(MIU1BASE + 0x00000068)
+		
+	#define P_SET_FLASH_CTL         (UV32*)(MIU1BASE + 0x00000100)
+	#define P_SET_BT_BTC            (UV32*)(MIU1BASE + 0x00000104)
+
+	#define P_MP4RAW_START_ADR1 	(UV32*)(MIU1BASE + 0x00000070)
+	#define P_MP4RAW_START_ADR2 	(UV32*)(MIU1BASE + 0x00000074)
+	#define P_MP4RAW_START_ADR3 	(UV32*)(MIU1BASE + 0x00000078)
+	#define P_MP4W_START_ADR1  	 	(UV32*)(MIU1BASE + 0x0000007c)
+	#define P_MP4W_START_ADR2   	(UV32*)(MIU1BASE + 0x00000080)
+	#define P_MP4W_START_ADR3  	 	(UV32*)(MIU1BASE + 0x00000084)
+	#define P_MP4V_START_ADR1 		(UV32*)(MIU1BASE + 0x00000088)
+	#define P_MP4V_START_ADR2   	(UV32*)(MIU1BASE + 0x0000008c)
+	#define P_MP4_FRAME_BUF_HSIZE	(UV32*)(MIU1BASE + 0x00000090)
+		
+
+/**
+ * APBDMA: 0x0808_0000 ~ 0x0808_FFFF
+ */
+#define DMABASE					0x88080000
+	#define P_DMA_BSY				(UV32*)(DMABASE + 0x00000000)
+	#define P_DMA_INT				(UV32*)(DMABASE + 0x00000004)
+	#define P_DMA_AHB_SA1A			(UV32*)(DMABASE + 0x00000008)
+	#define P_DMA_AHB_SA2A			(UV32*)(DMABASE + 0x0000000c)
+	#define P_DMA_AHB_SA3A			(UV32*)(DMABASE + 0x00000010)
+	#define P_DMA_AHB_SA4A			(UV32*)(DMABASE + 0x00000014)
+	#define P_DMA_AHB_EA1A			(UV32*)(DMABASE + 0x00000018)
+	#define P_DMA_AHB_EA2A			(UV32*)(DMABASE + 0x0000001c)
+	#define P_DMA_AHB_EA3A			(UV32*)(DMABASE + 0x00000020)
+	#define P_DMA_AHB_EA4A			(UV32*)(DMABASE + 0x00000024)
+	#define P_DMA_APB_SA4			(UV32*)(DMABASE + 0x00000034)
+	#define P_DMA_AHB_SA1B			(UV32*)(DMABASE + 0x0000004C)
+	#define P_DMA_AHB_SA2B			(UV32*)(DMABASE + 0x00000050)
+	#define P_DMA_AHB_SA3B			(UV32*)(DMABASE + 0x00000054)
+	#define P_DMA_AHB_SA4B			(UV32*)(DMABASE + 0x00000058)
+	#define P_DMA_AHB_EA1B			(UV32*)(DMABASE + 0x0000005C)
+	#define P_DMA_AHB_EA2B			(UV32*)(DMABASE + 0x00000060)
+	#define P_DMA_AHB_EA3B			(UV32*)(DMABASE + 0x00000064)
+	#define P_DMA_AHB_EA4B			(UV32*)(DMABASE + 0x00000068)
+	#define P_DMA_CR1				(UV32*)(DMABASE + 0x0000006C)
+	#define P_DMA_CR2				(UV32*)(DMABASE + 0x00000070)
+	#define P_DMA_CR3				(UV32*)(DMABASE + 0x00000074)
+	#define P_DMA_CR4				(UV32*)(DMABASE + 0x00000078)
+
+/**
+ * BUFCTL: 0x0809_0000 ~ 0x0809_FFFF
+ */
+#define BUFBASE					0x88090000
+	#define P_C2P_SETTING           (UV32*)(BUFBASE + 0x00000000)
+	#define P_PTR_SETTING           (UV32*)(BUFBASE + 0x00000004)
+	#define P_CSI_BUF_PTR_REG       (UV32*)(BUFBASE + 0x00000008)
+	#define P_PPUT1_BUF_PTR_REG     (UV32*)(BUFBASE + 0x0000000C)
+	#define P_PPUT2_BUF_PTR_REG     (UV32*)(BUFBASE + 0x00000010)
+	#define P_PPUT3_BUF_PTR_REG     (UV32*)(BUFBASE + 0x00000014)
+	#define P_PPU_BUF_PTR_REG       (UV32*)(BUFBASE + 0x00000018)
+	#define P_JPG_BUF_PTR_REG       (UV32*)(BUFBASE + 0x0000001C)
+	#define P_TVE_BUF_PTR_REG       (UV32*)(BUFBASE + 0x00000020)
+	#define P_LCD_BUF_PTR_REG       (UV32*)(BUFBASE + 0x00000024)
+	#define P_BUFCTL_STATUS			(UV32*)(BUFBASE + 0x00000028)				
+	#define P_PPU_FRAME_CNT			(UV32*)(BUFBASE + 0x0000002C)				
+	#define P_PPU_FCNT_INC			(UV32*)(BUFBASE + 0x00000030)				
+	#define P_TVE_FRAME_CNT			(UV32*)(BUFBASE + 0x00000034)				
+	#define P_GPU_FRAME_END			(UV32*)(BUFBASE + 0x00000038)				
+	#define P_P2T_SETTING         	(UV32*)(BUFBASE + 0x0000003C)
+	#define P_P2L_SETTING			(UV32*)(BUFBASE + 0x00000040)				
+	#define P_MP4RAW_BUF_PTR_REG	(UV32*)(BUFBASE + 0x00000044)				
+	#define P_MP4W_BUF_PTR_REG		(UV32*)(BUFBASE + 0x00000048)				
+	#define P_BUFCTL_SETTING		(UV32*)(BUFBASE + 0x0000004C)				
+	#define P_MP4R_BUF_PTR_REG		(UV32*)(BUFBASE + 0x00000050)		
+	#define P_MP4V_BUF_PTR_REG		(UV32*)(BUFBASE + 0x00000054)			
+	#define P_HW4_SETTING			(UV32*)(BUFBASE + 0x00000058)
+
+/**
+ * IRQCTL: 0x080A_0000 ~ 0x080A_FFFF
+ */
+#define IRQBASE					0x880A0000
+
+/**
+ * GPUBUF: 0x080B_0000 ~ 0x080B_FFFF
+ */
+#define GPUBASE					0x880B0000
+
+/**
+ * LDMDMA: 0x080C_0000 ~ 0x080C_FFFF
+ */
+#define LDMBASE					0x880c0000
+	#define P_LDM_CTRL              (UV32*)(LDMBASE + 0x00000000)
+	#define P_LDM_STATUS            (UV32*)(LDMBASE + 0x00000004)
+	#define P_LDM_MIU_START         (UV32*)(LDMBASE + 0x00000008)
+	#define P_LDM_MIU_END           (UV32*)(LDMBASE + 0x0000000C)
+	#define P_LDM_START             (UV32*)(LDMBASE + 0x00000010)
+	#define P_LDM_END               (UV32*)(LDMBASE + 0x00000014)
+
+/**
+ * BLNDMA: 0x080D_0000 ~ 0x080D_FFFF
+ */
+#define BLNDMABASE				0x880D0000
+    #define P_BLNDMA_SRCA_ADDR		(UV32*)(BLNDMABASE + 0x00000000)
+	#define P_BLNDMA_SRCB_ADDR		(UV32*)(BLNDMABASE + 0x00000004)
+	#define P_BLNDMA_DEST_ADDR		(UV32*)(BLNDMABASE + 0x00000008)
+	#define P_BLNDMA_WIDTH_HEIGH	(UV32*)(BLNDMABASE + 0x0000000C)
+	#define P_BLNDMA_FILL_PAT		(UV32*)(BLNDMABASE + 0x00000010)
+	#define P_BLNDMA_CONTROL_1		(UV32*)(BLNDMABASE + 0x00000014)
+	#define P_BLNDMA_IRQ_CONTROL	(UV32*)(BLNDMABASE + 0x00000018)
+	#define P_BLNDMA_BLEND_FACTOR	(UV32*)(BLNDMABASE + 0x0000001C)
+	#define P_BLNDMA_TRANSPARENT	(UV32*)(BLNDMABASE + 0x00000020)
+	#define P_BLNDMA_CONTROL_2		(UV32*)(BLNDMABASE + 0x00000028)
+	#define P_BLNDMA_ABASE_ADDR		(UV32*)(BLNDMABASE + 0x00000030)
+	#define P_BLNDMA_AOFFSET_XY		(UV32*)(BLNDMABASE + 0x00000034)
+	#define P_BLNDMA_A_BG			(UV32*)(BLNDMABASE + 0x00000038)
+	#define P_BLNDMA_BBASE_ADDR		(UV32*)(BLNDMABASE + 0x00000040)
+	#define P_BLNDMA_BOFFSET_XY		(UV32*)(BLNDMABASE + 0x00000044)
+	#define P_BLNDMA_B_BG			(UV32*)(BLNDMABASE + 0x00000048)
+	#define P_BLNDMA_DBASE_ADDR		(UV32*)(BLNDMABASE + 0x00000050)
+	#define P_BLNDMA_DOFFSET_XY		(UV32*)(BLNDMABASE + 0x00000054)
+	#define P_BLNDMA_D_BG			(UV32*)(BLNDMABASE + 0x00000058)
+
+/**
+ * TPGBUF: 0x080E_0000 ~ 0x080E_FFFF
+ */
+#define TPGBASE					0x880E0000
+
+/**
+ * AHBDEC: 0x080F_0000 ~ 0x080F_FFFF
+ */
+#define AHBDECBASE				0x880F0000
+
+/**
+ * GPIO: 0x0810_0000 ~ 0x0810_FFFF
+ */
+#define GPIOBASE				0x88100000
+	#define	P_GPIO_TDR				(UV32*)(GPIOBASE + 0x00000000)
+
+/**
+ * SPI: 0x0811_0000 ~ 0x0811_FFFF
+ */
+#define SPIBASE					0x88110000
+	#define P_SPI_CTRL				(UV32*)(SPIBASE + 0x00000000)
+	#define P_SPI_TXSTS				(UV32*)(SPIBASE + 0x00000004)
+	#define P_SPI_TXDATA			(UV32*)(SPIBASE + 0x00000008)
+	#define P_SPI_RXSTS				(UV32*)(SPIBASE + 0x0000000c)
+	#define P_SPI_RXDATA			(UV32*)(SPIBASE + 0x00000010)
+	#define P_SPI_MISC				(UV32*)(SPIBASE + 0x00000014)
+
+/**
+ * SIO: 0x0812_0000 ~ 0x0812_FFFF
+ */
+#define SIOBASE				0x88120000
+
+/**
+ * I2C: 0x0813_0000 ~ 0x0813_FFFF
+ */
+#define I2CBASE					0x88130000
+	#define P_I2CCR					(UV32*)(I2CBASE + 0x00000020)
+	#define P_I2CINTR				(UV32*)(I2CBASE + 0x00000024)
+	#define P_I2CCVR				(UV32*)(I2CBASE + 0x00000028)
+	#define P_I2CID					(UV32*)(I2CBASE + 0x0000002C)
+	#define P_I2CADDR				(UV32*)(I2CBASE + 0x00000030)
+	#define P_I2CWDATA				(UV32*)(I2CBASE + 0x00000034)
+	#define P_I2CRDATA				(UV32*)(I2CBASE + 0x00000038)
+	#define	P_I2CPR					(UV32*)(I2CBASE + 0x0000003C)
+
+/**
+ * I2S: 0x0814_0000 ~ 0x0814_FFFF
+ */
+#define I2SBASE					0x88140000
+	#define P_I2S_CTRL				(UV32*)(I2SBASE + 0x00000000)
+	#define P_I2S_STAT				(UV32*)(I2SBASE + 0x00000004)
+	#define P_I2S_FIFO				(UV32*)(I2SBASE + 0x00000008)
+	#define P_I2S_DATA				(UV32*)(I2SBASE + 0x0000000c)
+
+/**
+ * UART: 0x0815_0000 ~ 0x0815_FFFF
+ */
+#define UARTBASE				0x88150000
+	#define P_UARTDR				(UV32*)(UARTBASE+(0x00<<2))
+	#define P_UARTRSR				(UV32*)(UARTBASE+(0x01<<2))
+	#define P_UARTCR				(UV32*)(UARTBASE+(0x02<<2))
+	#define P_UARTBUD				(UV32*)(UARTBASE+(0x03<<2))
+	#define P_UARTFR				(UV32*)(UARTBASE+(0x04<<2))
+	#define P_IRDACR				(UV32*)(UARTBASE+(0x08<<2))
+	#define P_UARTBMR				(UV32*)(UARTBASE+(0x07<<2))
+	#define P_TUBEDR				(UV32*)(UARTBASE + 0x7ffc)
+
+/**
+ * TIMER1: 0x0816_0000 ~ 0x0816_0FFF
+ */
+#define TM0BASE					0x88160000
+	#define P_TM0_CTRL				(UV32*)(TM0BASE + 0x00000000)
+	#define P_TM0_CCP_CTRL			(UV32*)(TM0BASE + 0x00000004)
+	#define P_TM0_PRELOAD			(UV32*)(TM0BASE + 0x00000008)
+	#define P_TM0_CCP_REG			(UV32*)(TM0BASE + 0x0000000c)
+	#define P_TM0_UPCNT				(UV32*)(TM0BASE + 0x00000010)
+
+/**
+ * TIMER2: 0x0816_1000 ~ 0x0816_1FFF
+ */
+#define TM1BASE					0x88161000
+	#define P_TM1_CTRL				(UV32*)(TM1BASE + 0x00000000)
+	#define P_TM1_CCP_CTRL			(UV32*)(TM1BASE + 0x00000004)
+	#define P_TM1_PRELOAD			(UV32*)(TM1BASE + 0x00000008)
+	#define P_TM1_CCP_REG			(UV32*)(TM1BASE + 0x0000000c)
+	#define P_TM1_UPCNT				(UV32*)(TM1BASE + 0x00000010)
+
+/**
+ * TIMER3: 0x0816_2000 ~ 0x0816_2FFF
+ */
+#define TM2BASE					0x88162000
+	#define P_TM2_CTRL				(UV32*)(TM2BASE + 0x00000000)
+	#define P_TM2_CCP_CTRL			(UV32*)(TM2BASE + 0x00000004)
+	#define P_TM2_PRELOAD			(UV32*)(TM2BASE + 0x00000008)
+	#define P_TM2_CCP_REG			(UV32*)(TM2BASE + 0x0000000c)
+	#define P_TM2_UPCNT				(UV32*)(TM2BASE + 0x00000010)
+
+/**
+ * TIMER4: 0x0816_3000 ~ 0x0816_3FFF
+ */
+#define TM3BASE					0x88163000
+	#define P_TM3_CTRL				(UV32*)(TM3BASE + 0x00000000)
+	#define P_TM3_CCP_CTRL			(UV32*)(TM3BASE + 0x00000004)
+	#define P_TM3_PRELOAD			(UV32*)(TM3BASE + 0x00000008)
+	#define P_TM3_CCP_REG			(UV32*)(TM3BASE + 0x0000000c)
+	#define P_TM3_UPCNT				(UV32*)(TM3BASE + 0x00000010)
+
+/**
+ * TIMER5: 0x0816_4000 ~ 0x0816_4FFF
+ */
+#define TM4BASE					0x88164000
+	#define P_TM4_CTRL				(UV32*)(TM4BASE + 0x00000000)
+	#define P_TM4_CCP_CTRL			(UV32*)(TM4BASE + 0x00000004)
+	#define P_TM4_PRELOAD			(UV32*)(TM4BASE + 0x00000008)
+	#define P_TM4_CCP_REG			(UV32*)(TM4BASE + 0x0000000c)
+	#define P_TM4_UPCNT				(UV32*)(TM4BASE + 0x00000010)
+
+/**
+ * TIMER6: 0x0816_5000 ~ 0x0816_5FFF
+ */
+#define TM5BASE					0x88165000
+	#define P_TM5_CTRL				(UV32*)(TM5BASE + 0x00000000)
+	#define P_TM5_CCP_CTRL			(UV32*)(TM5BASE + 0x00000004)
+	#define P_TM5_PRELOAD			(UV32*)(TM5BASE + 0x00000008)
+	#define P_TM5_CCP_REG			(UV32*)(TM5BASE + 0x0000000c)
+	#define P_TM5_UPCNT				(UV32*)(TM5BASE + 0x00000010)
+
+/**
+ * RTC: 0x0816_6000 ~ 0x0816_6FFF
+ */
+#define RTCBASE					0x88166000
+	#define P_RTC_RTCSEC			(UV32*)(RTCBASE + 0x00000000)
+	#define P_RTC_RTCMIN			(UV32*)(RTCBASE + 0x00000004)
+	#define P_RTC_RTCHOU			(UV32*)(RTCBASE + 0x00000008)
+	#define P_RTC_ALMSEC			(UV32*)(RTCBASE + 0x0000000c)
+	#define P_RTC_ALMMIN			(UV32*)(RTCBASE + 0x00000010)
+	#define P_RTC_ALMHOU			(UV32*)(RTCBASE + 0x00000014)
+	#define P_RTC_CTRL1				(UV32*)(RTCBASE + 0x00000018)
+	#define P_RTC_STST1				(UV32*)(RTCBASE + 0x0000001c)
+	#define P_RTC_CTRL2				(UV32*)(RTCBASE + 0x00000020)
+	#define P_RTC_STST2				(UV32*)(RTCBASE + 0x00000024)
+	#define P_RTC_RESET				(UV32*)(RTCBASE + 0x00000028)
+
+/**
+ * WDOG: 0x0817_0000 ~ 0x0817_FFFF
+ */
+#define WDGBASE					0x88170000
+	#define P_WDG_CTRL				(UV32*)(WDGBASE + 0x00000000)
+	#define P_WDG_CYC				(UV32*)(WDGBASE + 0x00000004)
+	#define P_WDG_CLR				(UV32*)(WDGBASE + 0x00000008)
+
+/**
+ * SD: 0x0818_0000 ~ 0x0818_FFFF
+ */
+#define SDCBASE					0x88180000
+	#define P_SDC_DataTx           	(UV32*)(SDCBASE + 0x00000000)
+	#define P_SDC_DataRx           	(UV32*)(SDCBASE + 0x00000004)
+	#define P_SDC_Command          	(UV32*)(SDCBASE + 0x00000008)
+	#define P_SDC_Arg              	(UV32*)(SDCBASE + 0x0000000C)
+	#define P_SDC_Resp             	(UV32*)(SDCBASE + 0x00000010)
+	#define P_SDC_Status           	(UV32*)(SDCBASE + 0x00000014)
+	#define P_SDC_Control          	(UV32*)(SDCBASE + 0x00000018)
+	#define P_SDC_IntEn            	(UV32*)(SDCBASE + 0x0000001C)
+
+/**
+ * FLASH: 0x0819_0000 ~ 0x0819_FFFF
+ */
+#define FLCBASE					0x88190000
+	#define P_FL_CR					(UV32*)(FLCBASE + 0x00000000)
+	#define P_FL_CLE				(UV32*)(FLCBASE + 0x00000004)
+	#define P_FL_ALE				(UV32*)(FLCBASE + 0x00000008)
+	#define P_FL_WD					(UV32*)(FLCBASE + 0x0000000C)
+	#define P_FL_RD					(UV32*)(FLCBASE + 0x00000010)
+	#define P_FL_INTEN				(UV32*)(FLCBASE + 0x00000014)
+	#define P_FL_INTSTS				(UV32*)(FLCBASE + 0x00000018)
+	#define P_FL_TRUELP				(UV32*)(FLCBASE + 0x0000001C)
+	#define P_FL_TRUECP				(UV32*)(FLCBASE + 0x00000020)
+	#define P_FL_CALLP				(UV32*)(FLCBASE + 0x00000024)
+	#define P_FL_CALCP				(UV32*)(FLCBASE + 0x00000028)
+	#define P_FL_ECCSTS				(UV32*)(FLCBASE + 0x0000002C)
+	#define P_FL_CALECC				(UV32*)(FLCBASE + 0x00000030)
+
+/**
+ * ADC: 0x081A_0000 ~ 0x081A_FFFF
+ */
+#define ADCBASE					0x881a0000
+	#define P_ADC_SETUP				(UV32*)(ADCBASE + 0x00000000)
+	#define P_MIC_GAIN				(UV32*)(ADCBASE + 0x00000004)
+	#define P_MCLK_SETUP			(UV32*)(ADCBASE + 0x00000008)
+	#define P_SH_SETUP				(UV32*)(ADCBASE + 0x0000000c)
+	#define P_AM_CTRL1				(UV32*)(ADCBASE + 0x00000010)
+	#define P_AM_CTRL2				(UV32*)(ADCBASE + 0x00000014)
+	#define P_ADC_DATA				(UV32*)(ADCBASE + 0x00000018)
+	#define P_ASP_DATA				(UV32*)(ADCBASE + 0x0000001c)
+	#define P_MIC_DATA				(UV32*)(ADCBASE + 0x00000020)
+	#define P_ADC_TEST				(UV32*)(ADCBASE + 0x00000024)
+
+/**
+ * USB device: 0x081B_0000 ~ 0x081B_FFFF
+ */
+#define USBDEVBASE				0x881B0000
+
+/**
+ * USB host: 0x081C_0000 ~ 0x081C_FFFF
+ */
+#define USBHOSTBASE				0x881C0000
+
+/**
+ * Reserved: 0x081D_0000 ~ 0x081D_FFFF
+ */
+ 
+
+/**
+ * Reserved: 0x081E_0000 ~ 0x081E_FFFF
+ */
+
+
+/**
+ * Reserved: 0x081F_0000 ~ 0x081F_FFFF
+ */
+
+
+/**
+ * SFTCFG: 0x0820_0000 ~ 0x0820_FFFF
+ */
+#define SFTCFGBASE				0x88200000
+	#define P_TFT_GPIO_OUT			(UV32*)(SFTCFGBASE + 0x00000014)
+	#define P_TFT_GPIO_OE			(UV32*)(SFTCFGBASE + 0x00000018)	
+	#define P_TFT_GPIO_IN			(UV32*)(SFTCFGBASE + 0x00000064)
+	#define P_ADC_GPIO_OE			(UV32*)(SFTCFGBASE + 0x00000048)
+	#define P_ADC_GPIO_AEN			(UV32*)(SFTCFGBASE + 0x00000054)	
+	#define P_ADC_GPIO_IN			(UV32*)(SFTCFGBASE + 0x00000078)
+	#define P_SYS_C2M_STBLENG    	(UV32*)(SFTCFGBASE + 0x000000c0)
+
+/**
+ * CKG: 0x0821_0000 ~ 0x0821_FFFF
+ */
+#define CKGBASE					0x88210000
+	#define P_CKG_CFG_APBDMA		(UV32*)(CKGBASE + (22 << 2))		
+	#define P_CKG_CFG_UART			(UV32*)(CKGBASE + (23 << 2))
+	#define P_CKG_CFG_TIMER0		(UV32*)(CKGBASE + (27 << 2))
+	#define P_CKG_CFG_TIMER1		(UV32*)(CKGBASE + (28 << 2))
+	#define P_CKG_CFG_TIMER2		(UV32*)(CKGBASE + (29 << 2))
+	#define P_CKG_CFG_TIMER3		(UV32*)(CKGBASE + (30 << 2))
+	#define P_CKG_CFG_TIMER4		(UV32*)(CKGBASE + (31 << 2))
+	#define P_CKG_CFG_TIMER5		(UV32*)(CKGBASE + (32 << 2))
+	#define P_CKG_CFG_WDOG			(UV32*)(CKGBASE + (33 << 2))		
+	#define P_CKG_CFG_RTC			(UV32*)(CKGBASE + (34 << 2))	
+	#define P_CKG_CFG_I2S			(UV32*)(CKGBASE + (35 << 2))
+	#define P_CKG_SEL_I2S			(UV32*)(CKGBASE + (36 << 2))
+	#define P_CKG_CFG_SPI			(UV32*)(CKGBASE + (38 << 2))
+	#define P_CKG_SEL_SPI			(UV32*)(CKGBASE + (39 << 2))
+	#define P_CKG_CFG_ADC			(UV32*)(CKGBASE + (43 << 2))
+	#define P_CKG_SEL_ADC			(UV32*)(CKGBASE + (44 << 2))
+	#define P_CKG_CFG_PLLA		    (UV32*)(CKGBASE + (47 << 2))	// added by Bruce
+	#define P_CKG_CFG_TMB			(UV32*)(CKGBASE + (56 << 2))
+	#define P_CKG_SEL_TIMER			(UV32*)(CKGBASE + (57 << 2))
+	#define P_CKG_STS_WDOG			(UV32*)(CKGBASE + (58 << 2))
+	#define P_CKG_CFG_SFT			(UV32*)(CKGBASE + (63 << 2))	// added by Bruce		
+
+/**
+ * MP4: 0x0822_0000 ~ 0x0822_FFFF
+ */
+#define MPEG4BASE			0x88220000
+
+/////////////////////////////////////////////////////////////////////////////////
+// MPEG Engine Register Definition 
+/////////////////////////////////////////////////////////////////////////////////
+	#define P_mjwidth_low	        (UV32*)(MPEG4BASE + (0x0000<<2))
+	#define P_mjwidth_high	        (UV32*)(MPEG4BASE + (0x0001<<2))
+	#define P_mjheight_low	        (UV32*)(MPEG4BASE + (0x0002<<2))
+	#define P_mjheight_high	        (UV32*)(MPEG4BASE + (0x0003<<2))
+	#define P_Mjhoffset_low	        (UV32*)(MPEG4BASE + (0x0004<<2))
+	#define P_Mjhoffset_high	    (UV32*)(MPEG4BASE + (0x0005<<2))
+	#define P_Mjvoffset_low	        (UV32*)(MPEG4BASE + (0x0006<<2))
+	#define P_Mjvoffset_high	    (UV32*)(MPEG4BASE + (0x0007<<2))
+	#define P_VlcOffaddr_low	    (UV32*)(MPEG4BASE + (0x0008<<2))
+	#define P_VlcOffaddr_mid	    (UV32*)(MPEG4BASE + (0x0009<<2))
+	#define P_VlcOffaddr_high	    (UV32*)(MPEG4BASE + (0x000a<<2))
+	#define P_tmbOffaddr_low	    (UV32*)(MPEG4BASE + (0x0010<<2))
+	#define P_tmbOffaddr_mid	    (UV32*)(MPEG4BASE + (0x0011<<2))
+	#define P_tmbOffaddr_high	    (UV32*)(MPEG4BASE + (0x0012<<2))
+	#define P_Yuvsel	            (UV32*)(MPEG4BASE + (0x0013<<2))
+	#define P_setting_reg0014	    (UV32*)(MPEG4BASE + (0x0014<<2))
+	#define P_setting_reg0015	    (UV32*)(MPEG4BASE + (0x0015<<2))
+	#define P_Hsf	                (UV32*)(MPEG4BASE + (0x0016<<2))
+	#define P_Vsf	                (UV32*)(MPEG4BASE + (0x0017<<2))
+	#define P_Gopval	            (UV32*)(MPEG4BASE + (0x0018<<2))
+	#define P_setting_reg0019	    (UV32*)(MPEG4BASE + (0x0019<<2))
+	#define P_Vardthr_low	        (UV32*)(MPEG4BASE + (0x001a<<2))
+	#define P_Vardthr_high	        (UV32*)(MPEG4BASE + (0x001b<<2))
+	#define P_iniavgact	            (UV32*)(MPEG4BASE + (0x001c<<2))
+	#define P_Avgactwei_low	        (UV32*)(MPEG4BASE + (0x001e<<2))
+	#define P_Avgactwei_high	    (UV32*)(MPEG4BASE + (0x001f<<2))
+	#define P_mjpgrst	            (UV32*)(MPEG4BASE + (0x0020<<2))
+	#define P_setting_reg0021	    (UV32*)(MPEG4BASE + (0x0021<<2))
+	#define P_iframe	            (UV32*)(MPEG4BASE + (0x0022<<2))
+	#define P_Thumb_ctrl	        (UV32*)(MPEG4BASE + (0x0023<<2))
+	#define P_memcsram_ctrl	        (UV32*)(MPEG4BASE + (0x0024<<2))
+	#define P_probemode	            (UV32*)(MPEG4BASE + (0x0025<<2))
+	#define P_Bist_ctrl_mpeg	    (UV32*)(MPEG4BASE + (0x0026<<2))
+	#define P_sofeof_ctrl	        (UV32*)(MPEG4BASE + (0x0028<<2))
+	#define P_Ifrme	                (UV32*)(MPEG4BASE + (0x0029<<2))
+	#define P_AVGact	            (UV32*)(MPEG4BASE + (0x002a<<2))
+	#define P_avgvard	            (UV32*)(MPEG4BASE + (0x002b<<2))
+	#define P_meBistFail	        (UV32*)(MPEG4BASE + (0x002c<<2))
+	#define P_mcBistFail	        (UV32*)(MPEG4BASE + (0x002d<<2))
+	#define P_BistFinish	        (UV32*)(MPEG4BASE + (0x002e<<2))
+	#define P_Hsfini	            (UV32*)(MPEG4BASE + (0x0030<<2))
+	#define P_Vsfini	            (UV32*)(MPEG4BASE + (0x0031<<2))
+	#define P_setting_reg0032	    (UV32*)(MPEG4BASE + (0x0032<<2))
+	#define P_McMehsfl	            (UV32*)(MPEG4BASE + (0x0033<<2))
+	#define P_Int_Mask	            (UV32*)(MPEG4BASE + (0x0034<<2))
+	#define P_Int_clr	            (UV32*)(MPEG4BASE + (0x0035<<2))
+	#define P_setting_reg0036	    (UV32*)(MPEG4BASE + (0x0036<<2))
+	#define P_Vlcbufasize_low	    (UV32*)(MPEG4BASE + (0x0037<<2))
+	#define P_Vlcbufasize_mid	    (UV32*)(MPEG4BASE + (0x0038<<2))
+	#define P_Vlcbufasize_high	    (UV32*)(MPEG4BASE + (0x0039<<2))
+	#define P_Vlcbufbsize_low	    (UV32*)(MPEG4BASE + (0x003a<<2))
+	#define P_Vlcbufbsize_mid	    (UV32*)(MPEG4BASE + (0x003b<<2))
+	#define P_Vlcbufbsize_high	    (UV32*)(MPEG4BASE + (0x003c<<2))
+	#define P_decmjwidth_low	    (UV32*)(MPEG4BASE + (0x0040<<2))
+	#define P_decmjwidth_high	    (UV32*)(MPEG4BASE + (0x0041<<2))
+	#define P_decmjheight_low	    (UV32*)(MPEG4BASE + (0x0042<<2))
+	#define P_decmjheight_high	    (UV32*)(MPEG4BASE + (0x0043<<2))
+	#define P_decVlcOffaddr_low	    (UV32*)(MPEG4BASE + (0x0044<<2))
+	#define P_decVlcOffaddr_mid	    (UV32*)(MPEG4BASE + (0x0045<<2))
+	#define P_decVlcOffaddr_high	(UV32*)(MPEG4BASE + (0x0046<<2))
+	#define P_lastmemaddr_low	    (UV32*)(MPEG4BASE + (0x0047<<2))
+	#define P_lastmemaddr_mid	    (UV32*)(MPEG4BASE + (0x0048<<2))
+	#define P_lastmemaddr_high	    (UV32*)(MPEG4BASE + (0x0049<<2))
+	#define P_Lastlength	        (UV32*)(MPEG4BASE + (0x004a<<2))
+	/////////////////////////////////////////////////////////////////////////////////
+	// Texture Engine Register Definition
+	/////////////////////////////////////////////////////////////////////////////////
+	// reg0100 ~ reg013f for Qtable1
+	// reg0140 ~ reg017f for Qtable2
+	#define P_Qtable1_str	        (UV32*)(MPEG4BASE + (0x0100<<2))
+	#define P_Qtable1_end	        (UV32*)(MPEG4BASE + (0x013f<<2))
+	#define P_Qtable2_str	        (UV32*)(MPEG4BASE + (0x0140<<2))
+	#define P_Qtable2_end	        (UV32*)(MPEG4BASE + (0x017f<<2))
+	#define P_Noqtbl	            (UV32*)(MPEG4BASE + (0x0180<<2))
+	#define P_setting_reg0181	    (UV32*)(MPEG4BASE + (0x0181<<2))
+	#define P_QSramEn	            (UV32*)(MPEG4BASE + (0x0182<<2))
+	#define P_setting_reg0183	    (UV32*)(MPEG4BASE + (0x0183<<2))
+	#define P_JFIF	                (UV32*)(MPEG4BASE + (0x0184<<2))
+	#define P_setting_reg0185	    (UV32*)(MPEG4BASE + (0x0185<<2))
+	#define P_Vlcbit	            (UV32*)(MPEG4BASE + (0x0186<<2))
+	#define P_JFIFend	            (UV32*)(MPEG4BASE + (0x0187<<2))
+	#define P_Restartmcu_low	    (UV32*)(MPEG4BASE + (0x0188<<2))
+	#define P_Restartmcu_high	    (UV32*)(MPEG4BASE + (0x0189<<2))
+	#define P_IframeQscale	        (UV32*)(MPEG4BASE + (0x0190<<2))
+	#define P_PframeQscale	        (UV32*)(MPEG4BASE + (0x0191<<2))
+	#define P_MatchCnt	            (UV32*)(MPEG4BASE + (0x0192<<2))
+	#define P_MatchCode0	        (UV32*)(MPEG4BASE + (0x0193<<2))
+	#define P_MatchCode1	        (UV32*)(MPEG4BASE + (0x0194<<2))
+	#define P_MatchCode2	        (UV32*)(MPEG4BASE + (0x0195<<2))
+	#define P_MatchCode3	        (UV32*)(MPEG4BASE + (0x0196<<2))
+	#define P_Offset	            (UV32*)(MPEG4BASE + (0x0197<<2))
+	#define P_VOPTimeIncMode	    (UV32*)(MPEG4BASE + (0x0198<<2))
+	#define P_MSCnt	                (UV32*)(MPEG4BASE + (0x0199<<2))
+	#define P_MSPlus_ctrl	        (UV32*)(MPEG4BASE + (0x019a<<2))
+	#define P_VOPTimeIncRes_low	    (UV32*)(MPEG4BASE + (0x01a0<<2))
+	#define P_VOPTimeIncRes_high	(UV32*)(MPEG4BASE + (0x01a1<<2))
+	#define P_VOPTimeInc_low	    (UV32*)(MPEG4BASE + (0x01a2<<2))
+	#define P_VOPTimeInc_high	    (UV32*)(MPEG4BASE + (0x01a3<<2))
+	#define P_VOPTimeIncLen	        (UV32*)(MPEG4BASE + (0x01a4<<2))
+	#define P_React_low	            (UV32*)(MPEG4BASE + (0x01a6<<2))
+	#define P_React_high	        (UV32*)(MPEG4BASE + (0x01a7<<2))
+	#define P_D0_Iframe_low	        (UV32*)(MPEG4BASE + (0x01a8<<2))
+	#define P_D0_Iframe_high	    (UV32*)(MPEG4BASE + (0x01a9<<2))
+	#define P_PreIframeMBByte_low	(UV32*)(MPEG4BASE + (0x01aa<<2))
+	#define P_PreIframeMBByte_high	(UV32*)(MPEG4BASE + (0x01ab<<2))
+	#define P_PrePframeMBByte_low	(UV32*)(MPEG4BASE + (0x01ac<<2))
+	#define P_PrePframeMBByte_high	(UV32*)(MPEG4BASE + (0x01ad<<2))
+	#define P_QscaleUpperB	        (UV32*)(MPEG4BASE + (0x01ae<<2))
+	#define P_QscaleLowerB	        (UV32*)(MPEG4BASE + (0x01af<<2))
+	#define P_D0_Pframe_low	        (UV32*)(MPEG4BASE + (0x01b0<<2))
+	#define P_D0_Pframe_high	    (UV32*)(MPEG4BASE + (0x01b1<<2))
+	#define P_VLCSize_low	        (UV32*)(MPEG4BASE + (0x01b2<<2))
+	#define P_VLCSize_mid	        (UV32*)(MPEG4BASE + (0x01b3<<2))
+	#define P_VLCSize_high	        (UV32*)(MPEG4BASE + (0x01b4<<2))
+	#define P_Qsum_low	            (UV32*)(MPEG4BASE + (0x01b5<<2))
+	#define P_Qsum_high	            (UV32*)(MPEG4BASE + (0x01b6<<2))
+	#define P_SRAM_CS_N	            (UV32*)(MPEG4BASE + (0x01be<<2))
+	#define P_auto_rst_dec	        (UV32*)(MPEG4BASE + (0x01bf<<2))
+	#define P_SRAM_test_ctrl	    (UV32*)(MPEG4BASE + (0x01e0<<2))
+	#define P_Tselect	            (UV32*)(MPEG4BASE + (0x01e1<<2))
+	#define P_Bist_ctrl_jpeg	    (UV32*)(MPEG4BASE + (0x01e2<<2))
+	#define P_jpegBistFail	        (UV32*)(MPEG4BASE + (0x01e3<<2))
+	#define P_Blockend	            (UV32*)(MPEG4BASE + (0x01e4<<2))
+	#define P_DeHuffmanen	        (UV32*)(MPEG4BASE + (0x01e6<<2))
+	#define P_DeHuffmanrdy	        (UV32*)(MPEG4BASE + (0x01e7<<2))
+	#define P_Vlddata_low	        (UV32*)(MPEG4BASE + (0x01e8<<2))
+	#define P_Vlddata_high	        (UV32*)(MPEG4BASE + (0x01e9<<2))
+	#define P_VideoRstMode	        (UV32*)(MPEG4BASE + (0x01ea<<2))
+	#define P_nacten	            (UV32*)(MPEG4BASE + (0x01eb<<2))
+	#define P_Imcucnt_low	        (UV32*)(MPEG4BASE + (0x01ec<<2))
+	#define P_Imcucnt_high	        (UV32*)(MPEG4BASE + (0x01ed<<2))
+	#define P_Pmcucnt_low	        (UV32*)(MPEG4BASE + (0x01ee<<2))
+	#define P_Pmcucnt_high	        (UV32*)(MPEG4BASE + (0x01ef<<2))
+	#define P_Skipmcucnt_low        (UV32*)(MPEG4BASE + (0x01f0<<2))
+	#define P_Skipmcucnt_high       (UV32*)(MPEG4BASE + (0x01f1<<2))
+	#define P_H263_ctrl	            (UV32*)(MPEG4BASE + (0x01f2<<2))
+	#define P_setting_reg01f3       (UV32*)(MPEG4BASE + (0x01f3<<2))
+	#define P_HmvSum_low	        (UV32*)(MPEG4BASE + (0x01f4<<2))
+	#define P_HmvSum_high	        (UV32*)(MPEG4BASE + (0x01f5<<2))
+	#define P_VmvSum_low	        (UV32*)(MPEG4BASE + (0x01f6<<2))
+	#define P_VmvSum_high	        (UV32*)(MPEG4BASE + (0x01f7<<2))
+	#define P_TSram_ctrl	        (UV32*)(MPEG4BASE + (0x01f8<<2))
+	#define P_setting_reg01f9       (UV32*)(MPEG4BASE + (0x01f9<<2))
+	#define P_setting_reg01fa       (UV32*)(MPEG4BASE + (0x01fa<<2))
+	#define P_ROIMBXOffsetLSB       (UV32*)(MPEG4BASE + (0x01fb<<2))
+	#define P_ROIMBXDestLSB	        (UV32*)(MPEG4BASE + (0x01fc<<2))
+	#define P_ROIMBYOffsetLSB       (UV32*)(MPEG4BASE + (0x01fd<<2))
+	#define P_ROIMBYDestLSB	        (UV32*)(MPEG4BASE + (0x01fe<<2))
+	#define P_ROIMBMSB	            (UV32*)(MPEG4BASE + (0x01ff<<2))
+	// reg0200 ~ reg023f for HuffmanTable
+	#define P_HuffmanTable_str	    (UV32*)(MPEG4BASE + (0x0200<<2))
+	#define P_HuffmanTable_end	    (UV32*)(MPEG4BASE + (0x023f<<2))
+	// reg0200 ~ reg023f for HuffmanTable
+	//////////////////////////////////////////////////////////////////////////////
+	#define P_HUFF_YDCW_REG	    	(UV32*)(MPEG4BASE + (0x0200<<2))
+	#define P_HUFF_YDCS_REG	    	(UV32*)(MPEG4BASE + (0x0218<<2))
+	#define P_HUFF_YDCV_REG	    	(UV32*)(MPEG4BASE + (0x0220<<2))
+	
+	#define P_HUFF_CDCW_REG	    	(UV32*)(MPEG4BASE + (0x0230<<2))
+	#define P_HUFF_CDCS_REG	    	(UV32*)(MPEG4BASE + (0x0248<<2))
+	#define P_HUFF_CDCV_REG	    	(UV32*)(MPEG4BASE + (0x0250<<2))
+	
+	#define P_HUFF_YACW_REG	    	(UV32*)(MPEG4BASE + (0x0260<<2))
+	#define P_HUFF_YACS_REG	    	(UV32*)(MPEG4BASE + (0x0278<<2))
+	
+	#define P_HUFF_CACW_REG	    	(UV32*)(MPEG4BASE + (0x0290<<2))
+	#define P_HUFF_CACS_REG	    	(UV32*)(MPEG4BASE + (0x02a8<<2))
+
+/**
+ * MIU2: 0x0823_0000 ~ 0x0823_FFFF
+ */
+#define MIU2BASE				0x88230000
+	#define P_MIU2_SDRAM_SETTING    (UV32*)(MIU2BASE + 0x00000060)
+	#define P_MIU2_TV_START_ADR1    (UV32*)(MIU2BASE + 0x00000044)
+	#define P_MIU2_TV_START_ADR2    (UV32*)(MIU2BASE + 0x00000048)
+	#define P_MIU2_TV_START_ADR3    (UV32*)(MIU2BASE + 0x00000064)
+	
+/**
+ * ECC: 0x0824_0000 ~ 0x0824_FFFF
+ */
+#define ECCBASE					0x88240000
+
 #endif  //_SCORE7_REGISTERS_H
