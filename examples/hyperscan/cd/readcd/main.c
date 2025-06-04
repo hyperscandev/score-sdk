@@ -63,7 +63,8 @@ int main(){
 
 		// Clamp size if file is larger than size of buf
 		if (size > sizeof(buf)){
-			size = sizeof(buf); 
+			size = sizeof(buf);
+			buf[size] = 0;
 		}
 		
 		// Read data from CD into buffer, -1 if error
