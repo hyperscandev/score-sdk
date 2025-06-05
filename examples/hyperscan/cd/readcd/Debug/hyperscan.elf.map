@@ -8,88 +8,20 @@ c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/l
                               Debug\ff.o (memcpy)
 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(memset.o)
                               Debug\ff.o (memset)
-c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(printf.o)
-                              Debug\sys_irq.o (printf)
 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(signal.o)
                               c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(abort.o) (raise)
 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(strchr.o)
                               Debug\ff.o (strchr)
 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(syswrite.o)
                               Debug\libgloss.o (write)
-c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(vfprintf.o)
-                              c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(printf.o) (vfprintf)
-c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(wcrtomb.o)
-                              c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(vfprintf.o) (_wcrtomb_r)
-c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(wcsrtombs.o)
-                              c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(vfprintf.o) (_wcsrtombs_r)
-c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(wctomb_r.o)
-                              c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(wcrtomb.o) (_wctomb_r)
-c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(wsetup.o)
-                              c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(vfprintf.o) (__swsetup)
-c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(dtoa.o)
-                              c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(vfprintf.o) (_dtoa_r)
-c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(fflush.o)
-                              c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(vfprintf.o) (fflush)
-c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(findfp.o)
-                              c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(vfprintf.o) (__sinit)
-c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(freer.o)
-                              c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(wsetup.o) (_free_r)
-c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(fvwrite.o)
-                              c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(vfprintf.o) (__sfvwrite)
-c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(fwalk.o)
-                              c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(fflush.o) (_fwalk)
 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(impure.o)
-                              c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(printf.o) (_impure_ptr)
-c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(locale.o)
-                              c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(vfprintf.o) (localeconv)
-c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(makebuf.o)
-                              c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(wsetup.o) (__smakebuf)
-c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(malloc.o)
-                              c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(vfprintf.o) (free)
+                              c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(signal.o) (_impure_ptr)
 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(mallocr.o)
                               c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(signal.o) (_malloc_r)
-c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(memchr.o)
-                              c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(vfprintf.o) (memchr)
-c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(memmove.o)
-                              c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(fvwrite.o) (memmove)
 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(mlock.o)
-                              c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(freer.o) (__malloc_lock)
-c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(mprec.o)
-                              c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(dtoa.o) (_Bfree)
-c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(reallocr.o)
-                              c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(fvwrite.o) (_realloc_r)
-c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(s_isinf.o)
-                              c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(vfprintf.o) (isinf)
-c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(s_isnan.o)
-                              c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(vfprintf.o) (isnan)
-c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(stdio.o)
-                              c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(findfp.o) (__sclose)
-c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(strcmp.o)
-                              c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(wctomb_r.o) (strcmp)
-c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(strlen.o)
-                              c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(vfprintf.o) (strlen)
-c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(callocr.o)
-                              c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(mprec.o) (_calloc_r)
-c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(errno.o)
-                              c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(fvwrite.o) (__errno)
-c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/mel\libgcc.a(_addsub_df.o)
-                              c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(dtoa.o) (__subdf3)
-c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/mel\libgcc.a(_muldf3.o)
-                              c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(dtoa.o) (__muldf3)
-c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/mel\libgcc.a(_divdf3.o)
-                              c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(dtoa.o) (__divdf3)
-c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/mel\libgcc.a(_clz64.o)
-                              c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/mel\libgcc.a(_muldf3.o) (countLeadingZeros64)
-c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/mel\libgcc.a(_floatsidf.o)
-                              c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(dtoa.o) (__floatsidf)
-c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/mel\libgcc.a(_floatunsidf.o)
-                              c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(dtoa.o) (__floatunsidf)
-c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/mel\libgcc.a(_fixdfsi.o)
-                              c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(dtoa.o) (__fixdfsi)
-c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/mel\libgcc.a(_fpcmp_parts_df.o)
-                              c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(dtoa.o) (__gtdf2)
-c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/mel\libgcc.a(_clz32.o)
-                              c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/mel\libgcc.a(_floatsidf.o) (countLeadingZeros32)
+                              c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(mallocr.o) (__malloc_lock)
+c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(freer.o)
+                              c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(mallocr.o) (_free_r)
 
 Allocating common symbols
 Common symbol       size              file
@@ -215,7 +147,7 @@ END GROUP
 .plt
  *(.plt)
 
-.text           0x00000000a0091094     0xe3c4
+.text           0x00000000a0091094     0x79a4
  *(.text .stub .text.* .gnu.linkonce.t.*)
  .text          0x00000000a0091094        0x0 Debug\hyperscan_startup.o
  .text          0x00000000a0091094      0x1b8 Debug\main.o
@@ -266,230 +198,96 @@ END GROUP
                 0x00000000a0092110                norflash_setaddress
                 0x00000000a0091dc8                norflash_init
  .text          0x00000000a0092198        0x0 Debug\sys_isr.o
- .text          0x00000000a0092198      0x194 Debug\sys_irq.o
+ .text          0x00000000a0092198      0x16c Debug\sys_irq.o
                 0x00000000a00921a4                attach_isr
-                0x00000000a00922c4                irq_dispatch
- .text          0x00000000a009232c      0x164 Debug\i2c.o
-                0x00000000a0092408                i2c_write8
-                0x00000000a009237c                i2c_read8
-                0x00000000a009232c                i2c_init
- .text          0x00000000a0092490      0x138 Debug\hs_controller.o
-                0x00000000a0092490                hs_controller_init
-                0x00000000a00924e4                hs_controller_read
- .text          0x00000000a00925c8     0x4fd0 Debug\ff.o
-                0x00000000a0096c0c                f_gets
-                0x00000000a0096eec                f_printf
-                0x00000000a0096968                f_rename
-                0x00000000a009646c                f_truncate
-                0x00000000a00960d8                f_closedir
-                0x00000000a00965f0                f_unlink
-                0x00000000a0096e30                f_putc
-                0x00000000a0096e80                f_puts
-                0x00000000a0095c0c                f_close
-                0x00000000a009535c                f_read
-                0x00000000a009611c                f_readdir
-                0x00000000a0095aec                f_sync
-                0x00000000a0094e24                f_mount
-                0x00000000a0095fc0                f_opendir
-                0x00000000a0095c68                f_lseek
-                0x00000000a00961c0                f_stat
-                0x00000000a00956a4                f_write
-                0x00000000a0094f1c                f_open
-                0x00000000a0096770                f_mkdir
-                0x00000000a0096254                f_getfree
- .text          0x00000000a0097598      0x214 Debug\diskio.o
-                0x00000000a0097610                USB_disk_initialize
-                0x00000000a009767c                DiskB_ReadSector
-                0x00000000a0097710                disk_initialize
-                0x00000000a00976fc                disk_status
-                0x00000000a0097794                disk_ioctl
-                0x00000000a0097598                DiskB_Initial
-                0x00000000a00976bc                DiskB_WriteSector
-                0x00000000a0097764                disk_write
-                0x00000000a0097734                disk_read
- .text          0x00000000a00977ac       0x14 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(abort.o)
-                0x00000000a00977ac                abort
- .text          0x00000000a00977c0       0x90 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(memcmp.o)
-                0x00000000a00977c0                memcmp
- .text          0x00000000a0097850       0xb0 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(memcpy.o)
-                0x00000000a0097850                memcpy
- .text          0x00000000a0097900       0xb4 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(memset.o)
-                0x00000000a0097900                memset
- .text          0x00000000a00979b4       0x4c c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(printf.o)
-                0x00000000a00979b4                printf
-                0x00000000a00979e0                _printf_r
- .text          0x00000000a0097a00      0x2a8 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(signal.o)
-                0x00000000a0097c08                _signal_r
-                0x00000000a0097b2c                _raise_r
-                0x00000000a0097a7c                __sigtramp_r
-                0x00000000a0097c80                signal
-                0x00000000a0097a6c                _init_signal
-                0x00000000a0097a00                _init_signal_r
-                0x00000000a0097b0c                __sigtramp
-                0x00000000a0097be8                raise
- .text          0x00000000a0097ca8       0xfc c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(strchr.o)
-                0x00000000a0097ca8                strchr
- .text          0x00000000a0097da4       0x28 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(syswrite.o)
-                0x00000000a0097da4                write
- .text          0x00000000a0097dcc     0x1bb0 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(vfprintf.o)
-                0x00000000a0097e6c                _vfprintf_r
-                0x00000000a0097e10                vfprintf
- .text          0x00000000a009997c       0x78 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(wcrtomb.o)
-                0x00000000a009997c                _wcrtomb_r
-                0x00000000a00999cc                wcrtomb
- .text          0x00000000a00999f4      0x174 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(wcsrtombs.o)
-                0x00000000a00999f4                _wcsrtombs_r
-                0x00000000a0099b3c                wcsrtombs
- .text          0x00000000a0099b68      0x4d8 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(wctomb_r.o)
-                0x00000000a0099b68                _wctomb_r
- .text          0x00000000a009a040      0x124 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(wsetup.o)
-                0x00000000a009a040                __swsetup
- .text          0x00000000a009a164     0x14b0 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(dtoa.o)
-                0x00000000a009a354                _dtoa_r
- .text          0x00000000a009b614       0xf8 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(fflush.o)
-                0x00000000a009b614                fflush
- .text          0x00000000a009b70c      0x24c c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(findfp.o)
-                0x00000000a009b768                __sinit
-                0x00000000a009b804                __sfmoreglue
-                0x00000000a009b7f4                _cleanup
-                0x00000000a009b7d8                _cleanup_r
-                0x00000000a009b868                __sfp
- .text          0x00000000a009b958      0x42c c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(freer.o)
-                0x00000000a009ba74                _free_r
-                0x00000000a009b958                _malloc_trim_r
- .text          0x00000000a009bd84      0x390 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(fvwrite.o)
-                0x00000000a009bd84                __sfvwrite
- .text          0x00000000a009c114      0x110 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(fwalk.o)
-                0x00000000a009c114                _fwalk
- .text          0x00000000a009c224        0x0 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(impure.o)
- .text          0x00000000a009c224       0xdc c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(locale.o)
-                0x00000000a009c24c                _setlocale_r
-                0x00000000a009c224                __locale_charset
-                0x00000000a009c230                _localeconv_r
-                0x00000000a009c2d8                setlocale
-                0x00000000a009c23c                localeconv
- .text          0x00000000a009c300      0x17c c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(makebuf.o)
-                0x00000000a009c300                __smakebuf
- .text          0x00000000a009c47c       0x40 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(malloc.o)
-                0x00000000a009c49c                malloc
-                0x00000000a009c47c                free
- .text          0x00000000a009c4bc      0x8ac c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(mallocr.o)
-                0x00000000a009c4bc                _malloc_r
- .text          0x00000000a009cd68      0x100 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(memchr.o)
-                0x00000000a009cd68                memchr
- .text          0x00000000a009ce68       0xe8 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(memmove.o)
-                0x00000000a009ce68                memmove
- .text          0x00000000a009cf50        0x8 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(mlock.o)
-                0x00000000a009cf54                __malloc_unlock
-                0x00000000a009cf50                __malloc_lock
- .text          0x00000000a009cf58      0xd5c c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(mprec.o)
-                0x00000000a009d2f8                _mprec_log10
-                0x00000000a009cf78                _hi0bits
-                0x00000000a009d368                _Balloc
-                0x00000000a009d404                _d2b
-                0x00000000a009d7b4                _multiply
-                0x00000000a009d26c                _ratio
-                0x00000000a009dba8                _s2b
-                0x00000000a009d9a4                _i2b
-                0x00000000a009cfec                _lo0bits
-                0x00000000a009d0a0                __mcmp
-                0x00000000a009dabc                _pow5mult
-                0x00000000a009d0f8                _ulp
-                0x00000000a009d154                _b2d
-                0x00000000a009d9cc                _multadd
-                0x00000000a009d540                __mdiff
-                0x00000000a009d698                _lshift
-                0x00000000a009cf58                _Bfree
- .text          0x00000000a009dcb4      0x5d4 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(reallocr.o)
-                0x00000000a009dcb4                _realloc_r
- .text          0x00000000a009e288       0x3c c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(s_isinf.o)
-                0x00000000a009e288                isinf
- .text          0x00000000a009e2c4       0x2c c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(s_isnan.o)
-                0x00000000a009e2c4                isnan
- .text          0x00000000a009e2f0      0x170 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(stdio.o)
-                0x00000000a009e318                __sseek
-                0x00000000a009e3f8                __sread
-                0x00000000a009e2f0                __sclose
-                0x00000000a009e384                __swrite
- .text          0x00000000a009e460       0xc4 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(strcmp.o)
-                0x00000000a009e460                strcmp
- .text          0x00000000a009e524       0x60 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(strlen.o)
-                0x00000000a009e524                strlen
- .text          0x00000000a009e584       0xb4 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(callocr.o)
-                0x00000000a009e584                _calloc_r
- .text          0x00000000a009e638        0xc c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(errno.o)
-                0x00000000a009e638                __errno
- .text          0x00000000a009e644      0x368 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/mel\libgcc.a(_addsub_df.o)
-                0x00000000a009e646                __adddf3
-                0x00000000a009e644                __subdf3
- .text          0x00000000a009e9ac      0x324 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/mel\libgcc.a(_muldf3.o)
-                0x00000000a009e9ac                __muldf3
- .text          0x00000000a009ecd0      0x4c0 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/mel\libgcc.a(_divdf3.o)
-                0x00000000a009ed94                __divdf3
-                0x00000000a009ecd0                Div64by32To32
- .text          0x00000000a009f190       0x80 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/mel\libgcc.a(_clz64.o)
-                0x00000000a009f190                countLeadingZeros64
- .text          0x00000000a009f210       0x70 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/mel\libgcc.a(_floatsidf.o)
-                0x00000000a009f210                __floatsidf
- .text          0x00000000a009f280       0x54 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/mel\libgcc.a(_floatunsidf.o)
-                0x00000000a009f280                __floatunsidf
- .text          0x00000000a009f2d4       0x74 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/mel\libgcc.a(_fixdfsi.o)
-                0x00000000a009f2d4                __fixdfsi
- .text          0x00000000a009f348       0xa4 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/mel\libgcc.a(_fpcmp_parts_df.o)
-                0x00000000a009f350                __eqdf2
-                0x00000000a009f348                __gtdf2
-                0x00000000a009f350                __ltdf2
-                0x00000000a009f354                __compare_df2
-                0x00000000a009f350                __ledf2
-                0x00000000a009f350                __nedf2
-                0x00000000a009f348                __gedf2
- .text          0x00000000a009f3ec       0x6c c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/mel\libgcc.a(_clz32.o)
-                0x00000000a009f3ec                countLeadingZeros32
+                0x00000000a009229c                irq_dispatch
+ .text          0x00000000a0092304      0x164 Debug\i2c.o
+                0x00000000a00923e0                i2c_write8
+                0x00000000a0092354                i2c_read8
+                0x00000000a0092304                i2c_init
+ .text          0x00000000a0092468      0x138 Debug\hs_controller.o
+                0x00000000a0092468                hs_controller_init
+                0x00000000a00924bc                hs_controller_read
+ .text          0x00000000a00925a0     0x4fd0 Debug\ff.o
+                0x00000000a0096be4                f_gets
+                0x00000000a0096ec4                f_printf
+                0x00000000a0096940                f_rename
+                0x00000000a0096444                f_truncate
+                0x00000000a00960b0                f_closedir
+                0x00000000a00965c8                f_unlink
+                0x00000000a0096e08                f_putc
+                0x00000000a0096e58                f_puts
+                0x00000000a0095be4                f_close
+                0x00000000a0095334                f_read
+                0x00000000a00960f4                f_readdir
+                0x00000000a0095ac4                f_sync
+                0x00000000a0094dfc                f_mount
+                0x00000000a0095f98                f_opendir
+                0x00000000a0095c40                f_lseek
+                0x00000000a0096198                f_stat
+                0x00000000a009567c                f_write
+                0x00000000a0094ef4                f_open
+                0x00000000a0096748                f_mkdir
+                0x00000000a009622c                f_getfree
+ .text          0x00000000a0097570      0x214 Debug\diskio.o
+                0x00000000a00975e8                USB_disk_initialize
+                0x00000000a0097654                DiskB_ReadSector
+                0x00000000a00976e8                disk_initialize
+                0x00000000a00976d4                disk_status
+                0x00000000a009776c                disk_ioctl
+                0x00000000a0097570                DiskB_Initial
+                0x00000000a0097694                DiskB_WriteSector
+                0x00000000a009773c                disk_write
+                0x00000000a009770c                disk_read
+ .text          0x00000000a0097784       0x14 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(abort.o)
+                0x00000000a0097784                abort
+ .text          0x00000000a0097798       0x90 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(memcmp.o)
+                0x00000000a0097798                memcmp
+ .text          0x00000000a0097828       0xb0 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(memcpy.o)
+                0x00000000a0097828                memcpy
+ .text          0x00000000a00978d8       0xb4 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(memset.o)
+                0x00000000a00978d8                memset
+ .text          0x00000000a009798c      0x2a8 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(signal.o)
+                0x00000000a0097b94                _signal_r
+                0x00000000a0097ab8                _raise_r
+                0x00000000a0097a08                __sigtramp_r
+                0x00000000a0097c0c                signal
+                0x00000000a00979f8                _init_signal
+                0x00000000a009798c                _init_signal_r
+                0x00000000a0097a98                __sigtramp
+                0x00000000a0097b74                raise
+ .text          0x00000000a0097c34       0xfc c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(strchr.o)
+                0x00000000a0097c34                strchr
+ .text          0x00000000a0097d30       0x28 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(syswrite.o)
+                0x00000000a0097d30                write
+ .text          0x00000000a0097d58        0x0 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(impure.o)
+ .text          0x00000000a0097d58      0x8ac c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(mallocr.o)
+                0x00000000a0097d58                _malloc_r
+ .text          0x00000000a0098604        0x8 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(mlock.o)
+                0x00000000a0098608                __malloc_unlock
+                0x00000000a0098604                __malloc_lock
+ .text          0x00000000a009860c      0x42c c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(freer.o)
+                0x00000000a0098728                _free_r
+                0x00000000a009860c                _malloc_trim_r
  *(.gnu.warning)
  *(.glue_7t)
  *(.glue_7)
 
 .fini
  *(.fini)
-                0x00000000a009f458                PROVIDE (__etext, .)
-                0x00000000a009f458                PROVIDE (_etext, .)
-                0x00000000a009f458                PROVIDE (etext, .)
+                0x00000000a0098a38                PROVIDE (__etext, .)
+                0x00000000a0098a38                PROVIDE (_etext, .)
+                0x00000000a0098a38                PROVIDE (etext, .)
 
-.rodata         0x00000000a009f458     0x1558
+.rodata         0x00000000a0098a38     0x11a0
  *(.rodata .rodata.* .gnu.linkonce.r.*)
- .rodata        0x00000000a009f458       0x68 Debug\main.o
- .rodata        0x00000000a009f4c0       0x10 Debug\libgloss.o
- .rodata        0x00000000a009f4d0     0x1004 Debug\tv.o
-                0x00000000a009f4d0                font
- .rodata        0x00000000a00a04d4       0x28 Debug\sys_irq.o
- .rodata        0x00000000a00a04fc      0x120 Debug\ff.o
+ .rodata        0x00000000a0098a38       0x68 Debug\main.o
+ .rodata        0x00000000a0098aa0       0x10 Debug\libgloss.o
+ .rodata        0x00000000a0098ab0     0x1004 Debug\tv.o
+                0x00000000a0098ab0                font
+ .rodata        0x00000000a0099ab4      0x120 Debug\ff.o
  .rodata.str1.4
-                0x00000000a00a061c       0x5b c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(vfprintf.o)
-                                         0x5c (size before relaxing)
- *fill*         0x00000000a00a0677        0x1 00
- .rodata        0x00000000a00a0678      0x184 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(vfprintf.o)
- .rodata.str1.4
-                0x00000000a00a07fc       0x1e c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(wctomb_r.o)
-                                         0x20 (size before relaxing)
- *fill*         0x00000000a00a081a        0x2 00
- .rodata.str1.4
-                0x00000000a00a081c        0x9 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(dtoa.o)
-                                         0x14 (size before relaxing)
- *fill*         0x00000000a00a0825        0x3 00
- .rodata        0x00000000a00a0828       0x18 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(dtoa.o)
- .rodata.str1.4
-                0x00000000a00a0840        0x2 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(impure.o)
-                                          0x4 (size before relaxing)
- *fill*         0x00000000a00a0842        0x2 00
- .rodata.str1.4
-                0x00000000a00a0844        0xc c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(locale.o)
-                                         0x18 (size before relaxing)
- .rodata        0x00000000a00a0850       0x34 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(locale.o)
- *fill*         0x00000000a00a0884        0x4 00
- .rodata        0x00000000a00a0888      0x128 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(mprec.o)
-                0x00000000a00a0978                __mprec_tinytens
-                0x00000000a00a0888                __mprec_tens
-                0x00000000a00a0950                __mprec_bigtens
+                0x00000000a0099bd4        0x4 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(impure.o)
 
 .rodata1
  *(.rodata1)
@@ -502,90 +300,54 @@ END GROUP
 
 .eh_frame_hdr
  *(.eh_frame_hdr)
-                0x00000000a00a0ab0                . = (ALIGN (0x100) + (. & 0xff))
-                0x00000000a00a0ab0                . = ALIGN (0x4)
-                0x00000000a00a0ab0                PROVIDE (__preinit_array_start, .)
+                0x00000000a0099cd8                . = (ALIGN (0x100) + (. & 0xff))
+                0x00000000a0099cd8                . = ALIGN (0x4)
+                0x00000000a0099cd8                PROVIDE (__preinit_array_start, .)
 
 .preinit_array
  *(.preinit_array)
-                0x00000000a00a0ab0                PROVIDE (__preinit_array_end, .)
-                0x00000000a00a0ab0                PROVIDE (__init_array_start, .)
+                0x00000000a0099cd8                PROVIDE (__preinit_array_end, .)
+                0x00000000a0099cd8                PROVIDE (__init_array_start, .)
 
 .init_array
  *(.init_array)
-                0x00000000a00a0ab0                PROVIDE (__init_array_end, .)
-                0x00000000a00a0ab0                PROVIDE (__fini_array_start, .)
+                0x00000000a0099cd8                PROVIDE (__init_array_end, .)
+                0x00000000a0099cd8                PROVIDE (__fini_array_start, .)
 
 .fini_array
  *(.fini_array)
-                0x00000000a00a0ab0                PROVIDE (__fini_array_end, .)
+                0x00000000a0099cd8                PROVIDE (__fini_array_end, .)
 
-.data           0x00000000a00a0ab0      0x7a8
-                0x00000000a00a0ab0                __data_start = .
+.data           0x00000000a0099cd8      0x798
+                0x00000000a0099cd8                __data_start = .
  *(.data .data.* .gnu.linkonce.d.*)
- .data          0x00000000a00a0ab0        0x0 Debug\hyperscan_startup.o
- .data          0x00000000a00a0ab0        0x0 Debug\main.o
- .data          0x00000000a00a0ab0        0x0 Debug\libgloss.o
- .data          0x00000000a00a0ab0        0x0 Debug\uart.o
- .data          0x00000000a00a0ab0        0x0 Debug\tv.o
- .data          0x00000000a00a0ab0        0x0 Debug\norflash.o
- .data          0x00000000a00a0ab0        0x0 Debug\sys_isr.o
- .data          0x00000000a00a0ab0        0x0 Debug\sys_irq.o
- .data          0x00000000a00a0ab0        0x0 Debug\i2c.o
- .data          0x00000000a00a0ab0        0x0 Debug\hs_controller.o
- .data          0x00000000a00a0ab0        0x0 Debug\ff.o
- .data          0x00000000a00a0ab0        0x0 Debug\diskio.o
- .data          0x00000000a00a0ab0        0x0 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(abort.o)
- .data          0x00000000a00a0ab0        0x0 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(memcmp.o)
- .data          0x00000000a00a0ab0        0x0 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(memcpy.o)
- .data          0x00000000a00a0ab0        0x0 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(memset.o)
- .data          0x00000000a00a0ab0        0x0 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(printf.o)
- .data          0x00000000a00a0ab0        0x0 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(signal.o)
- .data          0x00000000a00a0ab0        0x0 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(strchr.o)
- .data          0x00000000a00a0ab0        0x0 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(syswrite.o)
- .data          0x00000000a00a0ab0        0x0 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(vfprintf.o)
- .data          0x00000000a00a0ab0        0x0 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(wcrtomb.o)
- .data          0x00000000a00a0ab0        0x0 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(wcsrtombs.o)
- .data          0x00000000a00a0ab0        0x0 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(wctomb_r.o)
- .data          0x00000000a00a0ab0        0x0 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(wsetup.o)
- .data          0x00000000a00a0ab0        0x0 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(dtoa.o)
- .data          0x00000000a00a0ab0        0x0 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(fflush.o)
- .data          0x00000000a00a0ab0        0x0 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(findfp.o)
- .data          0x00000000a00a0ab0        0x0 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(freer.o)
- .data          0x00000000a00a0ab0        0x0 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(fvwrite.o)
- .data          0x00000000a00a0ab0        0x0 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(fwalk.o)
- .data          0x00000000a00a0ab0      0x388 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(impure.o)
-                0x00000000a00a0ab0                _impure_ptr
- .data          0x00000000a00a0e38       0x10 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(locale.o)
-                0x00000000a00a0e38                __mb_cur_max
-                0x00000000a00a0e3c                __lc_ctype
- .data          0x00000000a00a0e48        0x0 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(makebuf.o)
- .data          0x00000000a00a0e48        0x0 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(malloc.o)
- .data          0x00000000a00a0e48      0x410 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(mallocr.o)
-                0x00000000a00a1254                __malloc_sbrk_base
-                0x00000000a00a0e48                __malloc_av_
-                0x00000000a00a1250                __malloc_trim_threshold
- .data          0x00000000a00a1258        0x0 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(memchr.o)
- .data          0x00000000a00a1258        0x0 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(memmove.o)
- .data          0x00000000a00a1258        0x0 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(mlock.o)
- .data          0x00000000a00a1258        0x0 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(mprec.o)
- .data          0x00000000a00a1258        0x0 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(reallocr.o)
- .data          0x00000000a00a1258        0x0 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(s_isinf.o)
- .data          0x00000000a00a1258        0x0 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(s_isnan.o)
- .data          0x00000000a00a1258        0x0 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(stdio.o)
- .data          0x00000000a00a1258        0x0 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(strcmp.o)
- .data          0x00000000a00a1258        0x0 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(strlen.o)
- .data          0x00000000a00a1258        0x0 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(callocr.o)
- .data          0x00000000a00a1258        0x0 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(errno.o)
- .data          0x00000000a00a1258        0x0 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/mel\libgcc.a(_addsub_df.o)
- .data          0x00000000a00a1258        0x0 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/mel\libgcc.a(_muldf3.o)
- .data          0x00000000a00a1258        0x0 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/mel\libgcc.a(_divdf3.o)
- .data          0x00000000a00a1258        0x0 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/mel\libgcc.a(_clz64.o)
- .data          0x00000000a00a1258        0x0 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/mel\libgcc.a(_floatsidf.o)
- .data          0x00000000a00a1258        0x0 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/mel\libgcc.a(_floatunsidf.o)
- .data          0x00000000a00a1258        0x0 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/mel\libgcc.a(_fixdfsi.o)
- .data          0x00000000a00a1258        0x0 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/mel\libgcc.a(_fpcmp_parts_df.o)
- .data          0x00000000a00a1258        0x0 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/mel\libgcc.a(_clz32.o)
+ .data          0x00000000a0099cd8        0x0 Debug\hyperscan_startup.o
+ .data          0x00000000a0099cd8        0x0 Debug\main.o
+ .data          0x00000000a0099cd8        0x0 Debug\libgloss.o
+ .data          0x00000000a0099cd8        0x0 Debug\uart.o
+ .data          0x00000000a0099cd8        0x0 Debug\tv.o
+ .data          0x00000000a0099cd8        0x0 Debug\norflash.o
+ .data          0x00000000a0099cd8        0x0 Debug\sys_isr.o
+ .data          0x00000000a0099cd8        0x0 Debug\sys_irq.o
+ .data          0x00000000a0099cd8        0x0 Debug\i2c.o
+ .data          0x00000000a0099cd8        0x0 Debug\hs_controller.o
+ .data          0x00000000a0099cd8        0x0 Debug\ff.o
+ .data          0x00000000a0099cd8        0x0 Debug\diskio.o
+ .data          0x00000000a0099cd8        0x0 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(abort.o)
+ .data          0x00000000a0099cd8        0x0 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(memcmp.o)
+ .data          0x00000000a0099cd8        0x0 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(memcpy.o)
+ .data          0x00000000a0099cd8        0x0 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(memset.o)
+ .data          0x00000000a0099cd8        0x0 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(signal.o)
+ .data          0x00000000a0099cd8        0x0 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(strchr.o)
+ .data          0x00000000a0099cd8        0x0 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(syswrite.o)
+ .data          0x00000000a0099cd8      0x388 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(impure.o)
+                0x00000000a0099cd8                _impure_ptr
+ .data          0x00000000a009a060      0x410 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(mallocr.o)
+                0x00000000a009a46c                __malloc_sbrk_base
+                0x00000000a009a060                __malloc_av_
+                0x00000000a009a468                __malloc_trim_threshold
+ .data          0x00000000a009a470        0x0 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(mlock.o)
+ .data          0x00000000a009a470        0x0 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(freer.o)
 
 .data1
  *(.data1)
@@ -624,110 +386,73 @@ END GROUP
 .got
  *(.got.plt)
  *(.got)
-                0x00000000a00a5258                _gp = (. + 0x4000)
+                0x00000000a009e470                _gp = (. + 0x4000)
 
-.sdata          0x00000000a00a1258        0x4
-                0x00000000a00a1258                _sdata_start = .
+.sdata          0x00000000a009a470        0x4
+                0x00000000a009a470                _sdata_start = .
  *(.sdata .sdata.* .gnu.linkonce.s.*)
- .sdata         0x00000000a00a1258        0x4 Debug\main.o
-                0x00000000a00a1258                fb
-                0x00000000a00a125c                _edata = .
-                0x00000000a00a125c                PROVIDE (edata, .)
-                0x00000000a00a125c                . = ALIGN (0x4)
-                0x00000000a00a125c                __bss_start = .
-                0x00000000a00a125c                __bss_start__ = .
+ .sdata         0x00000000a009a470        0x4 Debug\main.o
+                0x00000000a009a470                fb
+                0x00000000a009a474                _edata = .
+                0x00000000a009a474                PROVIDE (edata, .)
+                0x00000000a009a474                . = ALIGN (0x4)
+                0x00000000a009a474                __bss_start = .
+                0x00000000a009a474                __bss_start__ = .
 
-.sbss           0x00000000a00a125c       0x11
-                0x00000000a00a125c                PROVIDE (__sbss_start, .)
-                0x00000000a00a125c                PROVIDE (___sbss_start, .)
+.sbss           0x00000000a009a474       0x11
+                0x00000000a009a474                PROVIDE (__sbss_start, .)
+                0x00000000a009a474                PROVIDE (___sbss_start, .)
  *(.dynsbss)
  *(.sbss .sbss.* .gnu.linkonce.sb.*)
- .sbss          0x00000000a00a125c        0x4 Debug\libgloss.o
- .sbss          0x00000000a00a1260        0x8 Debug\ff.o
+ .sbss          0x00000000a009a474        0x4 Debug\libgloss.o
+ .sbss          0x00000000a009a478        0x8 Debug\ff.o
  *(.scommon)
- .scommon       0x00000000a00a1268        0x5 Debug\hs_controller.o
-                0x00000000a00a1268                controller
-                0x00000000a00a126d                PROVIDE (__sbss_end, .)
-                0x00000000a00a126d                PROVIDE (___sbss_end, .)
-                0x00000000a00a5258                _gp = (_sdata_start + 0x4000)
+ .scommon       0x00000000a009a480        0x5 Debug\hs_controller.o
+                0x00000000a009a480                controller
+                0x00000000a009a485                PROVIDE (__sbss_end, .)
+                0x00000000a009a485                PROVIDE (___sbss_end, .)
+                0x00000000a009e470                _gp = (_sdata_start + 0x4000)
 
-.bss            0x00000000a00a1270    0x8036c
+.bss            0x00000000a009a488    0x80360
  *(.dynbss)
  *(.bss .bss.* .gnu.linkonce.b.*)
- .bss           0x00000000a00a1270        0x0 Debug\hyperscan_startup.o
- .bss           0x00000000a00a1270        0x0 Debug\main.o
- .bss           0x00000000a00a1270    0x80000 Debug\libgloss.o
- .bss           0x00000000a0121270        0x0 Debug\uart.o
- .bss           0x00000000a0121270        0x0 Debug\tv.o
- .bss           0x00000000a0121270        0x0 Debug\norflash.o
- .bss           0x00000000a0121270        0x0 Debug\sys_isr.o
- .bss           0x00000000a0121270       0xfc Debug\sys_irq.o
- .bss           0x00000000a012136c        0x0 Debug\i2c.o
- .bss           0x00000000a012136c        0x0 Debug\hs_controller.o
- .bss           0x00000000a012136c        0x0 Debug\ff.o
- .bss           0x00000000a012136c        0x0 Debug\diskio.o
- .bss           0x00000000a012136c        0x0 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(abort.o)
- .bss           0x00000000a012136c        0x0 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(memcmp.o)
- .bss           0x00000000a012136c        0x0 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(memcpy.o)
- .bss           0x00000000a012136c        0x0 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(memset.o)
- .bss           0x00000000a012136c        0x0 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(printf.o)
- .bss           0x00000000a012136c        0x0 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(signal.o)
- .bss           0x00000000a012136c        0x0 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(strchr.o)
- .bss           0x00000000a012136c        0x0 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(syswrite.o)
- .bss           0x00000000a012136c        0x0 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(vfprintf.o)
- .bss           0x00000000a012136c        0x0 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(wcrtomb.o)
- .bss           0x00000000a012136c        0x0 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(wcsrtombs.o)
- .bss           0x00000000a012136c        0x0 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(wctomb_r.o)
- .bss           0x00000000a012136c        0x0 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(wsetup.o)
- .bss           0x00000000a012136c        0x0 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(dtoa.o)
- .bss           0x00000000a012136c        0x0 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(fflush.o)
- .bss           0x00000000a012136c        0x0 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(findfp.o)
- .bss           0x00000000a012136c        0x0 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(freer.o)
- .bss           0x00000000a012136c        0x0 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(fvwrite.o)
- .bss           0x00000000a012136c        0x0 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(fwalk.o)
- .bss           0x00000000a012136c        0x0 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(impure.o)
- .bss           0x00000000a012136c        0xc c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(locale.o)
-                0x00000000a012136c                __nlocale_changed
-                0x00000000a0121370                __mlocale_changed
-                0x00000000a0121374                _PathLocale
- .bss           0x00000000a0121378        0x0 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(makebuf.o)
- .bss           0x00000000a0121378        0x0 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(malloc.o)
- .bss           0x00000000a0121378       0x34 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(mallocr.o)
-                0x00000000a0121378                __malloc_top_pad
-                0x00000000a012137c                __malloc_max_sbrked_mem
-                0x00000000a0121384                __malloc_current_mallinfo
-                0x00000000a0121380                __malloc_max_total_mem
- .bss           0x00000000a01213ac        0x0 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(memchr.o)
- .bss           0x00000000a01213ac        0x0 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(memmove.o)
- .bss           0x00000000a01213ac        0x0 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(mlock.o)
- .bss           0x00000000a01213ac        0x0 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(mprec.o)
- .bss           0x00000000a01213ac        0x0 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(reallocr.o)
- .bss           0x00000000a01213ac        0x0 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(s_isinf.o)
- .bss           0x00000000a01213ac        0x0 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(s_isnan.o)
- .bss           0x00000000a01213ac        0x0 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(stdio.o)
- .bss           0x00000000a01213ac        0x0 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(strcmp.o)
- .bss           0x00000000a01213ac        0x0 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(strlen.o)
- .bss           0x00000000a01213ac        0x0 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(callocr.o)
- .bss           0x00000000a01213ac        0x0 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(errno.o)
- .bss           0x00000000a01213ac        0x0 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/mel\libgcc.a(_addsub_df.o)
- .bss           0x00000000a01213ac        0x0 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/mel\libgcc.a(_muldf3.o)
- .bss           0x00000000a01213ac        0x0 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/mel\libgcc.a(_divdf3.o)
- .bss           0x00000000a01213ac        0x0 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/mel\libgcc.a(_clz64.o)
- .bss           0x00000000a01213ac        0x0 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/mel\libgcc.a(_floatsidf.o)
- .bss           0x00000000a01213ac        0x0 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/mel\libgcc.a(_floatunsidf.o)
- .bss           0x00000000a01213ac        0x0 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/mel\libgcc.a(_fixdfsi.o)
- .bss           0x00000000a01213ac        0x0 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/mel\libgcc.a(_fpcmp_parts_df.o)
- .bss           0x00000000a01213ac        0x0 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/mel\libgcc.a(_clz32.o)
+ .bss           0x00000000a009a488        0x0 Debug\hyperscan_startup.o
+ .bss           0x00000000a009a488        0x0 Debug\main.o
+ .bss           0x00000000a009a488    0x80000 Debug\libgloss.o
+ .bss           0x00000000a011a488        0x0 Debug\uart.o
+ .bss           0x00000000a011a488        0x0 Debug\tv.o
+ .bss           0x00000000a011a488        0x0 Debug\norflash.o
+ .bss           0x00000000a011a488        0x0 Debug\sys_isr.o
+ .bss           0x00000000a011a488       0xfc Debug\sys_irq.o
+ .bss           0x00000000a011a584        0x0 Debug\i2c.o
+ .bss           0x00000000a011a584        0x0 Debug\hs_controller.o
+ .bss           0x00000000a011a584        0x0 Debug\ff.o
+ .bss           0x00000000a011a584        0x0 Debug\diskio.o
+ .bss           0x00000000a011a584        0x0 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(abort.o)
+ .bss           0x00000000a011a584        0x0 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(memcmp.o)
+ .bss           0x00000000a011a584        0x0 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(memcpy.o)
+ .bss           0x00000000a011a584        0x0 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(memset.o)
+ .bss           0x00000000a011a584        0x0 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(signal.o)
+ .bss           0x00000000a011a584        0x0 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(strchr.o)
+ .bss           0x00000000a011a584        0x0 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(syswrite.o)
+ .bss           0x00000000a011a584        0x0 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(impure.o)
+ .bss           0x00000000a011a584       0x34 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(mallocr.o)
+                0x00000000a011a584                __malloc_top_pad
+                0x00000000a011a588                __malloc_max_sbrked_mem
+                0x00000000a011a590                __malloc_current_mallinfo
+                0x00000000a011a58c                __malloc_max_total_mem
+ .bss           0x00000000a011a5b8        0x0 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(mlock.o)
+ .bss           0x00000000a011a5b8        0x0 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(freer.o)
  *(COMMON)
- COMMON         0x00000000a01213ac      0x230 Debug\ff.o
-                0x00000000a01213ac                fs
-                0x00000000a01215dc                . = ALIGN (0x4)
-                0x00000000a01215dc                . = ALIGN (0x4)
-                0x00000000a01215dc                _end = .
-                0x00000000a01215dc                _bss_end__ = .
-                0x00000000a01215dc                __bss_end__ = .
-                0x00000000a01215dc                __end__ = .
-                0x00000000a01215dc                PROVIDE (end, .)
+ COMMON         0x00000000a011a5b8      0x230 Debug\ff.o
+                0x00000000a011a5b8                fs
+                0x00000000a011a7e8                . = ALIGN (0x4)
+                0x00000000a011a7e8                . = ALIGN (0x4)
+                0x00000000a011a7e8                _end = .
+                0x00000000a011a7e8                _bss_end__ = .
+                0x00000000a011a7e8                __bss_end__ = .
+                0x00000000a011a7e8                __end__ = .
+                0x00000000a011a7e8                PROVIDE (end, .)
 
 .stab
  *(.stab)
@@ -747,7 +472,7 @@ END GROUP
 .stab.indexstr
  *(.stab.indexstr)
 
-.comment        0x0000000000000000      0x33c
+.comment        0x0000000000000000      0x17a
  *(.comment)
  .comment       0x0000000000000000       0x12 Debug\main.o
  .comment       0x0000000000000012       0x12 Debug\libgloss.o
@@ -763,38 +488,13 @@ END GROUP
  .comment       0x00000000000000c6       0x12 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(memcmp.o)
  .comment       0x00000000000000d8       0x12 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(memcpy.o)
  .comment       0x00000000000000ea       0x12 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(memset.o)
- .comment       0x00000000000000fc       0x12 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(printf.o)
- .comment       0x000000000000010e       0x12 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(signal.o)
- .comment       0x0000000000000120       0x12 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(strchr.o)
- .comment       0x0000000000000132       0x12 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(syswrite.o)
- .comment       0x0000000000000144       0x12 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(vfprintf.o)
- .comment       0x0000000000000156       0x12 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(wcrtomb.o)
- .comment       0x0000000000000168       0x12 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(wcsrtombs.o)
- .comment       0x000000000000017a       0x12 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(wctomb_r.o)
- .comment       0x000000000000018c       0x12 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(wsetup.o)
- .comment       0x000000000000019e       0x12 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(dtoa.o)
- .comment       0x00000000000001b0       0x12 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(fflush.o)
- .comment       0x00000000000001c2       0x12 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(findfp.o)
- .comment       0x00000000000001d4       0x12 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(freer.o)
- .comment       0x00000000000001e6       0x12 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(fvwrite.o)
- .comment       0x00000000000001f8       0x12 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(fwalk.o)
- .comment       0x000000000000020a       0x12 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(impure.o)
- .comment       0x000000000000021c       0x12 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(locale.o)
- .comment       0x000000000000022e       0x12 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(makebuf.o)
- .comment       0x0000000000000240       0x12 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(malloc.o)
- .comment       0x0000000000000252       0x12 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(mallocr.o)
- .comment       0x0000000000000264       0x12 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(memchr.o)
- .comment       0x0000000000000276       0x12 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(memmove.o)
- .comment       0x0000000000000288       0x12 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(mlock.o)
- .comment       0x000000000000029a       0x12 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(mprec.o)
- .comment       0x00000000000002ac       0x12 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(reallocr.o)
- .comment       0x00000000000002be       0x12 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(s_isinf.o)
- .comment       0x00000000000002d0       0x12 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(s_isnan.o)
- .comment       0x00000000000002e2       0x12 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(stdio.o)
- .comment       0x00000000000002f4       0x12 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(strcmp.o)
- .comment       0x0000000000000306       0x12 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(strlen.o)
- .comment       0x0000000000000318       0x12 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(callocr.o)
- .comment       0x000000000000032a       0x12 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(errno.o)
+ .comment       0x00000000000000fc       0x12 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(signal.o)
+ .comment       0x000000000000010e       0x12 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(strchr.o)
+ .comment       0x0000000000000120       0x12 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(syswrite.o)
+ .comment       0x0000000000000132       0x12 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(impure.o)
+ .comment       0x0000000000000144       0x12 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(mallocr.o)
+ .comment       0x0000000000000156       0x12 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(mlock.o)
+ .comment       0x0000000000000168       0x12 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(freer.o)
 
 .debug
  *(.debug)
@@ -889,7 +589,7 @@ END GROUP
  .debug_abbrev  0x000000000000067f      0x190 Debug\ff.o
  .debug_abbrev  0x000000000000080f      0x11a Debug\diskio.o
 
-.debug_line     0x0000000000000000     0x1227
+.debug_line     0x0000000000000000     0x1224
  *(.debug_line)
  .debug_line    0x0000000000000000       0xa3 Debug\hyperscan_startup.o
  .debug_line    0x00000000000000a3       0xa1 Debug\main.o
@@ -898,24 +598,24 @@ END GROUP
  .debug_line    0x0000000000000378      0x130 Debug\tv.o
  .debug_line    0x00000000000004a8       0xd2 Debug\norflash.o
  .debug_line    0x000000000000057a       0xfa Debug\sys_isr.o
- .debug_line    0x0000000000000674       0xa3 Debug\sys_irq.o
- .debug_line    0x0000000000000717       0x83 Debug\i2c.o
- .debug_line    0x000000000000079a       0xf8 Debug\hs_controller.o
- .debug_line    0x0000000000000892      0x85e Debug\ff.o
- .debug_line    0x00000000000010f0      0x137 Debug\diskio.o
+ .debug_line    0x0000000000000674       0xa0 Debug\sys_irq.o
+ .debug_line    0x0000000000000714       0x83 Debug\i2c.o
+ .debug_line    0x0000000000000797       0xf8 Debug\hs_controller.o
+ .debug_line    0x000000000000088f      0x85e Debug\ff.o
+ .debug_line    0x00000000000010ed      0x137 Debug\diskio.o
 
-.debug_frame    0x0000000000000000      0xe24
+.debug_frame    0x0000000000000000      0xe20
  *(.debug_frame)
  .debug_frame   0x0000000000000000       0x34 Debug\main.o
  .debug_frame   0x0000000000000034      0x184 Debug\libgloss.o
  .debug_frame   0x00000000000001b8       0xe8 Debug\uart.o
  .debug_frame   0x00000000000002a0      0x15c Debug\tv.o
  .debug_frame   0x00000000000003fc      0x100 Debug\norflash.o
- .debug_frame   0x00000000000004fc       0x68 Debug\sys_irq.o
- .debug_frame   0x0000000000000564       0x60 Debug\i2c.o
- .debug_frame   0x00000000000005c4       0x5c Debug\hs_controller.o
- .debug_frame   0x0000000000000620      0x6e4 Debug\ff.o
- .debug_frame   0x0000000000000d04      0x120 Debug\diskio.o
+ .debug_frame   0x00000000000004fc       0x64 Debug\sys_irq.o
+ .debug_frame   0x0000000000000560       0x60 Debug\i2c.o
+ .debug_frame   0x00000000000005c0       0x5c Debug\hs_controller.o
+ .debug_frame   0x000000000000061c      0x6e4 Debug\ff.o
+ .debug_frame   0x0000000000000d00      0x120 Debug\diskio.o
 
 .debug_str      0x0000000000000000       0x63
  *(.debug_str)
@@ -925,18 +625,18 @@ END GROUP
  .debug_str     0x0000000000000040        0xf Debug\ff.o
  .debug_str     0x000000000000004f       0x14 Debug\diskio.o
 
-.debug_loc      0x0000000000000000     0x1b55
+.debug_loc      0x0000000000000000     0x1b49
  *(.debug_loc)
  .debug_loc     0x0000000000000000       0x45 Debug\main.o
  .debug_loc     0x0000000000000045      0x2c6 Debug\libgloss.o
  .debug_loc     0x000000000000030b      0x1a0 Debug\uart.o
  .debug_loc     0x00000000000004ab      0x288 Debug\tv.o
  .debug_loc     0x0000000000000733      0x1e8 Debug\norflash.o
- .debug_loc     0x000000000000091b       0xb1 Debug\sys_irq.o
- .debug_loc     0x00000000000009cc       0x99 Debug\i2c.o
- .debug_loc     0x0000000000000a65       0x9e Debug\hs_controller.o
- .debug_loc     0x0000000000000b03      0xe27 Debug\ff.o
- .debug_loc     0x000000000000192a      0x22b Debug\diskio.o
+ .debug_loc     0x000000000000091b       0xa5 Debug\sys_irq.o
+ .debug_loc     0x00000000000009c0       0x99 Debug\i2c.o
+ .debug_loc     0x0000000000000a59       0x9e Debug\hs_controller.o
+ .debug_loc     0x0000000000000af7      0xe27 Debug\ff.o
+ .debug_loc     0x000000000000191e      0x22b Debug\diskio.o
 
 .debug_macinfo
  *(.debug_macinfo)
@@ -954,7 +654,7 @@ END GROUP
  *(.debug_varnames)
 OUTPUT(Debug\hyperscan.elf elf32-littlescore)
 
-.pdr            0x0000000000000000     0x1840
+.pdr            0x0000000000000000     0x10c0
  .pdr           0x0000000000000000        0x0 Debug\hyperscan_startup.o
  .pdr           0x0000000000000000       0x20 Debug\main.o
  .pdr           0x0000000000000020      0x1c0 Debug\libgloss.o
@@ -971,44 +671,10 @@ OUTPUT(Debug\hyperscan.elf elf32-littlescore)
  .pdr           0x0000000000000e80       0x20 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(memcmp.o)
  .pdr           0x0000000000000ea0       0x20 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(memcpy.o)
  .pdr           0x0000000000000ec0       0x20 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(memset.o)
- .pdr           0x0000000000000ee0       0x40 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(printf.o)
- .pdr           0x0000000000000f20      0x100 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(signal.o)
- .pdr           0x0000000000001020       0x20 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(strchr.o)
- .pdr           0x0000000000001040       0x20 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(syswrite.o)
- .pdr           0x0000000000001060       0x60 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(vfprintf.o)
- .pdr           0x00000000000010c0       0x40 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(wcrtomb.o)
- .pdr           0x0000000000001100       0x40 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(wcsrtombs.o)
- .pdr           0x0000000000001140       0x20 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(wctomb_r.o)
- .pdr           0x0000000000001160       0x20 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(wsetup.o)
- .pdr           0x0000000000001180       0x40 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(dtoa.o)
- .pdr           0x00000000000011c0       0x20 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(fflush.o)
- .pdr           0x00000000000011e0       0xc0 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(findfp.o)
- .pdr           0x00000000000012a0       0x40 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(freer.o)
- .pdr           0x00000000000012e0       0x20 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(fvwrite.o)
- .pdr           0x0000000000001300       0x20 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(fwalk.o)
- .pdr           0x0000000000001320        0x0 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(impure.o)
- .pdr           0x0000000000001320       0xa0 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(locale.o)
- .pdr           0x00000000000013c0       0x20 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(makebuf.o)
- .pdr           0x00000000000013e0       0x40 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(malloc.o)
- .pdr           0x0000000000001420       0x20 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(mallocr.o)
- .pdr           0x0000000000001440       0x20 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(memchr.o)
- .pdr           0x0000000000001460       0x20 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(memmove.o)
- .pdr           0x0000000000001480       0x40 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(mlock.o)
- .pdr           0x00000000000014c0      0x220 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(mprec.o)
- .pdr           0x00000000000016e0       0x20 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(reallocr.o)
- .pdr           0x0000000000001700       0x20 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(s_isinf.o)
- .pdr           0x0000000000001720       0x20 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(s_isnan.o)
- .pdr           0x0000000000001740       0x80 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(stdio.o)
- .pdr           0x00000000000017c0       0x20 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(strcmp.o)
- .pdr           0x00000000000017e0       0x20 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(strlen.o)
- .pdr           0x0000000000001800       0x20 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(callocr.o)
- .pdr           0x0000000000001820       0x20 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(errno.o)
- .pdr           0x0000000000001840        0x0 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/mel\libgcc.a(_addsub_df.o)
- .pdr           0x0000000000001840        0x0 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/mel\libgcc.a(_muldf3.o)
- .pdr           0x0000000000001840        0x0 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/mel\libgcc.a(_divdf3.o)
- .pdr           0x0000000000001840        0x0 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/mel\libgcc.a(_clz64.o)
- .pdr           0x0000000000001840        0x0 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/mel\libgcc.a(_floatsidf.o)
- .pdr           0x0000000000001840        0x0 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/mel\libgcc.a(_floatunsidf.o)
- .pdr           0x0000000000001840        0x0 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/mel\libgcc.a(_fixdfsi.o)
- .pdr           0x0000000000001840        0x0 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/mel\libgcc.a(_fpcmp_parts_df.o)
- .pdr           0x0000000000001840        0x0 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/mel\libgcc.a(_clz32.o)
+ .pdr           0x0000000000000ee0      0x100 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(signal.o)
+ .pdr           0x0000000000000fe0       0x20 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(strchr.o)
+ .pdr           0x0000000000001000       0x20 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(syswrite.o)
+ .pdr           0x0000000000001020        0x0 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(impure.o)
+ .pdr           0x0000000000001020       0x20 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(mallocr.o)
+ .pdr           0x0000000000001040       0x40 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(mlock.o)
+ .pdr           0x0000000000001080       0x40 c:/sunplus/s_core~1.1/gnu/bin/../lib/gcc/score-elf/4.2.1/../../../../score-elf/lib/mel\libc.a(freer.o)

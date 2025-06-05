@@ -219,12 +219,6 @@ USEPARAM=FALSE
 PARAM=
 # End Source File
 
-# Begin Source File
-SOURCE=..\..\..\..\src\irq\user_irq.c
-USEPARAM=FALSE
-PARAM=
-# End Source File
-
 # End Group
 # Begin Group "norflash"
 #PROP Default_Filter = 

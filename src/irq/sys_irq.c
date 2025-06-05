@@ -57,7 +57,7 @@ void attach_isr(unsigned int irq, isr_handler handler) {
 		// Swap handler at fixed vector with the one from our (unused) current vector
 		fixed_irq_dispatch[irq_offset] = current_irq_dispatch[irq_offset];
 		
-		printf("Installing handler for IRQ%d @ 0x%08x\n", irq, (unsigned int)&fixed_irq_dispatch[irq_offset]);
+		//printf("Installing handler for IRQ%d @ 0x%08x\n", irq, (unsigned int)&fixed_irq_dispatch[irq_offset]);
 		
 		// invalidate D-Cache
 		asm("cache 0x18, [r15, 0]");

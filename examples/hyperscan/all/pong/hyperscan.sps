@@ -12,7 +12,7 @@ OutPut Dir = Debug
 Inc Path = ..\..\..\..\include
 Lib Path = 
 Compiler = ..\S_CORE~1.1\GNU\bin\gcc
-Compiler DefFlag = -mscore7 -mel -g -Wall -nostartfiles
+Compiler DefFlag = -mscore7 -mel -g -Wall -nostartfiles -Os
 Compiler AddFlag = -Dhyperscan
 Assembler = ..\S_CORE~1.1\GNU\bin\as
 Assembler DefFlag = -Wa,-gdwarf-2  -x assembler-with-cpp
@@ -215,12 +215,6 @@ PARAM=
 
 # Begin Source File
 SOURCE=..\..\..\..\src\irq\sys_isr.s
-USEPARAM=FALSE
-PARAM=
-# End Source File
-
-# Begin Source File
-SOURCE=..\..\..\..\src\irq\user_irq.c
 USEPARAM=FALSE
 PARAM=
 # End Source File

@@ -35,7 +35,7 @@ Stack base address = a0fffff0
 Pre-Link Description = 
 Pre-Link Command = 
 Post-Build Description = makehyper
-Post-Build Command = 	cd ./Debug && move hyperscan.elf.bin Hyper.Exe	cd ./Debug && del *.o *.bin *.elf *.map *.d *.srec *.dbg *.res
+Post-Build Command = 	cd ./Debug && move hyperscan.elf.bin Hyper.Exe
 Custom Build Enable = 0
 WorkDir = 
 Custom Build = 
@@ -219,8 +219,12 @@ USEPARAM=FALSE
 PARAM=
 # End Source File
 
+# End Group
+# Begin Group "mp3drv"
+#PROP Default_Filter = 
+
 # Begin Source File
-SOURCE=..\..\..\..\src\irq\user_irq.c
+SOURCE=..\..\..\..\src\mp3drv\mp3drv.c
 USEPARAM=FALSE
 PARAM=
 # End Source File
@@ -231,6 +235,16 @@ PARAM=
 
 # Begin Source File
 SOURCE=..\..\..\..\src\norflash\norflash.c
+USEPARAM=FALSE
+PARAM=
+# End Source File
+
+# End Group
+# Begin Group "ppu"
+#PROP Default_Filter = 
+
+# Begin Source File
+SOURCE=..\..\..\..\src\ppu\ppu_control.c
 USEPARAM=FALSE
 PARAM=
 # End Source File
@@ -322,7 +336,7 @@ PARAM=
 #PROP Default_Filter = 
 
 # Begin Source File
-SOURCE=..\..\..\..\include\irq\intenable.h
+SOURCE=..\..\..\..\include\irq\interrupts.h
 USEPARAM=FALSE
 PARAM=
 # End Source File
