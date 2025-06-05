@@ -37,7 +37,7 @@ int USB_disk_initialize(void){
 	*P_INT_MASK_CTRL1 &= ~C_INT_USB_DIS;
 	
 	while(DiskB_Initial());
-
+	
 	return 0;
 }
 

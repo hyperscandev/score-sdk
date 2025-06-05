@@ -89,38 +89,36 @@ extern "C" {
 #define drvusbh_luninit(LUN)                                  \
     ({                                                        \
         /* Call iso_close from the cb table */                \
-        int __ret = ((int(*)(int))0xA000938)(LUN);            \
+        int __ret = ((int(*)(int))0xA0000938)(LUN);            \
         /* Restore $gp (r28) */                               \
         __asm__ volatile("la   r28, _gp");                    \
         /* Yield the return value */                          \
         __ret;                                                \
     })
 
-/* Call the drvusbh_readsector routine at 0xA0000950(LBA_t, UINT, BYTE *, int), save its int return,
+/* Call the drvusbh_readsector routine at 0xA0000950(unsigned int, unsigned int, unsigned char *, int), save its int return,
    then restore $gp (r28) and yield return. */
 #define drvusbh_readsector(block, blocknum, inaddr, lun)      \
     ({                                                        \
         /* Call iso_close from the cb table */                \
-        int __ret = ((int (*) (LBA_t, UINT, BYTE *, int))0xA0000950)(block, blocknum, inaddr, lun); \
+        int __ret = ((int (*) (unsigned int, unsigned int, unsigned char *, int))0xA0000950)(block, blocknum, inaddr, lun); \
         /* Restore $gp (r28) */                               \
         __asm__ volatile("la   r28, _gp");                    \
         /* Yield the return value */                          \
         __ret;                                                \
     })
 
-/* Call the drvusbh_writesector routine at 0xA000095C(LBA_t, UINT, BYTE *, int), save its int return,
+/* Call the drvusbh_writesector routine at 0xA000095C(unsigned int, unsigned int, unsigned char *, int), save its int return,
    then restore $gp (r28) and yield return. */
 #define drvusbh_writesector(block, blocknum, outaddr, lun)      \
     ({                                                        \
         /* Call iso_close from the cb table */                \
-        int __ret = ((int (*) (LBA_t, UINT, BYTE *, int))0xA000095C)(block, blocknum, outaddr, lun); \
+        int __ret = ((int (*) (unsigned int, unsigned int, unsigned char *, int))0xA000095C)(block, blocknum, outaddr, lun); \
         /* Restore $gp (r28) */                               \
         __asm__ volatile("la   r28, _gp");                    \
         /* Yield the return value */                          \
         __ret;                                                \
     })	   	
-//#define DrvUSBH_WriteSector(block, blocknum, outaddr, ukn1) ((int (*) (LBA_t, UINT, BYTE *, int))0xA001EFCC)(block, blocknum, outaddr, ukn1) 
-
 
 #ifdef __cplusplus
 }
