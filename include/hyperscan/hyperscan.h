@@ -14,7 +14,8 @@ extern "C" {
  *               H Y P E R S C A N  O S  C A L L B A C K S                *
  **************************************************************************/
 
-/* Call the ISO init routine at 0xA0000890, then restore $gp (r28) afterward */
+/* Call the ISO init routine at 0xA0000890, then restore $gp (r28) afterward
+   (no return) */
 #define iso_init()                        \
     ({                                    \
         /* Call iso_init from cb table */ \
@@ -60,7 +61,7 @@ extern "C" {
     })
 
 /* Call the ISO close routine at 0xA00008C0(int), save its int return,
-   then restore $gp (r28) before yielding return. */
+   then restore $gp (r28) before yielding return. (return is -1 if error) */
 #define iso_close(fd)                                         \
     ({                                                        \
         /* Call iso_close from the cb table */                \
@@ -70,7 +71,57 @@ extern "C" {
         /* Yield the return value */                          \
         __ret;                                                \
     })
-    	
+
+/* Call the drvusbh_Init routine at 0xA000092C, save its int return,
+   then restore $gp (r28) and yield return. */
+#define drvusbh_init()                                        \
+    ({                                                        \
+        /* Call drvusbh_init from the cb table */             \
+        int __ret = ((int (*)(void))0xA000092C)();            \
+        /* Restore $gp (r28) */                               \
+        __asm__ volatile("la   r28, _gp");                    \
+        /* Yield the return value */                          \
+        __ret;                                                \
+    })
+
+/* Call the drvusbh_luninit routine at 0xA0000938(int), save its int return,
+   then restore $gp (r28) and yield return. */
+#define drvusbh_luninit(LUN)                                  \
+    ({                                                        \
+        /* Call iso_close from the cb table */                \
+        int __ret = ((int(*)(int))0xA000938)(LUN);            \
+        /* Restore $gp (r28) */                               \
+        __asm__ volatile("la   r28, _gp");                    \
+        /* Yield the return value */                          \
+        __ret;                                                \
+    })
+
+/* Call the drvusbh_readsector routine at 0xA0000950(LBA_t, UINT, BYTE *, int), save its int return,
+   then restore $gp (r28) and yield return. */
+#define drvusbh_readsector(block, blocknum, inaddr, lun)      \
+    ({                                                        \
+        /* Call iso_close from the cb table */                \
+        int __ret = ((int (*) (LBA_t, UINT, BYTE *, int))0xA0000950)(block, blocknum, inaddr, lun); \
+        /* Restore $gp (r28) */                               \
+        __asm__ volatile("la   r28, _gp");                    \
+        /* Yield the return value */                          \
+        __ret;                                                \
+    })
+
+/* Call the drvusbh_writesector routine at 0xA000095C(LBA_t, UINT, BYTE *, int), save its int return,
+   then restore $gp (r28) and yield return. */
+#define drvusbh_writesector(block, blocknum, outaddr, lun)      \
+    ({                                                        \
+        /* Call iso_close from the cb table */                \
+        int __ret = ((int (*) (LBA_t, UINT, BYTE *, int))0xA000095C)(block, blocknum, outaddr, lun); \
+        /* Restore $gp (r28) */                               \
+        __asm__ volatile("la   r28, _gp");                    \
+        /* Yield the return value */                          \
+        __ret;                                                \
+    })	   	
+//#define DrvUSBH_WriteSector(block, blocknum, outaddr, ukn1) ((int (*) (LBA_t, UINT, BYTE *, int))0xA001EFCC)(block, blocknum, outaddr, ukn1) 
+
+
 #ifdef __cplusplus
 }
 #endif
