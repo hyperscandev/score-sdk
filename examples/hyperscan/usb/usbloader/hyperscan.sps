@@ -250,6 +250,16 @@ PARAM=
 # End Source File
 
 # End Group
+# Begin Group "ppu"
+#PROP Default_Filter = *.c
+
+# Begin Source File
+SOURCE=..\..\..\..\src\ppu\ppu.c
+USEPARAM=FALSE
+PARAM=
+# End Source File
+
+# End Group
 # Begin Source File
 SOURCE=..\..\..\..\src\libgloss.c
 USEPARAM=FALSE
@@ -266,6 +276,16 @@ PARAM=
 # Begin Group "Header Files"
 #PROP Default_Filter = h;inc;
 
+# Begin Group "cpuH"
+#PROP Default_Filter = 
+
+# Begin Source File
+SOURCE=..\..\..\..\include\cpu\discpu_func.h
+USEPARAM=FALSE
+PARAM=
+# End Source File
+
+# End Group
 # Begin Group "hyperscanH"
 #PROP Default_Filter = 
 
@@ -333,6 +353,16 @@ PARAM=
 
 # Begin Source File
 SOURCE=..\..\..\..\include\norflash\norflash.h
+USEPARAM=FALSE
+PARAM=
+# End Source File
+
+# End Group
+# Begin Group "ppuH"
+#PROP Default_Filter = 
+
+# Begin Source File
+SOURCE=..\..\..\..\include\ppu\ppu.h
 USEPARAM=FALSE
 PARAM=
 # End Source File

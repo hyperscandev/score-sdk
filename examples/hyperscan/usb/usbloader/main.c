@@ -9,6 +9,7 @@ This is part of the Mattel HyperScan SDK by ppcasm (ppcasm@gmail.com)
 #include <string.h>
 
 #include "tv/tv.h"
+#include "ppu/ppu.h"
 #include "uart/uart.h"
 #include "irq/interrupts.h"
 #include "hyperscan/fatfs/ff.h"
@@ -27,7 +28,6 @@ This is part of the Mattel HyperScan SDK by ppcasm (ppcasm@gmail.com)
 
 static FATFS fs0; //FatFS mountpoint
 static FIL callback_fil;
-static char filename_buf[128];
 
 void draw_pixel(unsigned short* framebuffer, int x, int y, unsigned short color) {
     if (x >= 0 && x < FRAMEBUFFER_WIDTH && y >= 0 && y < FRAMEBUFFER_HEIGHT) {
@@ -156,10 +156,11 @@ int load_directory_list(char **dir_buf){
         if (fno.fattrib & AM_DIR) {
 			dir_buf[dir_count] = (char *)malloc(strlen(fno.fname) + 1);
 			sprintf(dir_buf[dir_count], "%s", fno.fname);
+			
 			dir_count++;
         }
     }
-
+	
     // Close the directory
     f_closedir(&dir);
 
@@ -222,11 +223,18 @@ void execute_binary(char *dir_buf){
 	
 	res = f_read(&fil, ldrptr, file_size, &br);
 
+	//free(filepath);
+	
     // Close the directory
     f_close(&fil);
 
     // Unmount the file system
     f_mount(NULL, "", 0);
+	
+	*(volatile unsigned int*)0xa009108c = 0x00000000;
+	*(volatile unsigned int*)0xa0091090 = 0x00000000;
+	*(volatile unsigned int*)0x8009108c = 0x00000000;
+	*(volatile unsigned int*)0x80091090 = 0x00000000;
 	
 	entry_start();
 }
@@ -273,13 +281,7 @@ int iso_open_callback(char *filename) {
         while(1);
     }
 
-    // Open the file
-	char *filepath = (char *)malloc(128);
-	sprintf(filepath, "%s", filename);
-	
-    res = f_open(&callback_fil, filepath, FA_READ);
-    
-    strncpy(filename_buf, filename, 128);
+    res = f_open(&callback_fil, filename, FA_READ);
     
     return 1;
 }
@@ -295,13 +297,6 @@ void iso_read_callback(int filedes, void *buffer, unsigned int size) {
 	printf("iso_read: filedes(%x) | buffer{%p) | size(%x)\n", filedes, buffer, size);
 	
 	res = f_read(&callback_fil, buffer, size, &br);
-
-	if(strcmp(filename_buf, "DAT\\IWL.EXE") == 0){
-		printf("Patching stack pointer\n");
-		*(unsigned int *)0xa00a409c = 0x00000000;
-		*(unsigned int *)0xa00a40a0 = 0x00000000;
-		*(unsigned int *)0xa00a40a4 = asm_j_insn(0xA005E000, 1);
-	}
 	
     // Close the directory
     f_close(&callback_fil);
@@ -324,6 +319,11 @@ void iso_close_callback(int filedes) {
 
     // Unmount the file system
     f_mount(NULL, "", 0);
+}
+
+int wtf_callback() {
+	printf("WTF...\n");
+	return 0;
 }
 
 int main(){
@@ -404,8 +404,8 @@ int main(){
 	}
 	
 	if(controller[hs_controller_1].input.start){
-		int i = 0;
-		
+		//int i = 0;
+		/*
 		volatile unsigned int *src = (volatile unsigned int *)0x9F001000;
 		volatile unsigned int *dst = (volatile unsigned int *)0x800001FC;
 		unsigned int n = (0xFF000 / 4);
@@ -438,6 +438,11 @@ int main(){
 		asm("nop");
 		
 		for(i = 0; i < n; i++) {
+			// CDROM ring buffer 0x8005d000~0x8006feff
+			if(i >= 0x5CE04 && i <= 0x6FD03){
+				printf("HERE\n");
+				continue;
+			}
 			dst[i] = src[i];
 		}
 		
@@ -467,36 +472,44 @@ int main(){
 		asm("nop!");
 		asm("nop!");
 		asm("nop");
-		
+		*/
 		// You could place firmware patches here that would get applied before booting HyperScanOS
 
 		// Patch iso_init callback
-		//*(volatile unsigned int *)0x80000890 = 0x00000000; 
-		//*(volatile unsigned int *)0x80000894 = 0x00000000;
-		//*(volatile unsigned int *)0x80000898 = asm_j_insn((unsigned int)iso_init_callback, 0);
+		*(volatile unsigned int *)0x80000890 = 0x00000000; 
+		*(volatile unsigned int *)0x80000894 = 0x00000000;
+		*(volatile unsigned int *)0x80000898 = asm_j_insn((unsigned int)iso_init_callback, 0);
 
 		// Patch iso_open callback
-		//*(volatile unsigned int *)0x8000089C = 0x00000000;
-		//*(volatile unsigned int *)0x800008A0 = 0x00000000;
-		//*(volatile unsigned int *)0x800008A4 = asm_j_insn((unsigned int)iso_open_callback, 0);
+		*(volatile unsigned int *)0x8000089C = 0x00000000;
+		*(volatile unsigned int *)0x800008A0 = 0x00000000;
+		*(volatile unsigned int *)0x800008A4 = asm_j_insn((unsigned int)iso_open_callback, 0);
 
 		// Patch iso_read callback
-		//*(volatile unsigned int *)0x800008A8 = 0x00000000;
-		//*(volatile unsigned int *)0x800008AC = 0x00000000;
-		//*(volatile unsigned int *)0x800008B0 = asm_j_insn((unsigned int)iso_read_callback, 0);
+		*(volatile unsigned int *)0x800008A8 = 0x00000000;
+		*(volatile unsigned int *)0x800008AC = 0x00000000;
+		*(volatile unsigned int *)0x800008B0 = asm_j_insn((unsigned int)iso_read_callback, 0);
 
 		// Patch iso_lseek callback
-		//*(volatile unsigned int *)0x800008B4 = 0x00000000;
-		//*(volatile unsigned int *)0x800008B8 = 0x00000000;
-		//*(volatile unsigned int *)0x800008BC = asm_j_insn((unsigned int)iso_lseek_callback, 0);
+		*(volatile unsigned int *)0x800008B4 = 0x00000000;
+		*(volatile unsigned int *)0x800008B8 = 0x00000000;
+		*(volatile unsigned int *)0x800008BC = asm_j_insn((unsigned int)iso_lseek_callback, 0);
 
 		// Patch iso_close callback
-		//*(volatile unsigned int *)0x800008C0 = 0x00000000;
-		//*(volatile unsigned int *)0x800008C4 = 0x00000000;
-		//*(volatile unsigned int *)0x800008C8 = asm_j_insn((unsigned int)iso_close_callback, 0);
+		*(volatile unsigned int *)0x800008C0 = 0x00000000;
+		*(volatile unsigned int *)0x800008C4 = 0x00000000;
+		*(volatile unsigned int *)0x800008C8 = asm_j_insn((unsigned int)iso_close_callback, 0);
 
+		// Patch wtf callback
+		*(volatile unsigned int *)0x80000AC4 = 0x00000000;
+		*(volatile unsigned int *)0x80000AC8 = 0x00000000;
+		*(volatile unsigned int *)0x80000ACC = asm_j_insn((unsigned int)wtf_callback, 0);
+	
 		// Patch checksum
-		//*(volatile unsigned int *)0xA000F740 = 0x84B88018;
+		*(volatile unsigned int *)0x8000F740 = 0x84B88018;
+		
+		// Patch system test
+		//*(volatile unsigned int *)0x80012360 = asm_j_insn(0xA005E000, 1); 
 		
 		// invalidate D-Cache
 		asm("cache 0x18, [r15, 0]");
@@ -550,13 +563,6 @@ int main(){
 	
 	show_selection(dir_buf, dir_count, 0, selection);
 
-
-	// patch timer int handler
-	volatile unsigned int *timerpatch = (volatile unsigned int *)0x8000c62c;
-	int z = 0;
-	for(z=0;z<=0x80;z++){
-		timerpatch[z] = 0x00000000;
-	}
 	//*(volatile unsigned int *)0x8000C62C = 0x10804084;
 	//*(volatile unsigned int *)0x8000C630 = 0x00002300;
 	//*(volatile unsigned int *)0x8000C634 = 0x0a230a22;
@@ -586,6 +592,11 @@ int main(){
 	*(volatile unsigned int *)0x800008C0 = 0x00000000;
 	*(volatile unsigned int *)0x800008C4 = 0x00000000;
 	*(volatile unsigned int *)0x800008C8 = asm_j_insn((unsigned int)iso_close_callback, 0);
+
+	// Patch wtf callback
+	*(volatile unsigned int *)0x80000AC4 = 0x00000000;
+	*(volatile unsigned int *)0x80000AC8 = 0x00000000;
+	*(volatile unsigned int *)0x80000ACC = asm_j_insn((unsigned int)wtf_callback, 0);
 		
 	while(1){
 		

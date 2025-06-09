@@ -1,8 +1,6 @@
 #ifndef _SCORE7_REGISTERS_H
 #define _SCORE7_REGISTERS_H
 
-#define HS_LEDS(value) (*P_CSI_GPIO_SETUP = (0x1FFE0000+(value<<5)))
-
 typedef volatile unsigned int UV32;
 
 //**************************************************************//
@@ -737,6 +735,10 @@ typedef volatile unsigned int UV32;
 	#define P_PPU_Tx_HOffset_ADR	(UV32*)(PPUBASE + 0x00002000)		
 	#define P_PPU_Tx1_HCmp_ADR	    (UV32*)(PPUBASE + 0x00003000)
 	#define P_PPU_Sprite			(UV32*)(PPUBASE + 0x00004000)
+	// - Added by Hyperscandev merged on 6/9/25
+	#define P_SPRITE_ATTRIBUTE_BASE (UV32*)(PPUBASE + 0x00004004)
+	#define P_SPRITE_X_BASE         (UV32*)(PPUBASE + 0x00004002)
+	#define P_SPRITE_Y_BASE         (UV32*)(PPUBASE + 0x00004006)
 
 /**
  * JPG:	0x0802_0000 ~ 0x0802_FFFF

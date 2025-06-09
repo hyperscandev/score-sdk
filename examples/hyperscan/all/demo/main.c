@@ -12,6 +12,7 @@ This is a basic canvas to start your HyperScan project. Check around for documen
 #include "tv/tv.h"
 #include "score7_registers.h"
 #include "score7_constants.h"
+#include "hyperscan/hyperscan.h"
 #include "hyperscan/hs_controller/hs_controller.h"
 
 int main(){

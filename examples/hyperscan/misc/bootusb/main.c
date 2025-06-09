@@ -19,6 +19,8 @@ DO NOT TRY TO RUN THIS AS A HYPER.EXE APP; IT WILL NOT WORK...
 #include <string.h>
 #include <stdlib.h>
 
+#include "hyperscan/hyperscan.h"
+
 #include "hyperscan/fatfs/ff.h"
 #include "hyperscan/fatfs/diskio.h"
 

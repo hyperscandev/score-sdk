@@ -5,6 +5,9 @@
 extern "C" {
 #endif
 
+// Used to control the Hyperscan LEDs
+#define HS_LEDS(value) (*P_CSI_GPIO_SETUP = (0x1FFE0000+(value<<5)))
+
 // Used for iso_lseek
 #define ISO_SEEK_SET 0
 #define ISO_SEEK_CUR 1

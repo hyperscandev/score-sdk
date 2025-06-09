@@ -9,6 +9,7 @@ better understand what this is.
 
 #include "score7_registers.h"
 #include "score7_constants.h"
+#include "hyperscan/hyperscan.h"
 
 // HyperScan firmware callback functions
 #define drvusbh_initial() ((int (*)(void))0xA0001460)()
