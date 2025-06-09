@@ -2,6 +2,7 @@
 #define _SCORE7_REGISTERS_H
 
 typedef volatile unsigned int UV32;
+typedef volatile int SV32;
 
 //**************************************************************//
 //                        CKG & PLL                             //
