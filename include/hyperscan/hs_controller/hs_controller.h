@@ -34,7 +34,7 @@ typedef union{
 	unsigned char bytes[5];
 } controllerunion;
 
-controllerunion controller[1];
+extern controllerunion controller[1];
 
 /**************************************************************************
  *               F U N C T I O N    D E C L A R A T I O N S               *
