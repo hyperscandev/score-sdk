@@ -12,7 +12,7 @@ OutPut Dir = Debug
 Inc Path = ..\..\..\include
 Lib Path = 
 Compiler = ..\S_CORE~1.1\GNU\bin\gcc
-Compiler DefFlag = -mscore7 -mel -g -Wall
+Compiler DefFlag = -mscore7 -mel -g -Wall -nostartfiles
 Compiler AddFlag = 
 Assembler = ..\S_CORE~1.1\GNU\bin\as
 Assembler DefFlag = -Wa,-gdwarf-2  -x assembler-with-cpp
@@ -242,16 +242,6 @@ PARAM=
 # End Source File
 
 # End Group
-# Begin Group "sdcard"
-#PROP Default_Filter = *.c
-
-# Begin Source File
-SOURCE=..\..\..\src\sdcard\sdcard.c
-USEPARAM=FALSE
-PARAM=
-# End Source File
-
-# End Group
 # Begin Source File
 SOURCE=..\..\..\src\libgloss.c
 USEPARAM=FALSE
@@ -316,12 +306,6 @@ PARAM=
 # End Group
 # Begin Group "tvH"
 #PROP Default_Filter = 
-
-# Begin Source File
-SOURCE=..\..\..\include\tv\font_8x16.h
-USEPARAM=FALSE
-PARAM=
-# End Source File
 
 # Begin Source File
 SOURCE=..\..\..\include\tv\tv.h

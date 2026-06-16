@@ -15,8 +15,10 @@
 #include "score7_registers.h"
 #include "score7_constants.h"
 
+volatile unsigned short *fb = (volatile unsigned short *) 0xA0400000u;
+
 /* BratzLife firmware: global FS manager object */
-/*
+
 #define FS_GLOBAL     ((void *)0xA0219624u)
 
 typedef int (*fn_open_t)(void *fs, const char *path, const char *mode, int flags);
@@ -40,9 +42,9 @@ static void fs_close(int fd)
 {
     SD_CLOSE(FS_GLOBAL, fd);
 }
-*/
+
 /* Returns 1 on success */
-/*
+
 static int fs_write_chunk(int fd, const void *buf, int len)
 {
     return (SD_WRITE(fd, buf, len, 0, 1, 0, 0) == 1ULL);
@@ -52,7 +54,7 @@ static void fs_read_chunk(int fd, void *buf, int len)
 {
     SD_READ(fd, buf, len, 0, 1, 0, 0);
 }
-*/
+
 /*
  * Write 'len' bytes from 'buf' to a file
  *
@@ -61,7 +63,6 @@ static void fs_read_chunk(int fd, void *buf, int len)
  *  -1   open failed
  *  -2   write failed
  */
- /*
 int sd_write_file(const char *path, const void *buf, U32 len)
 {
     enum { CHUNK = 4096 };
@@ -90,7 +91,7 @@ int sd_write_file(const char *path, const void *buf, U32 len)
     fs_close(fd);
     return 0;
 }
-*/
+
 /*
  * Read exactly 'len' bytes from a file into 'out_buf'
  *
@@ -98,7 +99,6 @@ int sd_write_file(const char *path, const void *buf, U32 len)
  *   0   success
  *  -1   open failed
  */
-/*
 int sd_read_file(const char *path, void *out_buf, U32 len)
 {
     enum { CHUNK = 512 };
@@ -124,7 +124,7 @@ int sd_read_file(const char *path, void *out_buf, U32 len)
     fs_close(fd);
     return 0;
 }
-*/
+
 /*
  * Dump memory range [addr, addr + len) to a file
  *
@@ -133,37 +133,15 @@ int sd_read_file(const char *path, void *out_buf, U32 len)
  *  -1   open failed
  *  -2   write failed
  */
-//int sd_dump_memory(const char *path, const void *addr, U32 len)
-//{
-//    return sd_write_file(path, addr, len);
-//}
-
-unsigned short *fb = (unsigned short *) 0xA0400000;
-
-//volatile unsigned int vblank_count = 0;
-volatile unsigned int acc = 0;
-volatile unsigned int sec = 0;
-void inc_vblank(void) {
-	*P_IRQ_STATUS = 0x00000001u;
-	acc += 1001;
-	if(acc >= 60000) {
-		acc -= 60000;
-		sec++;
-	}
-    //vblank_count++;
-    //if(vblank_count % 60000 == 0) {
-    //    sec++;
-    //}
+int sd_dump_memory(const char *path, const void *addr, U32 len)
+{
+    return sd_write_file(path, addr, len);
 }
 
 int main(void)
 {
-	cache_flush_all();
-	//printf("OKAY");
-    tv_init(RESOLUTION_640_480, COLOR_RGB565, 0xA0400000, 0xA0400000, 0xA0400000);
-    
     /* Example: dump 8MB from 0xA0000000 */
-    //(void)sd_dump_memory("dev0:\\dump.bin", (const void *)0xA0000000u, 8u * (1024u * 1024u));
+    //(void)sd_dump_memory("dev0:\\dump.bin", (const void *)0xA0000000u, 1u * (1024u * 1024u));
 
     /* Example: read 16 bytes from a file into a small buffer */
     //{
@@ -175,16 +153,18 @@ int main(void)
     //    tv_printhex((unsigned short *)TESTFB, 4, 6,
     //                (U32)buf[0] | ((U32)buf[1] << 8) | ((U32)buf[2] << 16) | ((U32)buf[3] << 24));
     //}
-    attach_isr(INT_PPU_VBLANK_START, inc_vblank);
-    enable_isr(INT_PPU_VBLANK_START);
+    //attach_isr(INT_PPU_VBLANK_START, inc_vblank);
+    //enable_isr(INT_PPU_VBLANK_START);
+    
+    cache_flush_all();
+    tv_init(RESOLUTION_320_240, COLOR_RGB565, 0xA0400000u, 0xA0400000u, 0xA0400000u);
+    cache_flush_all();
+    
+    *P_TV_FADE_SETUP = 0u;
     
     while (1) {
-    	//printf("OKAY");
-        //tv_init(RESOLUTION_640_480, COLOR_RGB565, 0x80400000, 0x80400000, 0x80400000);
-        //tv_print(fb, 3, 4, "Seconds:");
-
-//        tv_printhex(fb, 4, 4, vblank_count);
-        tv_printhex(fb, 4, 3, sec);
+      tv_print((unsigned short *)0xA0400000, 12, 8, "HELLO WORLD!");
+      *P_TV_FADE_SETUP = 0u;
     }
 
     return 0;
