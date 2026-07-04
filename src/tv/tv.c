@@ -1,5 +1,6 @@
 #include <stdarg.h>
 #include <stdio.h>
+// #include <stdint.h>
 #include "score7_registers.h"
 #include "score7_constants.h"
 #include "tv/tv.h"
@@ -266,56 +267,295 @@ const unsigned char font[] =
   0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
  };
  
+typedef struct {
+    unsigned int id;
+    unsigned int bits;
+    unsigned int width;
+    unsigned int height;
+} tv_resolution_mode_t;
+
+typedef struct {
+    unsigned int id;
+    unsigned int bits;
+} tv_color_mode_t;
+
+static const tv_resolution_mode_t tv_resolution_modes[] = {
+    { RESOLUTION_640_480, C_TV_VGA_MODE, 640, 480 },
+    { RESOLUTION_320_240, C_TV_QVGA_MODE, 320, 240 }
+};
+
+static const tv_color_mode_t tv_color_modes[] = {
+    { COLOR_RGB565, C_TV_RGB_MODE | C_TV_RGB565_MODE }
+};
+
+static const tv_resolution_mode_t *current_resolution_mode = &tv_resolution_modes[0];
+static const tv_color_mode_t *current_color_mode = &tv_color_modes[0];
+
+// =============================================================
+//	unsigned int tv_array_count_resolution(void)
+//
+//	This returns the number of supported TV resolution modes in
+//	the internal resolution mode table.
+//
+//	unsigned int return
+// =============================================================
+static unsigned int tv_array_count_resolution(void)
+{
+    return sizeof(tv_resolution_modes) / sizeof(tv_resolution_modes[0]);
+}
+
+// =============================================================
+//	unsigned int tv_array_count_color(void)
+//
+//	This returns the number of supported TV color modes in the
+//	internal color mode table.
+//
+//	unsigned int return
+// =============================================================
+static unsigned int tv_array_count_color(void)
+{
+    return sizeof(tv_color_modes) / sizeof(tv_color_modes[0]);
+}
+
+// =============================================================
+//	const tv_resolution_mode_t *tv_get_resolution_mode(unsigned int resolution)
+//
+//	This finds the internal TV resolution mode that matches the
+//	requested public resolution ID.
+//
+//	const tv_resolution_mode_t * return
+// =============================================================
+static const tv_resolution_mode_t *tv_get_resolution_mode(unsigned int resolution)
+{
+    unsigned int i;
+    for (i = 0; i < tv_array_count_resolution(); i++) {
+        if (tv_resolution_modes[i].id == resolution) return &tv_resolution_modes[i];
+    }
+    return &tv_resolution_modes[0];
+}
+
+// =============================================================
+//	const tv_resolution_mode_t *tv_get_resolution_mode_from_bits(unsigned int bits)
+//
+//	This finds the internal TV resolution mode that matches the
+//	resolution bits currently stored in the TV mode control register.
+//
+//	const tv_resolution_mode_t * return
+// =============================================================
+static const tv_resolution_mode_t *tv_get_resolution_mode_from_bits(unsigned int bits)
+{
+    unsigned int i;
+    bits &= C_TV_VGA_MODE | C_TV_QVGA_MODE;
+    for (i = 0; i < tv_array_count_resolution(); i++) {
+        if (tv_resolution_modes[i].bits == bits) return &tv_resolution_modes[i];
+    }
+    return current_resolution_mode;
+}
+
+// =============================================================
+//	const tv_color_mode_t *tv_get_color_mode(unsigned int colormode)
+//
+//	This finds the internal TV color mode that matches the requested
+//	public color mode ID.
+//
+//	const tv_color_mode_t * return
+// =============================================================
+static const tv_color_mode_t *tv_get_color_mode(unsigned int colormode)
+{
+    unsigned int i;
+    for (i = 0; i < tv_array_count_color(); i++) {
+        if (tv_color_modes[i].id == colormode) return &tv_color_modes[i];
+    }
+    return &tv_color_modes[0];
+}
+
+// =============================================================
+//	unsigned int tv_width(void)
+//
+//	This returns the current TV framebuffer width in pixels.
+//
+//	unsigned int return
+// =============================================================
+static unsigned int tv_width(void)
+{
+    return current_resolution_mode->width;
+}
+
+// =============================================================
+//	unsigned int tv_height(void)
+//
+//	This returns the current TV framebuffer height in pixels.
+//
+//	unsigned int return
+// =============================================================
+static unsigned int tv_height(void)
+{
+    return current_resolution_mode->height;
+}
+
+// =============================================================
+//	unsigned int tv_pixels(void)
+//
+//	This returns the total number of pixels in the current TV
+//	framebuffer mode.
+//
+//	unsigned int return
+// =============================================================
+static unsigned int tv_pixels(void)
+{
+    return tv_width() * tv_height();
+}
+
+// =============================================================
+//	unsigned int tv_columns(void)
+//
+//	This returns the number of 8 pixel wide text columns that fit
+//	in the current TV framebuffer mode.
+//
+//	unsigned int return
+// =============================================================
+static unsigned int tv_columns(void)
+{
+    return tv_width() / 8;
+}
+
+// =============================================================
+//	unsigned int tv_rows(void)
+//
+//	This returns the number of 16 pixel high text rows that fit
+//	in the current TV framebuffer mode.
+//
+//	unsigned int return
+// =============================================================
+static unsigned int tv_rows(void)
+{
+    return tv_height() / 16;
+}
+
+// =============================================================
+//	void tv_sync_mode(void)
+//
+//	This updates the cached TV resolution mode from the current
+//	TV mode control register value.
+//
+//	void return
+// =============================================================
+static void tv_sync_mode(void)
+{
+    current_resolution_mode = tv_get_resolution_mode_from_bits(*P_TV_MODE_CTRL);
+}
+
+// =============================================================
+//	void tv_draw_char(unsigned short *fb, unsigned int x,
+//	unsigned int y, unsigned char c, unsigned short text_color,
+//	unsigned short bg_color)
+//
+//	This draws one 8x16 font character to the selected framebuffer
+//	at the requested text column and row.
+//
+//	void return
+// =============================================================
+static void tv_draw_char(unsigned short *fb, unsigned int x, unsigned int y, unsigned char c, unsigned short text_color, unsigned short bg_color)
+{
+    unsigned int yy;
+    unsigned int xx;
+    unsigned int width = tv_width();
+    unsigned int height = tv_height();
+    unsigned int px0 = x * 8;
+    unsigned int py0 = y * 16;
+    if (!fb) return;
+    if (x >= tv_columns() || y >= tv_rows()) return;
+    if (px0 >= width || py0 >= height) return;
+    for (yy = 0; yy < 16 && py0 + yy < height; yy++) {
+        unsigned char row = font[c * 16 + yy];
+        for (xx = 0; xx < 8 && px0 + xx < width; xx++) {
+            fb[(py0 + yy) * width + (px0 + xx)] = (row & (1 << (7 - xx))) ? text_color : bg_color;
+        }
+    }
+}
+
+// =============================================================
+//	void tv_draw_text(unsigned short *fb, unsigned int x,
+//	unsigned int y, const char *text, unsigned short text_color,
+//	unsigned short bg_color)
+//
+//	This draws a text string to the selected framebuffer, handling
+//	newlines and wrapping based on the current TV resolution mode.
+//
+//	void return
+// =============================================================
+static void tv_draw_text(unsigned short *fb, unsigned int x, unsigned int y, const char *text, unsigned short text_color, unsigned short bg_color)
+{
+    unsigned int base_x = x;
+    unsigned int cols = tv_columns();
+    unsigned int rows = tv_rows();
+    if (!fb || !text) return;
+    while (*text && y < rows) {
+        if (*text == '\r') {
+            text++;
+            continue;
+        }
+        if (*text == '\n') {
+            x = base_x;
+            y++;
+            text++;
+            continue;
+        }
+        if (x >= cols) {
+            x = base_x;
+            y++;
+            if (y >= rows) break;
+        }
+        tv_draw_char(fb, x, y, (unsigned char)*text, text_color, bg_color);
+        x++;
+        text++;
+    }
+}
+
+// =============================================================
+//	void tv_clear_buffer(unsigned short *fb, unsigned short color)
+//
+//	This fills the selected framebuffer with a single RGB565 color
+//	using the current TV resolution mode.
+//
+//	void return
+// =============================================================
+static void tv_clear_buffer(unsigned short *fb, unsigned short color)
+{
+    unsigned int i;
+    unsigned int pixels = tv_pixels();
+    if (!fb) return;
+    for(i=0;i<pixels;i++) {
+        fb[i] = color;
+    }
+}
+
 // =============================================================
 //	void tv_clearscreen(unsigned short *fb)
 //
-//	This clears the TV screen.
-// 
-// 
+//	This clears the selected TV framebuffer to black using the
+//	current TV resolution mode.
+//
 //	void return
 // =============================================================
 void tv_clearscreen(unsigned short *fb){
-    int i = 0;
-	for(i=0;i<320*240;i++) {
-		fb[i] = 0x07E0;
-	}
-	
-	// Get current resolution
-	//uint32_t resolution = *P_TV_MODE_CTRL & (C_TV_VGA_MODE | C_TV_QVGA_MODE);
-
-    //if (resolution == C_TV_VGA_MODE) {
-        // 640x480
-   //     for(i=0;i<(640*480);i++) {
-   //     	fb[i] = 0xf800;
-   //     }
-   // }
-   // else if (resolution == C_TV_QVGA_MODE) {
-        // 320x240
-   //     for(i=0;i<320*240;i++) {
-   //     	fb[i] = 0xf800;
-   //     }
-   // }
-   // else {
-        // Unsupported (Default: 640x480)
-   //     for(i=0;i<640*480;i++) {
-   //     	fb[i] = 0xf800;
-   //     }
-   // }
+    tv_sync_mode();
+    tv_clear_buffer(fb, 0x0000);
 }
 
 // =============================================================
 //	void tv_init(unsigned int resolution, unsigned int colormode,
-//	unsigned int fb1_addr, unsigned int fb2_addr, unsigned int fb3_addr);
+//	unsigned int fb1_addr, unsigned int fb2_addr, unsigned int fb3_addr)
 //
-//	This initializes basic TV output, then sets up some initial framebuffer
-//	addresses (3), and sets color scheme, then selects fb1_addr as the 
-//	default framebuffer.
-// 
+//	This initializes TV output, selects the requested resolution and
+//	color mode, sets three framebuffer addresses, clears them, and
+//	selects fb1_addr as the default framebuffer.
 //
 //	void return
 // =============================================================
-
 void tv_init(unsigned int resolution, unsigned int colormode, unsigned int fb1_addr, unsigned int fb2_addr, unsigned int fb3_addr){
+    current_resolution_mode = tv_get_resolution_mode(resolution);
+    current_color_mode = tv_get_color_mode(colormode);
 	
 	*P_TV_CLK_CONF = C_TV_CLK_EN | C_TV_RST_DIS;
 	
@@ -325,34 +565,24 @@ void tv_init(unsigned int resolution, unsigned int colormode, unsigned int fb1_a
 					| C_TV_NTSC_MODE 				
 					| C_TV_INTERLACE_MODE 
 					| C_TV_NTSC_TYPE 		
-					| C_TV_LITTLE_ENDIAN; 	
-
+					| C_TV_LITTLE_ENDIAN
+                    | current_resolution_mode->bits
+                    | current_color_mode->bits;
     // Clear resolution bits first
-    *P_TV_MODE_CTRL &= ~(C_TV_VGA_MODE | C_TV_QVGA_MODE);
     
     // Set resolution 
-    if (resolution == RESOLUTION_640_480) {
     	// 640x480
-        *P_TV_MODE_CTRL |= C_TV_VGA_MODE;
-    } else if (resolution == RESOLUTION_320_240) {
     	// 320x240
-        *P_TV_MODE_CTRL |= C_TV_QVGA_MODE;
-    } else {
         // Invalid resolution (default to 640x480)
-        *P_TV_MODE_CTRL |= C_TV_VGA_MODE;
-    }
     
     // Set color mode (TODO: Add RGBA5551 support)
-	if(colormode == COLOR_RGB565){
-		*P_TV_MODE_CTRL	|= 	C_TV_RGB_MODE 				
-							| C_TV_RGB565_MODE;
-	}
-
     // Set up framebuffer
 	tv_buffer_set(fb1_addr, fb2_addr, fb3_addr);
 	
 	// Clear screen
-	tv_clearscreen((unsigned short *)fb1_addr);
+    tv_clear_buffer((unsigned short *)fb1_addr, 0x0000);
+    if (fb2_addr) tv_clear_buffer((unsigned short *)fb2_addr, 0x0000);
+    if (fb3_addr) tv_clear_buffer((unsigned short *)fb3_addr, 0x0000);
 	
 	// Choose first framebuffer as current
 	tv_buffer_sel(0);
@@ -363,11 +593,10 @@ void tv_init(unsigned int resolution, unsigned int colormode, unsigned int fb1_a
 }
 
 // =============================================================
-// 	void tv_buffer_set(unsigned int fb1_addr, unsigned int fb2_addr,
-// 	unsigned int fb3_addr)
+//	void tv_buffer_set(unsigned int fb1_addr, unsigned int fb2_addr,
+//	unsigned int fb3_addr)
 //
-//	This sets the current framebuffer pointers (3)
-//	
+//	This sets the three TV framebuffer base address registers.
 //
 //	void return
 // =============================================================
@@ -380,8 +609,8 @@ void tv_buffer_set(unsigned int fb1_addr, unsigned int fb2_addr, unsigned int fb
 
 // =============================================================
 //	void tv_buffer_sel(unsigned int sel)
-// 
-//	This selects the current framebuffer
+//
+//	This selects which configured TV framebuffer is currently shown.
 //
 //	void return
 // =============================================================
@@ -392,8 +621,9 @@ void tv_buffer_sel(unsigned int sel){
 
 // =============================================================
 //	void tv_saturation(unsigned int satu)
-// 
-//	This sets TV saturation
+//
+//	This sets the TV saturation register using the lower 8 bits of
+//	the supplied value.
 //
 //	void return
 // =============================================================
@@ -404,9 +634,10 @@ void tv_saturation(unsigned int satu){
 
 // =============================================================
 //	void tv_hue(unsigned int hue)
-// 
-//	This sets TV hue
-// 
+//
+//	This sets the TV hue register using the lower 8 bits of the
+//	supplied value.
+//
 //	void return
 // =============================================================
 void tv_hue(unsigned int hue){
@@ -416,9 +647,10 @@ void tv_hue(unsigned int hue){
 
 // =============================================================
 //	void tv_fade(unsigned int fade)
-// 
-//	This sets TV fade
-// 
+//
+//	This sets the TV fade register using the lower 8 bits of the
+//	supplied value.
+//
 //	void return
 // =============================================================
 void tv_fade(unsigned int fade){
@@ -427,169 +659,42 @@ void tv_fade(unsigned int fade){
 }
 
 // =============================================================
-//	void tv_print(unsigned int x, unsigned int y, unsigned char *text)
-// 
-//	Print to TV screen via low level framebuffer access
-// 
+//	void tv_print(unsigned short *fb, unsigned int x,
+//	unsigned int y, const char *text)
+//
+//	This prints text to the selected TV framebuffer using white text
+//	on a black background.
+//
 //	void return
 // =============================================================
 void tv_print(unsigned short *fb, unsigned int x, unsigned int y, const char *text){
-	
-	// Get current resolution
-	//uint32_t resolution = *P_TV_MODE_CTRL & (C_TV_VGA_MODE | C_TV_QVGA_MODE);
-    //uint32_t hres = 0;
-    
-    //if (resolution == C_TV_VGA_MODE) {
-        // 640x480
-    //    hres = 640;
-    //}
-    //else if (resolution == C_TV_QVGA_MODE) {
-        // 320x240
-    //    hres = 320;
-    //}
-    //else {
-        // Unsupported (Default: 640x480)
-    //    hres = 640;
-    //}
-    
-    short xx, yy;
-    int hres = 320;
-    
-    while (*text) 
-    {
-        for (yy = 0; yy < 16; yy++) 
-        {
-	      for (xx = 0; xx < 8; xx++)
-	      {
-            if (font[(*text)*16 + yy] & (1 << (7 - xx))) fb[(y*16 + yy) * hres + (x*8 + xx)] = 0xFFFF; else fb[(y*16 + yy) * hres + (x*8 + xx)] = 0x0000;
-	      }
-	}
-	x++;
-	text++;
-    }
-    
-  return;
-}
-
-void tv_printz(uint16_t *fb, unsigned int x, unsigned int y, const char *text)
-{
-	unsigned int yy = 0;
-	unsigned int xx = 0;
-	
-    while (*text)
-    {
-        unsigned char c = (unsigned char)*text;
-        for (yy = 0; yy < 16; yy++)
-        {
-            uint8_t row = font[c * 16 + yy];
-            for (xx = 0; xx < 8; xx++)
-            {
-                unsigned int px = x * 8 + xx;
-                unsigned int py = y * 16 + yy;
-                if (px < 320 && py < 240)
-                    fb[py * 320 + px] = (row & (1 << (7 - xx))) ? 0xFFFF : 0x0000;
-            }
-        }
-        x++;
-        text++;
-    }
+    tv_sync_mode();
+    tv_draw_text(fb, x, y, text, 0xFFFF, 0x0000);
 }
 
 // =============================================================
-//	void tv_printcolor(unsigned int x, unsigned int y, unsigned char *text, unsigned short text_color, unsigned short bg_color)
-// 
-//	Print to TV screen via low level framebuffer access, but with text and background color support
-// 
+//	void tv_printf(unsigned short *fb, unsigned int x,
+//	unsigned int y, const char *fmt, ...)
+//
+//	This formats text using printf-style formatting, then prints it
+//	to the selected TV framebuffer using tv_print.
+//
 //	void return
 // =============================================================
-void tv_printcolor(unsigned short *fb, unsigned int x, unsigned int y, const char *text, unsigned short text_color, unsigned short bg_color){
-	
-	// Get current resolution
-	uint32_t resolution = *P_TV_MODE_CTRL & (C_TV_VGA_MODE | C_TV_QVGA_MODE);
-    uint32_t hres = 0;
-    
-    if (resolution == C_TV_VGA_MODE) {
-        // 640x480
-        hres = 640;
-    }
-    else if (resolution == C_TV_QVGA_MODE) {
-        // 320x240
-        hres = 320;
-    }
-    else {
-        // Unsupported (Default: 640x480)
-        hres = 640;
-    }
-    
-    short xx, yy;
-
-    while (*text) 
-    {
-        for (yy = 0; yy < 16; yy++) 
-        {
-	      for (xx = 0; xx < 8; xx++)
-	      {
-            if (font[(*text)*16 + yy] & (1 << (7 - xx))) fb[(y*16 + yy) * hres + (x*8 + xx)] = text_color; else fb[(y*16 + yy) * hres + (x*8 + xx)] = bg_color;
-	        
-	      }
-	}
-	x++;
-	text++;
-    }
-    
-  return;
-}
-
-// =============================================================
-// void tv_printf(unsigned short *fb, unsigned int x, unsigned int y, uint16_t fg, uint16_t bg, const char *fmt, ...)
-// 
-// Print to TV screen but support formatting chars similar to printf
-// 
-// void return
-// =============================================================
-void tv_printf(unsigned short *fb,
-               unsigned int x, unsigned int y,
-               uint16_t fg, uint16_t bg,
-               const char *fmt, ...)
+void tv_printf(unsigned short *fb, unsigned int x, unsigned int y, const char *fmt, ...)
 {
     char buf[512];
     va_list ap;
     va_start(ap, fmt);
     vsnprintf(buf, sizeof(buf), fmt, ap);
     va_end(ap);
-    tv_printcolor(fb, x, y, buf, fg, bg);
-}
-
-// =============================================================
-// void tv_printhex(unsigned int x, unsigned int y, unsigned char *text)
-// 
-// Print hex value to TV screen via low level framebuffer access
-// 
-// void return
-// =============================================================
-void tv_printhex(unsigned short *fb, unsigned int x, unsigned int y, unsigned long value){
-	
-	unsigned long i;
-	unsigned long digit;
-	char s[9];
-	for(i=0;i<8;i++)
-	{
-		digit=value>>28;
-	    value<<=4;
-	    s[i] = digit+'0'+(digit<10?0:'a'-10-'0');
-	}
-	
-	s[8]=0x00;
-	tv_print(fb, x, y, "0x");
-	x++;
-	x++;
-	tv_print(fb, x, y, s);
+    tv_print(fb, x, y, buf);
 }
 
 //==============================================================
 //	void tv_fadeout(void)
 //
-//	This will perform a predefined fade-out using the "tv_fade" primative
+//	This performs a predefined fade-out using the tv_fade primitive.
 //
 //	void return
 //==============================================================
@@ -604,7 +709,7 @@ void tv_fadeout(void) {
 //==============================================================
 //	void tv_fadein(void)
 //
-//	This will perform a predefined fade-in using the "tv_fade" primative
+//	This performs a predefined fade-in using the tv_fade primitive.
 //
 //	void return
 //==============================================================
@@ -615,4 +720,3 @@ void tv_fadein(void) {
 		for(j=0; j<1024*8; j++);
 	}
 }
-
