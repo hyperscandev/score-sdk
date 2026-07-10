@@ -30,9 +30,11 @@ typedef unsigned int        size_t;
 #endif
 
 /* Boolean */
+#ifndef __cplusplus
 #ifndef __bool_true_false_are_defined
 typedef enum { false = 0, true = 1 } bool;
 #define __bool_true_false_are_defined 1
+#endif
 #endif
 
 //******************************************************************//

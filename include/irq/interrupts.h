@@ -4,6 +4,10 @@
 #include "score7_registers.h"
 #include "score7_constants.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 //===================================================
 // Prototypes
 //===================================================
@@ -11,6 +15,10 @@
 void attach_isr(unsigned int irq, void (*handler)(void));
 void disable_isr(unsigned int vector);
 void enable_isr(unsigned int vector);
+
+#ifdef __cplusplus
+}
+#endif
 
 //===================================================
 // S+Core Interrupt Sources
