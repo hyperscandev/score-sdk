@@ -12,6 +12,8 @@ extern "C" {
 #define RESOLUTION_640_480	0
 #define RESOLUTION_320_240  1
 
+extern const unsigned char font[];
+
 /**************************************************************************
  *                           M A C R O S                                  *
  **************************************************************************/
@@ -33,7 +35,7 @@ void tv_print(unsigned short *fb, unsigned int x, unsigned int y, const char *te
 void tv_printcolor(unsigned short *fb, unsigned int x, unsigned int y, const char *text, unsigned short color);
 void tv_printcolorex(unsigned short *fb, unsigned int x, unsigned int y, const char *text, unsigned short fgcolor, unsigned short bgcolor);
 void tv_printhex(unsigned short *fb, unsigned intx,  unsigned int y, unsigned long value);
-
+ 
 #ifdef __cplusplus
 }
 #endif

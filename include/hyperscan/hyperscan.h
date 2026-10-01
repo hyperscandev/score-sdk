@@ -123,6 +123,18 @@ extern "C" {
         __ret;                                                \
     })	   	
 
+/* Call the RFID detect routine at 0xA0000830, save its int return,
+   then restore $gp (r28) and yield return. */
+#define rfid_det()                                                      \
+    ({                                                                  \
+        /* Call rfid_det from the cb table */                           \
+        unsigned int __ret = ((unsigned int (*)(void))0xA0000830)();    \
+        /* Restore $gp (r28) */                                         \
+        __asm__ volatile("la   r28, _gp");                              \
+        /* Yield the return value */                                    \
+        __ret;                                                          \
+    })
+
 #ifdef __cplusplus
 }
 #endif

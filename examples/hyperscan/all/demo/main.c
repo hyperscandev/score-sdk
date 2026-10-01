@@ -6,6 +6,7 @@ This is a basic canvas to start your HyperScan project. Check around for documen
 
 */
 
+#include <setjmp.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -15,8 +16,27 @@ This is a basic canvas to start your HyperScan project. Check around for documen
 #include "hyperscan/hyperscan.h"
 #include "hyperscan/hs_controller/hs_controller.h"
 
+jmp_buf env;
+
+int testfunc(int p1, int p2, int p3, int p4) {
+    volatile int a = p1 + 1;
+    volatile int b = p2 + 2;
+    volatile int c = p3 + 3;
+    volatile int d = p4 + 4;
+
+    int r = setjmp(env);
+    if (r == 0) {
+        a = 11;
+        b = 22;
+        c = 33;
+        d = 44;
+        longjmp(env, 5);
+    }
+
+    return (r == 5 && a == 11 && b == 22 && c == 33 && d == 44) ? 0 : 1;
+}
+
 int main(){
-	
 	// Stupid framebuffer for now
 	unsigned short *fb = (unsigned short *) 0xA0400000;
 
@@ -81,7 +101,8 @@ int main(){
 		if(controller[hs_controller_1].input.joystick_x >= 0xB0) tv_print(fb, ((640/8)-strlen(left_msg)-1)/2, 16, left_msg); else tv_print(fb, ((640/8)-strlen(left_msg)-1)/2, 16, "    ");
 
 		printf("Example debug over serial\n");
-
+		printf("%x\n", testfunc(1, 2, 3, 4));
+		
 	}
 		
 	return nExitCode;

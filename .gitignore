@@ -6,4 +6,5 @@
 Debug/
 Makefile
 **/[Mm]akefile
-documentation/score7/
+
+tools/score7/score-toolchain/
